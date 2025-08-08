@@ -20,7 +20,7 @@ export function WordReferenceDropdown({
         <Button>WordReference ▼</Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align='start'>
+      <DropdownMenuContent>
         {/* English submenu */}
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
