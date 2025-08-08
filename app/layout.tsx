@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'SupraDictionary',
-  description: 'A polylot’s companion.',
+  description: 'A polyglot’s companion.',
   icons: {
     icon: '/SD.png',
   },
