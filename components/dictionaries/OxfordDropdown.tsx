@@ -23,8 +23,6 @@ export function OxfordDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://www.oxfordlearnersdictionaries.com/definition/english/${search}`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             English
           </a>
@@ -33,8 +31,6 @@ export function OxfordDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://www.oxfordlearnersdictionaries.com/definition/american_english/${search}`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             American English
           </a>

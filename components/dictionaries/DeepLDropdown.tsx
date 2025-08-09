@@ -30,8 +30,6 @@ export function DeepLDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.deepl.com/en/translator#en/es/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 Spanish
               </a>
@@ -39,8 +37,6 @@ export function DeepLDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.deepl.com/en/translator#en/fr/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 French
               </a>
@@ -57,8 +53,6 @@ export function DeepLDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.deepl.com/es/translator#es/en/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 English
               </a>
@@ -66,8 +60,6 @@ export function DeepLDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.deepl.com/es/translator#es/fr/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 French
               </a>
@@ -84,8 +76,6 @@ export function DeepLDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.deepl.com/fr/translator#fr/en/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 English
               </a>
@@ -93,8 +83,6 @@ export function DeepLDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.deepl.com/fr/translator#fr/es/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 Spanish
               </a>

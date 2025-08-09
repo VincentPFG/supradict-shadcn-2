@@ -23,8 +23,6 @@ export function LeRobertDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://dictionnaire.lerobert.com/definition/${search}`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             Definition
           </a>
@@ -33,8 +31,6 @@ export function LeRobertDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://dictionnaire.lerobert.com/conjugaison/${search}`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             Conjugation
           </a>

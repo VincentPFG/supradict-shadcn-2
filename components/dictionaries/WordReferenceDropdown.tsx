@@ -30,8 +30,6 @@ export function WordReferenceDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.wordreference.com/enes/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 Spanish
               </a>
@@ -39,8 +37,6 @@ export function WordReferenceDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.wordreference.com/enfr/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 French
               </a>
@@ -57,8 +53,6 @@ export function WordReferenceDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.wordreference.com/esen/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 English
               </a>
@@ -66,8 +60,6 @@ export function WordReferenceDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.wordreference.com/esfr/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 French
               </a>
@@ -75,8 +67,6 @@ export function WordReferenceDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.wordreference.com/conj/esverbs.aspx?v=${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 Conjugation
               </a>
@@ -93,8 +83,6 @@ export function WordReferenceDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.wordreference.com/fren/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 English
               </a>
@@ -102,8 +90,6 @@ export function WordReferenceDropdown({
             <DropdownMenuItem asChild>
               <a
                 href={`https://www.wordreference.com/fres/${search}`}
-                target='_blank'
-                rel='noopener noreferrer'
               >
                 Spanish
               </a>

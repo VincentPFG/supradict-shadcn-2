@@ -21,8 +21,6 @@ export function WiktionaryDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://en.wiktionary.org/wiki/${search}`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             English
           </a>
@@ -31,8 +29,6 @@ export function WiktionaryDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://es.wiktionary.org/wiki/${search}`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             Spanish
           </a>
@@ -41,8 +37,6 @@ export function WiktionaryDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://fr.wiktionary.org/wiki/${search}`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             French
           </a>

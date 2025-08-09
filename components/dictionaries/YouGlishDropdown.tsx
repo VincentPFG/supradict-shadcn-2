@@ -21,8 +21,6 @@ export function YouGlishDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://youglish.com/pronounce/${search}/english`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             English
           </a>
@@ -31,8 +29,6 @@ export function YouGlishDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://youglish.com/pronounce/${search}/spanish`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             Spanish
           </a>
@@ -41,8 +37,6 @@ export function YouGlishDropdown({
         <DropdownMenuItem asChild>
           <a
             href={`https://youglish.com/pronounce/${search}/french`}
-            target='_blank'
-            rel='noopener noreferrer'
           >
             French
           </a>
