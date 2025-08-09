@@ -15,14 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-export const metadata: Metadata = {
-  title: 'SupraDictionary',
-  description: 'A polyglot’s companion.',
-  icons: {
-    icon: '/SD.png',
-  },
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{

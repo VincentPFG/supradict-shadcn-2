@@ -10,6 +10,24 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ search?: string }>
+}) {
+  const { search = '' } = await searchParams
+
+  return {
+    title: `SupraDictionary${
+      search && ` – ${search}`
+    }`,
+    description: 'A polyglot’s companion.',
+    icons: {
+      icon: '/SD.png',
+    },
+  }
+}
+
 export default async function Home({
   searchParams,
 }: {
