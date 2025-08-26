@@ -94,6 +94,13 @@ export function WordReferenceDropdown({
                 Spanish
               </a>
             </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.wordreference.com/conj/frverbs.aspx?v=${search}`}
+              >
+                Conjugation
+              </a>
+            </DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
       </DropdownMenuContent>

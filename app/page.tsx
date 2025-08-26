@@ -78,9 +78,9 @@ export default async function Home({
       <DeepLDropdown
         search={search}
       ></DeepLDropdown>
-      <LeRobertDropdown
+      {/* <LeRobertDropdown
         search={search}
-      ></LeRobertDropdown>
+      ></LeRobertDropdown> */}
       <WiktionaryDropdown
         search={search}
       ></WiktionaryDropdown>
