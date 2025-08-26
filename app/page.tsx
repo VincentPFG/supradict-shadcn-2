@@ -1,6 +1,7 @@
 import { DeepLDropdown } from '@/components/dictionaries/DeepLDropdown'
 import { LeRobertDropdown } from '@/components/dictionaries/LeRobertDropdown'
 import { MerriamWebster } from '@/components/dictionaries/MerriamWebster'
+import { OxfordAmerican } from '@/components/dictionaries/OxfordAmerican'
 import { OxfordDropdown } from '@/components/dictionaries/OxfordDropdown'
 import { WiktionaryDropdown } from '@/components/dictionaries/WiktionaryDropdown'
 import { WordReferenceDropdown } from '@/components/dictionaries/WordReferenceDropdown'
@@ -72,9 +73,12 @@ export default async function Home({
       <WordReferenceDropdown
         search={search}
       ></WordReferenceDropdown>
-      <OxfordDropdown
+      {/* <OxfordDropdown
         search={search}
-      ></OxfordDropdown>
+      ></OxfordDropdown> */}
+      <OxfordAmerican
+        search={search}
+      ></OxfordAmerican>
       <DeepLDropdown
         search={search}
       ></DeepLDropdown>
