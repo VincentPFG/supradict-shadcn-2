@@ -5,8 +5,9 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
+import { MerriamWebster } from './MerriamWebster'
 
-export function OxfordDropdown({
+export function MerriamWebsterDropdown({
   search,
 }: {
   search: string
@@ -14,23 +15,25 @@ export function OxfordDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='default'>Oxford</Button>
+        <Button variant='default'>
+          Merriam-Webster
+        </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
           <a
-            href={`https://www.oxfordlearnersdictionaries.com/definition/english/${search}`}
+            href={`https://www.merriam-webster.com/dictionary/${search}`}
           >
-            English
+            Dictionary
           </a>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
           <a
-            href={`https://www.oxfordlearnersdictionaries.com/definition/american_english/${search}`}
+            href={`https://www.merriam-webster.com/thesaurus/${search}`}
           >
-            American English
+            Thesaurus
           </a>
         </DropdownMenuItem>
       </DropdownMenuContent>

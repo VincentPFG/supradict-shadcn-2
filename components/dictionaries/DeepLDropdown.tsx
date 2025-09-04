@@ -17,7 +17,7 @@ export function DeepLDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button>DeepL ▼</Button>
+        <Button>DeepL</Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>

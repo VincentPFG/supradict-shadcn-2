@@ -14,7 +14,7 @@ export function YouGlishDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button>YouGlish ▼</Button>
+        <Button>YouGlish</Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>

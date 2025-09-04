@@ -17,7 +17,7 @@ export function WordReferenceDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button>WordReference ▼</Button>
+        <Button>WordReference</Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>

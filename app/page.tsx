@@ -1,6 +1,8 @@
 import { DeepLDropdown } from '@/components/dictionaries/DeepLDropdown'
 import { LeRobertDropdown } from '@/components/dictionaries/LeRobertDropdown'
 import { MerriamWebster } from '@/components/dictionaries/MerriamWebster'
+import { MerriamWebsterDropdown } from '@/components/dictionaries/MerriamWebsterDropdown'
+import { Oxford } from '@/components/dictionaries/Oxford'
 import { OxfordAmerican } from '@/components/dictionaries/OxfordAmerican'
 import { OxfordDropdown } from '@/components/dictionaries/OxfordDropdown'
 import { WiktionaryDropdown } from '@/components/dictionaries/WiktionaryDropdown'
@@ -67,18 +69,24 @@ export default async function Home({
         <Badge variant='outline'>{search}</Badge>
       )}
 
-      <MerriamWebster
+      {/* <MerriamWebster
         search={search}
-      ></MerriamWebster>
+      ></MerriamWebster> */}
+      <MerriamWebsterDropdown
+        search={search}
+      ></MerriamWebsterDropdown>
       <WordReferenceDropdown
         search={search}
       ></WordReferenceDropdown>
-      {/* <OxfordDropdown
+      <OxfordDropdown
+        search={search
+          .trim()
+          .replace(/\s+/g, '-')}
+      ></OxfordDropdown>
+      {/* <OxfordAmerican
         search={search}
-      ></OxfordDropdown> */}
-      <OxfordAmerican
-        search={search}
-      ></OxfordAmerican>
+      ></OxfordAmerican> */}
+      {/* <Oxford search={search}></Oxford> */}
       <DeepLDropdown
         search={search}
       ></DeepLDropdown>

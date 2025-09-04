@@ -14,7 +14,7 @@ export function WiktionaryDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button>Wiktionary ▼</Button>
+        <Button>Wiktionary</Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
