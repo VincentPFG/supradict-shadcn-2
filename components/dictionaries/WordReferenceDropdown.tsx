@@ -41,6 +41,13 @@ export function WordReferenceDropdown({
                 French
               </a>
             </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.wordreference.com/conj/enverbs.aspx?v=${search}`}
+              >
+                Conjugation
+              </a>
+            </DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
 
