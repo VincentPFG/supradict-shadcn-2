@@ -75,14 +75,15 @@ export default async function Home({
       <MerriamWebsterDropdown
         search={search}
       ></MerriamWebsterDropdown>
-      <WordReferenceDropdown
-        search={search}
-      ></WordReferenceDropdown>
       <OxfordDropdown
         search={search
           .trim()
           .replace(/\s+/g, '-')}
       ></OxfordDropdown>
+      <WordReferenceDropdown
+        search={search}
+      ></WordReferenceDropdown>
+
       {/* <OxfordAmerican
         search={search}
       ></OxfordAmerican> */}
