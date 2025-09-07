@@ -41,6 +41,13 @@ export function WiktionaryDropdown({
             French
           </a>
         </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <a
+            href={`https://it.wiktionary.org/wiki/${search}`}
+          >
+            Italian
+          </a>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

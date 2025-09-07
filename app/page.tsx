@@ -47,13 +47,12 @@ export default async function Home({
           SupraDictionary
         </Link>
       </h1>
-
       <div className='flex gap-2'>
         <Badge variant='outline'>English</Badge>
         <Badge variant='outline'>Spanish</Badge>
         <Badge variant='outline'>French</Badge>
+        <Badge variant='outline'>Italian</Badge>
       </div>
-
       <form className='w-full max-w-md grid gap-y-1 px-4'>
         <Label htmlFor='search'>Search</Label>
         <Input
@@ -68,21 +67,20 @@ export default async function Home({
       {search && (
         <Badge variant='outline'>{search}</Badge>
       )}
-
       {/* <MerriamWebster
         search={search}
       ></MerriamWebster> */}
       <MerriamWebsterDropdown
         search={search}
-      ></MerriamWebsterDropdown>
-      <WordReferenceDropdown
-        search={search}
-      ></WordReferenceDropdown>
+      ></MerriamWebsterDropdown>{' '}
       <OxfordDropdown
         search={search
           .trim()
           .replace(/\s+/g, '-')}
       ></OxfordDropdown>
+      <WordReferenceDropdown
+        search={search}
+      ></WordReferenceDropdown>
       {/* <OxfordAmerican
         search={search}
       ></OxfordAmerican> */}

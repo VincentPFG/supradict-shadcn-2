@@ -41,6 +41,13 @@ export function WordReferenceDropdown({
                 French
               </a>
             </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.wordreference.com/enit/${search}`}
+              >
+                Italian
+              </a>
+            </DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
 
@@ -62,6 +69,13 @@ export function WordReferenceDropdown({
                 href={`https://www.wordreference.com/esfr/${search}`}
               >
                 French
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.wordreference.com/esit/${search}`}
+              >
+                Italian
               </a>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
@@ -96,7 +110,50 @@ export function WordReferenceDropdown({
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <a
+                href={`https://www.wordreference.com/frit/${search}`}
+              >
+                Italian
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
                 href={`https://www.wordreference.com/conj/frverbs.aspx?v=${search}`}
+              >
+                Conjugation
+              </a>
+            </DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+        {/* Italian submenu */}
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            Italian
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.wordreference.com/iten/${search}`}
+              >
+                English
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.wordreference.com/ites/${search}`}
+              >
+                Spanish
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.wordreference.com/itfr/${search}`}
+              >
+                French
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.wordreference.com/conj/itverbs.aspx?v=${search}`}
               >
                 Conjugation
               </a>

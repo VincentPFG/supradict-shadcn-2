@@ -41,6 +41,13 @@ export function DeepLDropdown({
                 French
               </a>
             </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.deepl.com/en/translator#en/it/${search}`}
+              >
+                Italian
+              </a>
+            </DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
 
@@ -64,6 +71,13 @@ export function DeepLDropdown({
                 French
               </a>
             </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.deepl.com/es/translator#es/it/${search}`}
+              >
+                Italian
+              </a>
+            </DropdownMenuItem>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
 
@@ -85,6 +99,42 @@ export function DeepLDropdown({
                 href={`https://www.deepl.com/fr/translator#fr/es/${search}`}
               >
                 Spanish
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.deepl.com/fr/translator#fr/it/${search}`}
+              >
+                Italian
+              </a>
+            </DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+        {/* Italian submenu */}
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>
+            Italian
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.deepl.com/it/translator#it/en/${search}`}
+              >
+                English
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.deepl.com/it/translator#it/es/${search}`}
+              >
+                Spanish
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a
+                href={`https://www.deepl.com/it/translator#it/fr/${search}`}
+              >
+                French
               </a>
             </DropdownMenuItem>
           </DropdownMenuSubContent>

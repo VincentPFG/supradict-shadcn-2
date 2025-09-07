@@ -41,6 +41,13 @@ export function YouGlishDropdown({
             French
           </a>
         </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <a
+            href={`https://youglish.com/pronounce/${search}/italian`}
+          >
+            Italian
+          </a>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
