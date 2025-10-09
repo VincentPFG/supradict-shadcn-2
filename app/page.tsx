@@ -41,49 +41,51 @@ export default async function Home({
 }) {
   const { search = '' } = await searchParams
   return (
-    <div className='grid place-items-center min-h-screen gap-4'>
-      <h1 className='text-2xl font-semibold'>
-        <Link
-          href='/'
-          className='text-inherit no-underline hover:underline'
-        >
-          SupraDictionary
-        </Link>
-      </h1>
+    <div className='grid place-items-center min-h-screen'>
+      <div className='grid w-full place-items-center gap-10'>
+        <h1 className='text-2xl font-semibold'>
+          <Link
+            href='/'
+            className='text-inherit no-underline hover:underline'
+          >
+            SupraDictionary
+          </Link>
+        </h1>
 
-      {/* <div className='flex gap-2'>
+        {/* <div className='flex gap-2'>
         <Badge variant='outline'>English</Badge>
         <Badge variant='outline'>Spanish</Badge>
         <Badge variant='outline'>French</Badge>
       </div> */}
-      <form className='w-full max-w-md grid gap-y-1 px-4'>
-        <Label htmlFor='search'>Search</Label>
-        <Input
-          id='search'
-          type='text'
-          name='search'
-          placeholder='Type then press Enter'
-          autoFocus
-          autoCapitalize='off'
-        />
+        <form className='w-full max-w-md grid gap-y-1 px-4'>
+          <Label htmlFor='search'>Search</Label>
+          <Input
+            id='search'
+            type='text'
+            name='search'
+            placeholder='Type then press Enter'
+            autoFocus
+            autoCapitalize='off'
+          />
 
-        <p>
-          Current search: 
-          {search && (
-            <Badge
-              className='center'
-              variant='outline'
-            >
-              {search}
-            </Badge>
-          )}
-        </p>
-      </form>
+          <p>
+            Current search: 
+            {search && (
+              <Badge
+                className='center'
+                variant='outline'
+              >
+                {search}
+              </Badge>
+            )}
+          </p>
+        </form>
 
-      <div className='flex gap-4'>
-        <English search={search}></English>
-        <Spanish search={search}></Spanish>
-        <French search={search}></French>
+        <div className='flex gap-5'>
+          <English search={search}></English>
+          <Spanish search={search}></Spanish>
+          <French search={search}></French>
+        </div>
       </div>
     </div>
   )
