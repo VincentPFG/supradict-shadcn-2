@@ -8,10 +8,13 @@ import { OxfordDropdown } from '@/components/dictionaries/OxfordDropdown'
 import { WiktionaryDropdown } from '@/components/dictionaries/WiktionaryDropdown'
 import { WordReferenceDropdown } from '@/components/dictionaries/WordReferenceDropdown'
 import { YouGlishDropdown } from '@/components/dictionaries/YouGlishDropdown'
+import { French } from '@/components/languages/French'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
+import { Spanish } from './../components/languages/Spanish'
+import { English } from '@/components/languages/English'
 
 export async function generateMetadata({
   searchParams,
@@ -48,12 +51,11 @@ export default async function Home({
         </Link>
       </h1>
 
-      <div className='flex gap-2'>
+      {/* <div className='flex gap-2'>
         <Badge variant='outline'>English</Badge>
         <Badge variant='outline'>Spanish</Badge>
         <Badge variant='outline'>French</Badge>
-      </div>
-
+      </div> */}
       <form className='w-full max-w-md grid gap-y-1 px-4'>
         <Label htmlFor='search'>Search</Label>
         <Input
@@ -64,42 +66,25 @@ export default async function Home({
           autoFocus
           autoCapitalize='off'
         />
+
+        <p>
+          Current search: 
+          {search && (
+            <Badge
+              className='center'
+              variant='outline'
+            >
+              {search}
+            </Badge>
+          )}
+        </p>
       </form>
-      {search && (
-        <Badge variant='outline'>{search}</Badge>
-      )}
 
-      {/* <MerriamWebster
-        search={search}
-      ></MerriamWebster> */}
-      <MerriamWebsterDropdown
-        search={search}
-      ></MerriamWebsterDropdown>
-      <OxfordDropdown
-        search={search
-          .trim()
-          .replace(/\s+/g, '-')}
-      ></OxfordDropdown>
-      <WordReferenceDropdown
-        search={search}
-      ></WordReferenceDropdown>
-
-      {/* <OxfordAmerican
-        search={search}
-      ></OxfordAmerican> */}
-      {/* <Oxford search={search}></Oxford> */}
-      <DeepLDropdown
-        search={search}
-      ></DeepLDropdown>
-      {/* <LeRobertDropdown
-        search={search}
-      ></LeRobertDropdown> */}
-      <WiktionaryDropdown
-        search={search}
-      ></WiktionaryDropdown>
-      <YouGlishDropdown
-        search={search}
-      ></YouGlishDropdown>
+      <div className='flex gap-4'>
+        <English search={search}></English>
+        <Spanish search={search}></Spanish>
+        <French search={search}></French>
+      </div>
     </div>
   )
 }
