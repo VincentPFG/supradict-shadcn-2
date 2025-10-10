@@ -43,7 +43,7 @@ export default async function Home({
   return (
     <div className='grid place-items-center min-h-screen'>
       <div className='grid w-full place-items-center gap-10'>
-        <h1 className='text-2xl font-semibold'>
+        <h1 className='text-4xl font-semibold'>
           <Link
             href='/'
             className='text-inherit no-underline hover:underline'
@@ -57,7 +57,7 @@ export default async function Home({
         <Badge variant='outline'>Spanish</Badge>
         <Badge variant='outline'>French</Badge>
       </div> */}
-        <form className='w-full max-w-md grid gap-y-1 px-4'>
+        <form className='w-full max-w-md grid gap-y-2 px-4'>
           <Label htmlFor='search'>Search</Label>
           <Input
             id='search'
