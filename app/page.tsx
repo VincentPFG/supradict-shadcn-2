@@ -149,7 +149,7 @@ export default async function Home({
   return (
     // <div className='grid w-full place-items-center min-h-screen'>
     <div className='grid w-full place-items-center gap-5 p-5'>
-      <h1 className='sm-text-4xl md-text-5xl font-semibold'>
+      <h1 className='text-4xl sm:text-5xl font-semibold'>
         <Link
           href='/'
           className='text-inherit no-underline hover:underline'
