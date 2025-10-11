@@ -149,14 +149,14 @@ export default async function Home({
   return (
     // <div className='grid w-full place-items-center min-h-screen'>
     <div className='grid w-full place-items-center gap-5 p-5'>
-      <h1 className='text-5xl font-semibold'>
+      {/* <h1 className='text-5xl font-semibold'>
         <Link
           href='/'
           className='text-inherit no-underline hover:underline'
         >
           SupraDictionary
         </Link>
-      </h1>
+      </h1> */}
 
       {/* <div className='flex gap-2'>
         <Badge variant='outline'>English</Badge>
