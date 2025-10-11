@@ -212,6 +212,7 @@ export default async function Home({
                 )
                 .map(dict => (
                   <NavigationMenuLink
+                    key={dict.label}
                     className='grid w-[300px]'
                     href={dict.href}
                   >
@@ -231,6 +232,7 @@ export default async function Home({
                 )
                 .map(dict => (
                   <NavigationMenuLink
+                    key={dict.label}
                     className='grid w-[300px]'
                     href={dict.href}
                   >
@@ -250,6 +252,7 @@ export default async function Home({
                 )
                 .map(dict => (
                   <NavigationMenuLink
+                    key={dict.label}
                     className='grid w-[300px]'
                     href={dict.href}
                   >
