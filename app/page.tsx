@@ -168,7 +168,7 @@ export default async function Home({
           id='search'
           type='text'
           name='search'
-          placeholder='Type then press Enter'
+          placeholder='Type here then press Enter'
           autoFocus
           autoCapitalize='off'
         />
