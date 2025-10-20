@@ -144,6 +144,10 @@ export default async function Home({
       label: 'YouGlish',
       href: `https://youglish.com/pronounce/${search}/french/fr`,
     },
+    {
+      label: 'Le Robert',
+      href: `https://dictionnaire.lerobert.com/definition/${search}`,
+    },
   ]
 
   return (
