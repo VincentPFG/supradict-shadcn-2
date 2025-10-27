@@ -241,7 +241,7 @@ export default async function Home({
                 .map(dict => (
                   <NavigationMenuLink
                     key={dict.label}
-                    className='grid w-[300px]'
+                    className='w-[300px]'
                     href={dict.href}
                   >
                     {dict.label}
@@ -261,7 +261,7 @@ export default async function Home({
                 .map(dict => (
                   <NavigationMenuLink
                     key={dict.label}
-                    className='grid w-[300px]'
+                    className='w-[300px]'
                     href={dict.href}
                   >
                     {dict.label}
@@ -281,7 +281,7 @@ export default async function Home({
                 .map(dict => (
                   <NavigationMenuLink
                     key={dict.label}
-                    className='grid w-[300px]'
+                    className='w-[300px]'
                     href={dict.href}
                   >
                     {dict.label}
