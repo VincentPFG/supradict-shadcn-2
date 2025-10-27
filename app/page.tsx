@@ -74,14 +74,14 @@ export default async function Home({
       label: 'WordReference FR',
       href: `https://www.wordreference.com/enfr/${search}`,
     },
-    {
-      label: 'DeepL ES',
-      href: `https://www.deepl.com/en/translator#en/es/${search}`,
-    },
-    {
-      label: 'DeepL FR',
-      href: `https://www.deepl.com/en/translator#en/fr/${search}`,
-    },
+    // {
+    //   label: 'DeepL ES',
+    //   href: `https://www.deepl.com/en/translator#en/es/${search}`,
+    // },
+    // {
+    //   label: 'DeepL FR',
+    //   href: `https://www.deepl.com/en/translator#en/fr/${search}`,
+    // },
     {
       label: 'Wiktionary',
       href: `https://en.wiktionary.org/wiki/${search}`,
@@ -89,6 +89,14 @@ export default async function Home({
     {
       label: 'YouGlish',
       href: `https://youglish.com/pronounce/${search}/english/us`,
+    },
+    {
+      label: 'Reverso ES',
+      href: `https://www.reverso.net/text-translation#sl=eng&tl=spa&text=${search}`,
+    },
+    {
+      label: 'Reverso FR',
+      href: `https://www.reverso.net/text-translation#sl=eng&tl=fra&text=${search}`,
     },
   ]
 
@@ -101,14 +109,14 @@ export default async function Home({
       label: 'WordReference FR',
       href: `https://www.wordreference.com/esfr/${search}`,
     },
-    {
-      label: 'DeepL EN',
-      href: `https://www.deepl.com/es/translator#es/en/${search}`,
-    },
-    {
-      label: 'DeepL FR',
-      href: `https://www.deepl.com/es/translator#es/fr/${search}`,
-    },
+    // {
+    //   label: 'DeepL EN',
+    //   href: `https://www.deepl.com/es/translator#es/en/${search}`,
+    // },
+    // {
+    //   label: 'DeepL FR',
+    //   href: `https://www.deepl.com/es/translator#es/fr/${search}`,
+    // },
     {
       label: 'Wikcionario',
       href: `https://es.wiktionary.org/wiki/${search}`,
@@ -116,6 +124,14 @@ export default async function Home({
     {
       label: 'YouGlish',
       href: `https://youglish.com/pronounce/${search}/spanish/la`,
+    },
+    {
+      label: 'Reverso EN',
+      href: `https://www.reverso.net/traducción-texto#sl=spa&tl=eng&text=${search}`,
+    },
+    {
+      label: 'Reverso FR',
+      href: `https://www.reverso.net/traducción-texto#sl=spa&tl=fra&text=${search}`,
     },
   ]
 
@@ -128,14 +144,14 @@ export default async function Home({
       label: 'WordReference ES',
       href: `https://www.wordreference.com/fres/${search}`,
     },
-    {
-      label: 'DeepL EN',
-      href: `https://www.deepl.com/fr/translator#fr/en/${search}`,
-    },
-    {
-      label: 'DeepL ES',
-      href: `https://www.deepl.com/fr/translator#fr/es/${search}`,
-    },
+    // {
+    //   label: 'DeepL EN',
+    //   href: `https://www.deepl.com/fr/translator#fr/en/${search}`,
+    // },
+    // {
+    //   label: 'DeepL ES',
+    //   href: `https://www.deepl.com/fr/translator#fr/es/${search}`,
+    // },
     {
       label: 'Wiktionnaire',
       href: `https://fr.wiktionary.org/wiki/${search}`,
@@ -147,6 +163,14 @@ export default async function Home({
     {
       label: 'Le Robert',
       href: `https://dictionnaire.lerobert.com/definition/${search}`,
+    },
+    {
+      label: 'Reverso EN',
+      href: `https://www.reverso.net/traduction-texte#sl=fra&tl=eng&text=${search}`,
+    },
+    {
+      label: 'Reverso ES',
+      href: `https://www.reverso.net/traduction-texte#sl=fra&tl=spa&text=${search}`,
     },
   ]
 
