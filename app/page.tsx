@@ -272,10 +272,6 @@ export default async function Home({
       href: `https://youglish.com/pronounce/${search}/italian`,
     },
     {
-      label: 'Le Robert',
-      href: `https://dictionnaire.lerobert.com/definition/${search}`,
-    },
-    {
       label: 'Reverso EN',
       href: `https://www.reverso.net/traduzione-testo#sl=ita&tl=eng&text=${search}`,
     },
