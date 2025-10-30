@@ -74,6 +74,18 @@ export default async function Home({
       label: 'WordReference FR',
       href: `https://www.wordreference.com/enfr/${search}`,
     },
+    {
+      label: 'WordReference IT',
+      href: `https://www.wordreference.com/enit/${search}`,
+    },
+    {
+      label: 'WordReference PT',
+      href: `https://www.wordreference.com/enpt/${search}`,
+    },
+    {
+      label: 'WordReference ⇒',
+      href: `https://www.wordreference.com/conj/enverbs.aspx?v=${search}`,
+    },
     // {
     //   label: 'DeepL ES',
     //   href: `https://www.deepl.com/en/translator#en/es/${search}`,
@@ -98,6 +110,14 @@ export default async function Home({
       label: 'Reverso FR',
       href: `https://www.reverso.net/text-translation#sl=eng&tl=fra&text=${search}`,
     },
+    {
+      label: 'Reverso IT',
+      href: `https://www.reverso.net/text-translation#sl=eng&tl=ita&text=${search}`,
+    },
+    {
+      label: 'Reverso PT',
+      href: `https://www.reverso.net/text-translation#sl=eng&tl=por&text=${search}`,
+    },
   ]
 
   const spanishLinks = [
@@ -108,6 +128,18 @@ export default async function Home({
     {
       label: 'WordReference FR',
       href: `https://www.wordreference.com/esfr/${search}`,
+    },
+    {
+      label: 'WordReference IT',
+      href: `https://www.wordreference.com/esit/${search}`,
+    },
+    {
+      label: 'WordReference PT',
+      href: `https://www.wordreference.com/espt/${search}`,
+    },
+    {
+      label: 'WordReference ⇒',
+      href: `https://www.wordreference.com/conj/esverbs.aspx?v=${search}`,
     },
     // {
     //   label: 'DeepL EN',
@@ -133,6 +165,14 @@ export default async function Home({
       label: 'Reverso FR',
       href: `https://www.reverso.net/traducción-texto#sl=spa&tl=fra&text=${search}`,
     },
+    {
+      label: 'Reverso IT',
+      href: `https://www.reverso.net/traducción-texto#sl=spa&tl=ita&text=${search}`,
+    },
+    {
+      label: 'Reverso PT',
+      href: `https://www.reverso.net/traducción-texto#sl=spa&tl=por&text=${search}`,
+    },
   ]
 
   const frenchLinks = [
@@ -143,6 +183,18 @@ export default async function Home({
     {
       label: 'WordReference ES',
       href: `https://www.wordreference.com/fres/${search}`,
+    },
+    {
+      label: 'WordReference IT',
+      href: `https://www.wordreference.com/frit/${search}`,
+    },
+    {
+      label: 'WordReference PT',
+      href: `https://www.wordreference.com/frpt/${search}`,
+    },
+    {
+      label: 'WordReference ⇒',
+      href: `https://www.wordreference.com/conj/frverbs.aspx?v=${search}`,
     },
     // {
     //   label: 'DeepL EN',
@@ -171,6 +223,151 @@ export default async function Home({
     {
       label: 'Reverso ES',
       href: `https://www.reverso.net/traduction-texte#sl=fra&tl=spa&text=${search}`,
+    },
+    {
+      label: 'Reverso IT',
+      href: `https://www.reverso.net/traduction-texte#sl=fra&tl=ita&text=${search}`,
+    },
+    {
+      label: 'Reverso PT',
+      href: `https://www.reverso.net/traduction-texte#sl=fra&tl=por&text=${search}`,
+    },
+  ]
+
+  const italianLinks = [
+    {
+      label: 'WordReference EN',
+      href: `https://www.wordreference.com/iten/${search}`,
+    },
+    {
+      label: 'WordReference ES',
+      href: `https://www.wordreference.com/ites/${search}`,
+    },
+    {
+      label: 'WordReference FR',
+      href: `https://www.wordreference.com/itfr/${search}`,
+    },
+    {
+      label: 'WordReference PT',
+      href: `https://www.wordreference.com/itpt/${search}`,
+    },
+    {
+      label: 'WordReference ⇒',
+      href: `https://www.wordreference.com/conj/itverbs.aspx?v=${search}`,
+    },
+    // {
+    //   label: 'DeepL EN',
+    //   href: `https://www.deepl.com/fr/translator#fr/en/${search}`,
+    // },
+    // {
+    //   label: 'DeepL ES',
+    //   href: `https://www.deepl.com/fr/translator#fr/es/${search}`,
+    // },
+    {
+      label: 'Wikizionario',
+      href: `https://it.wiktionary.org/wiki/${search}`,
+    },
+    {
+      label: 'YouGlish',
+      href: `https://youglish.com/pronounce/${search}/italian`,
+    },
+    {
+      label: 'Le Robert',
+      href: `https://dictionnaire.lerobert.com/definition/${search}`,
+    },
+    {
+      label: 'Reverso EN',
+      href: `https://www.reverso.net/traduzione-testo#sl=ita&tl=eng&text=${search}`,
+    },
+    {
+      label: 'Reverso ES',
+      href: `https://www.reverso.net/traduzione-testo#sl=ita&tl=spa&text=${search}`,
+    },
+    {
+      label: 'Reverso FR',
+      href: `https://www.reverso.net/traduzione-testo#sl=ita&tl=frq&text=${search}`,
+    },
+    {
+      label: 'Reverso PT',
+      href: `https://www.reverso.net/traduzione-testo#sl=ita&tl=por&text=${search}`,
+    },
+  ]
+
+  const portugueseLinks = [
+    {
+      label: 'WordReference EN',
+      href: `https://www.wordreference.com/pten/${search}`,
+    },
+    {
+      label: 'WordReference ES',
+      href: `https://www.wordreference.com/ptes/${search}`,
+    },
+    {
+      label: 'WordReference FR',
+      href: `https://www.wordreference.com/ptfr/${search}`,
+    },
+    {
+      label: 'WordReference IT',
+      href: `https://www.wordreference.com/ptit/${search}`,
+    },
+    {
+      label: 'WordReference ⇒',
+      href: `https://www.wordreference.com/conj/ptverbs.aspx?v=${search}`,
+    },
+    // {
+    //   label: 'DeepL EN',
+    //   href: `https://www.deepl.com/fr/translator#fr/en/${search}`,
+    // },
+    // {
+    //   label: 'DeepL ES',
+    //   href: `https://www.deepl.com/fr/translator#fr/es/${search}`,
+    // },
+    {
+      label: 'Wikcionário',
+      href: `https://pt.wiktionary.org/wiki/${search}`,
+    },
+    {
+      label: 'YouGlish',
+      href: `https://youglish.com/pronounce/${search}/portuguese/br`,
+    },
+    {
+      label: 'Reverso EN',
+      href: `https://www.reverso.net/tradu%C3%A7%C3%A3o-texto#sl=por&tl=eng&text=${search}`,
+    },
+    {
+      label: 'Reverso ES',
+      href: `https://www.reverso.net/tradu%C3%A7%C3%A3o-texto#sl=por&tl=spa&text=${search}`,
+    },
+    {
+      label: 'Reverso FR',
+      href: `https://www.reverso.net/tradu%C3%A7%C3%A3o-texto#sl=por&tl=fra&text=${search}`,
+    },
+    {
+      label: 'Reverso IT',
+      href: `https://www.reverso.net/tradu%C3%A7%C3%A3o-texto#sl=por&tl=ita&text=${search}`,
+    },
+  ]
+
+  const faveLinks = [
+    {
+      label: 'WordReference EN FR',
+      href: `https://www.wordreference.com/enfr/${search}`,
+    },
+    {
+      label: 'WordReference ES FR',
+      href: `https://www.wordreference.com/esfr/${search}`,
+    },
+    {
+      label: 'WordReference FR EN',
+      href: `https://www.wordreference.com/fren/${search}`,
+    },
+    {
+      label: 'WordReference FR ES',
+      href: `https://www.wordreference.com/fres/${search}`,
+    },
+    {
+      label: 'Merriam-Webster',
+      href: `https://www.merriam-webster.com/dictionary/${search}`,
     },
   ]
 
@@ -275,6 +472,73 @@ export default async function Home({
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               {frenchLinks
+                .sort((a, b) =>
+                  a.label.localeCompare(b.label)
+                )
+                .map(dict => (
+                  <NavigationMenuLink
+                    key={dict.label}
+                    className='w-[300px]'
+                    href={dict.href}
+                  >
+                    {dict.label}
+                  </NavigationMenuLink>
+                ))}
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+
+      <NavigationMenu
+      // viewport={false}
+      >
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>
+              Italiano
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              {italianLinks
+                .sort((a, b) =>
+                  a.label.localeCompare(b.label)
+                )
+                .map(dict => (
+                  <NavigationMenuLink
+                    key={dict.label}
+                    className='w-[300px]'
+                    href={dict.href}
+                  >
+                    {dict.label}
+                  </NavigationMenuLink>
+                ))}
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>
+              Português
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              {portugueseLinks
+                .sort((a, b) =>
+                  a.label.localeCompare(b.label)
+                )
+                .map(dict => (
+                  <NavigationMenuLink
+                    key={dict.label}
+                    className='w-[300px]'
+                    href={dict.href}
+                  >
+                    {dict.label}
+                  </NavigationMenuLink>
+                ))}
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>
+              ⭐
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              {faveLinks
                 .sort((a, b) =>
                   a.label.localeCompare(b.label)
                 )
