@@ -306,10 +306,6 @@ export default async function Home({
       label: 'WordReference IT',
       href: `https://www.wordreference.com/ptit/${search}`,
     },
-    {
-      label: 'WordReference ⇒',
-      href: `https://www.wordreference.com/conj/ptverbs.aspx?v=${search}`,
-    },
     // {
     //   label: 'DeepL EN',
     //   href: `https://www.deepl.com/fr/translator#fr/en/${search}`,
@@ -341,6 +337,18 @@ export default async function Home({
     {
       label: 'Reverso IT',
       href: `https://www.reverso.net/tradu%C3%A7%C3%A3o-texto#sl=por&tl=ita&text=${search}`,
+    },
+    {
+      label: 'Priberam',
+      href: `https://dicionario.priberam.org/${search}`,
+    },
+    {
+      label: 'Priberam ⇒',
+      href: `https://dicionario.priberam.org/Conjugar/${search}`,
+    },
+    {
+      label: 'Portal da Lingua Portuguesa',
+      href: `http://www.portaldalinguaportuguesa.org/simplesearch.php?sel=exact&query=${search}`,
     },
   ]
 
