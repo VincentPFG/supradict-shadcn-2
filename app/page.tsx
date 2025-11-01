@@ -216,7 +216,7 @@ export default async function Home({
                 .map(dict => (
                   <NavigationMenuLink
                     key={dict.label}
-                    className='w-[300px]'
+                    className='w-[200px]'
                     href={dict.href}
                   >
                     {dict.label}
@@ -236,7 +236,7 @@ export default async function Home({
                 .map(dict => (
                   <NavigationMenuLink
                     key={dict.label}
-                    className='w-[300px]'
+                    className='w-[200px]'
                     href={dict.href}
                   >
                     {dict.label}
@@ -256,7 +256,7 @@ export default async function Home({
                 .map(dict => (
                   <NavigationMenuLink
                     key={dict.label}
-                    className='w-[300px]'
+                    className='w-[200px]'
                     href={dict.href}
                   >
                     {dict.label}
@@ -264,7 +264,7 @@ export default async function Home({
                 ))}
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          {/* <NavigationMenuItem>
             <NavigationMenuTrigger>
               ⭐
             </NavigationMenuTrigger>
@@ -283,7 +283,7 @@ export default async function Home({
                   </NavigationMenuLink>
                 ))}
             </NavigationMenuContent>
-          </NavigationMenuItem>
+          </NavigationMenuItem> */}
         </NavigationMenuList>
       </NavigationMenu>
     </div>
