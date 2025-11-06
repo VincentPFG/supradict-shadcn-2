@@ -65,9 +65,7 @@ export default async function Home({
     },
     {
       label: 'Oxford',
-      href: `https://www.oxfordlearnersdictionaries.com/definition/american_english/${search
-        .trim()
-        .replace(/ /g, '-')}`,
+      href: `https://www.oxfordlearnersdictionaries.com/search/american_english/?q=${search}`,
     },
     {
       label: 'WordReference ES',
