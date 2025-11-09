@@ -33,6 +33,14 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area'
 // import { useState } from 'react'
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
+
 export async function generateMetadata({
   searchParams,
 }: {
@@ -153,24 +161,20 @@ export default async function Home({
 
   const faveLinks = [
     {
-      label: 'WordReference EN FR',
-      href: `https://www.wordreference.com/enfr/${search}`,
-    },
-    {
-      label: 'WordReference ES FR',
-      href: `https://www.wordreference.com/esfr/${search}`,
-    },
-    {
-      label: 'WordReference FR ES',
-      href: `https://www.wordreference.com/fres/${search}`,
-    },
-    {
-      label: 'WordReference FR EN',
-      href: `https://www.wordreference.com/fren/${search}`,
-    },
-    {
-      label: 'Merriam-Webster',
+      label: 'M-W',
       href: `https://www.merriam-webster.com/dictionary/${search}`,
+    },
+    {
+      label: 'W EN',
+      href: `https://en.wiktionary.org/wiki/${search}`,
+    },
+    {
+      label: 'W ES',
+      href: `https://es.wiktionary.org/wiki/${search}`,
+    },
+    {
+      label: 'W FR',
+      href: `https://fr.wiktionary.org/wiki/${search}`,
     },
   ]
 
@@ -284,6 +288,29 @@ export default async function Home({
           </NavigationMenuItem> */}
         </NavigationMenuList>
       </NavigationMenu>
+
+      <iframe
+        src={`https://www.merriam-webster.com/dictionary/${search}`}
+        className='w-full h-[50vh]'
+      ></iframe>
+      {/* 
+      <Tabs defaultValue='M-W' className='w-full'>
+        <TabsList className='w-full'>
+          {faveLinks.map(dict => (
+            <TabsTrigger value={dict.label}>
+              {dict.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {faveLinks.map(dict => (
+          <TabsContent value={dict.label}>
+            <iframe
+              src={dict.href}
+              className='w-full h-[50vh]'
+            ></iframe>
+          </TabsContent>
+        ))}
+      </Tabs> */}
     </div>
   )
 }
