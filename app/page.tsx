@@ -159,22 +159,26 @@ export default async function Home({
     },
   ]
 
-  const faveLinks = [
+  const iframeLinks = [
     {
-      label: 'M-W',
+      label: 'EN',
       href: `https://www.merriam-webster.com/dictionary/${search}`,
     },
     {
-      label: 'W EN',
-      href: `https://en.wiktionary.org/wiki/${search}`,
+      label: 'EN FR',
+      href: `https://www.linguee.com/english-french/search?query=${search}`,
     },
     {
-      label: 'W ES',
-      href: `https://es.wiktionary.org/wiki/${search}`,
+      label: 'ES FR',
+      href: `https://www.linguee.es/espanol-frances/search?query=${search}`,
     },
     {
-      label: 'W FR',
-      href: `https://fr.wiktionary.org/wiki/${search}`,
+      label: 'FR EN',
+      href: `https://www.linguee.fr/francais-anglais/search?query=${search}`,
+    },
+    {
+      label: 'FR ES',
+      href: `https://www.linguee.fr/francais-espagnol/search?query=${search}`,
     },
   ]
 
@@ -271,7 +275,7 @@ export default async function Home({
               ⭐
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              {faveLinks
+              {iframeLinks
                 .sort((a, b) =>
                   a.label.localeCompare(b.label)
                 )
@@ -289,20 +293,20 @@ export default async function Home({
         </NavigationMenuList>
       </NavigationMenu>
 
-      <iframe
+      {/* <iframe
         src={`https://www.merriam-webster.com/dictionary/${search}`}
         className='w-full h-[50vh]'
-      ></iframe>
-      {/* 
-      <Tabs defaultValue='M-W' className='w-full'>
+      ></iframe> */}
+
+      <Tabs className='w-full'>
         <TabsList className='w-full'>
-          {faveLinks.map(dict => (
+          {iframeLinks.map(dict => (
             <TabsTrigger value={dict.label}>
               {dict.label}
             </TabsTrigger>
           ))}
         </TabsList>
-        {faveLinks.map(dict => (
+        {iframeLinks.map(dict => (
           <TabsContent value={dict.label}>
             <iframe
               src={dict.href}
@@ -310,7 +314,7 @@ export default async function Home({
             ></iframe>
           </TabsContent>
         ))}
-      </Tabs> */}
+      </Tabs>
     </div>
   )
 }
