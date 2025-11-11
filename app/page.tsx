@@ -99,6 +99,14 @@ export default async function Home({
       label: 'Reverso FR',
       href: `https://www.reverso.net/text-translation#sl=eng&tl=fra&text=${search}`,
     },
+    {
+      label: 'Linguee FR',
+      href: `https://www.linguee.com/english-french/search?query=${search}`,
+    },
+    {
+      label: 'Linguee ES',
+      href: `https://www.linguee.com/english-spanish/search?query=${search}`,
+    },
   ]
 
   const spanishLinks = [
@@ -125,6 +133,14 @@ export default async function Home({
     {
       label: 'Reverso FR',
       href: `https://www.reverso.net/traducción-texto#sl=spa&tl=fra&text=${search}`,
+    },
+    {
+      label: 'Linguee FR',
+      href: `https://www.linguee.es/espanol-frances/search?query=${search}`,
+    },
+    {
+      label: 'Linguee EN',
+      href: `https://www.linguee.es/espanol-ingles/search?query=${search}`,
     },
   ]
 
@@ -157,29 +173,49 @@ export default async function Home({
       label: 'Reverso ES',
       href: `https://www.reverso.net/traduction-texte#sl=fra&tl=spa&text=${search}`,
     },
+    {
+      label: 'Linguee EN',
+      href: `https://www.linguee.fr/francais-anglais/search?query=${search}`,
+    },
+    {
+      label: 'Linguee ES',
+      href: `https://www.linguee.fr/francais-espagnol/search?query=${search}`,
+    },
   ]
 
   const iframeLinks = [
     {
-      label: 'EN',
+      label: 'MW',
       href: `https://www.merriam-webster.com/dictionary/${search}`,
     },
+    // {
+    //   label: 'EN↔FR',
+    //   href: `https://www.linguee.com/english-french/search?query=${search}&source=french`,
+    // },
+    // {
+    //   label: 'EN ES',
+    //   href: `https://www.linguee.com/english-spanish/search?query=${search}`,
+    // },
+    // {
+    //   label: 'ES FR',
+    //   href: `https://www.linguee.es/espanol-frances/search?query=${search}`,
+    // },
     {
-      label: 'EN FR',
-      href: `https://www.linguee.com/english-french/search?query=${search}`,
-    },
-    {
-      label: 'ES FR',
-      href: `https://www.linguee.es/espanol-frances/search?query=${search}`,
-    },
-    {
-      label: 'FR EN',
+      label: 'EN',
       href: `https://www.linguee.fr/francais-anglais/search?query=${search}`,
     },
     {
-      label: 'FR ES',
+      label: 'ES',
       href: `https://www.linguee.fr/francais-espagnol/search?query=${search}`,
     },
+    // {
+    //   label: 'IT',
+    //   href: `https://www.linguee.fr/francais-italien/search?query=${search}`,
+    // },
+    // {
+    //   label: 'PT',
+    //   href: `https://www.linguee.fr/francais-portugais/search?query=${search}`,
+    // },
   ]
 
   return (
