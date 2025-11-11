@@ -80,7 +80,7 @@ export default async function Home({
       href: `https://www.wordreference.com/enes/${search}`,
     },
     {
-      label: 'WordReference FR',
+      label: '⭐ WordReference FR',
       href: `https://www.wordreference.com/enfr/${search}`,
     },
     {
@@ -115,7 +115,7 @@ export default async function Home({
       href: `https://www.wordreference.com/esen/${search}`,
     },
     {
-      label: 'WordReference FR',
+      label: '⭐ WordReference FR',
       href: `https://www.wordreference.com/esfr/${search}`,
     },
     {
@@ -146,11 +146,11 @@ export default async function Home({
 
   const frenchLinks = [
     {
-      label: 'WordReference EN',
+      label: '⭐ WordReference EN',
       href: `https://www.wordreference.com/fren/${search}`,
     },
     {
-      label: 'WordReference ES',
+      label: '⭐ WordReference ES',
       href: `https://www.wordreference.com/fres/${search}`,
     },
     {
@@ -188,18 +188,6 @@ export default async function Home({
       label: 'MW',
       href: `https://www.merriam-webster.com/dictionary/${search}`,
     },
-    // {
-    //   label: 'EN↔FR',
-    //   href: `https://www.linguee.com/english-french/search?query=${search}&source=french`,
-    // },
-    // {
-    //   label: 'EN ES',
-    //   href: `https://www.linguee.com/english-spanish/search?query=${search}`,
-    // },
-    // {
-    //   label: 'ES FR',
-    //   href: `https://www.linguee.es/espanol-frances/search?query=${search}`,
-    // },
     {
       label: 'EN',
       href: `https://www.linguee.fr/francais-anglais/search?query=${search}`,
@@ -208,14 +196,6 @@ export default async function Home({
       label: 'ES',
       href: `https://www.linguee.fr/francais-espagnol/search?query=${search}`,
     },
-    // {
-    //   label: 'IT',
-    //   href: `https://www.linguee.fr/francais-italien/search?query=${search}`,
-    // },
-    // {
-    //   label: 'PT',
-    //   href: `https://www.linguee.fr/francais-portugais/search?query=${search}`,
-    // },
   ]
 
   return (
