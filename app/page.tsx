@@ -301,13 +301,19 @@ export default async function Home({
       <Tabs className='w-full'>
         <TabsList className='w-full'>
           {iframeLinks.map(dict => (
-            <TabsTrigger value={dict.label}>
+            <TabsTrigger
+              value={dict.label}
+              key={dict.label}
+            >
               {dict.label}
             </TabsTrigger>
           ))}
         </TabsList>
         {iframeLinks.map(dict => (
-          <TabsContent value={dict.label}>
+          <TabsContent
+            value={dict.label}
+            key={dict.label}
+          >
             <iframe
               src={dict.href}
               className='w-full h-[50vh]'
