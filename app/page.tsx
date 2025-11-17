@@ -107,7 +107,19 @@ export default async function Home({
       label: 'Linguee ES',
       href: `https://www.linguee.com/english-spanish/search?query=${search}`,
     },
-  ]
+    {
+      label: 'Google ES',
+      href: `https://translate.google.com/?op=translate&sl=en&tl=es&text=${search}`,
+    },
+    {
+      label: 'Google FR',
+      href: `https://translate.google.com/?op=translate&sl=en&tl=fr&text=${search}`,
+    },
+    {
+      label: 'Cambridge 2',
+      href: `https://dictionary.cambridge.org/search/direct/?datasetsearch=essential-american-english&q=${search}`,
+    },
+  ].sort((a, b) => a.label.localeCompare(b.label))
 
   const spanishLinks = [
     {
@@ -142,7 +154,15 @@ export default async function Home({
       label: 'Linguee EN',
       href: `https://www.linguee.es/espanol-ingles/search?query=${search}`,
     },
-  ]
+    {
+      label: 'Google EN',
+      href: `https://translate.google.com/?op=translate&sl=es&tl=en&text=${search}`,
+    },
+    {
+      label: 'Google FR',
+      href: `https://translate.google.com/?op=translate&sl=es&tl=fr&text=${search}`,
+    },
+  ].sort((a, b) => a.label.localeCompare(b.label))
 
   const frenchLinks = [
     {
@@ -181,7 +201,15 @@ export default async function Home({
       label: 'Linguee ES',
       href: `https://www.linguee.fr/francais-espagnol/search?query=${search}`,
     },
-  ]
+    {
+      label: 'Google EN',
+      href: `https://translate.google.com/?op=translate&sl=fr&tl=en&text=${search}`,
+    },
+    {
+      label: 'Google ES',
+      href: `https://translate.google.com/?op=translate&sl=fr&tl=es&text=${search}`,
+    },
+  ].sort((a, b) => a.label.localeCompare(b.label))
 
   const iframeLinks = [
     {
@@ -230,60 +258,46 @@ export default async function Home({
             <NavigationMenuTrigger>
               EN
             </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {englishLinks
-                .sort((a, b) =>
-                  a.label.localeCompare(b.label)
-                )
-                .map(dict => (
-                  <NavigationMenuLink
-                    key={dict.label}
-                    className='w-[200px]'
-                    href={dict.href}
-                  >
-                    {dict.label}
-                  </NavigationMenuLink>
-                ))}
+            <NavigationMenuContent className='min-w-[200px]'>
+              {englishLinks.map(dict => (
+                <NavigationMenuLink
+                  key={dict.label}
+                  href={dict.href}
+                >
+                  {dict.label}
+                </NavigationMenuLink>
+              ))}
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>
               ES
             </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {spanishLinks
-                .sort((a, b) =>
-                  a.label.localeCompare(b.label)
-                )
-                .map(dict => (
-                  <NavigationMenuLink
-                    key={dict.label}
-                    className='w-[200px]'
-                    href={dict.href}
-                  >
-                    {dict.label}
-                  </NavigationMenuLink>
-                ))}
+            <NavigationMenuContent className='min-w-[200px]'>
+              {spanishLinks.map(dict => (
+                <NavigationMenuLink
+                  key={dict.label}
+                  href={dict.href}
+                >
+                  {dict.label}
+                </NavigationMenuLink>
+              ))}
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>
               FR
             </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              {frenchLinks
-                .sort((a, b) =>
-                  a.label.localeCompare(b.label)
-                )
-                .map(dict => (
-                  <NavigationMenuLink
-                    key={dict.label}
-                    className='w-[200px]'
-                    href={dict.href}
-                  >
-                    {dict.label}
-                  </NavigationMenuLink>
-                ))}
+            <NavigationMenuContent className='min-w-[200px]'>
+              {frenchLinks.map(dict => (
+                <NavigationMenuLink
+                  key={dict.label}
+                  className=''
+                  href={dict.href}
+                >
+                  {dict.label}
+                </NavigationMenuLink>
+              ))}
             </NavigationMenuContent>
           </NavigationMenuItem>
           {/* <NavigationMenuItem>
