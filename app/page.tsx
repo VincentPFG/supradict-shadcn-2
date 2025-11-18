@@ -116,7 +116,7 @@ export default async function Home({
       href: `https://translate.google.com/?op=translate&sl=en&tl=fr&text=${search}`,
     },
     {
-      label: 'Cambridge 2',
+      label: 'Cambridge',
       href: `https://dictionary.cambridge.org/search/direct/?datasetsearch=essential-american-english&q=${search}`,
     },
   ].sort((a, b) => a.label.localeCompare(b.label))
