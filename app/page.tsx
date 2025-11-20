@@ -71,16 +71,24 @@ export default async function Home({
     //   label: 'Merriam-Webster',
     //   href: `https://www.merriam-webster.com/dictionary/${search}`,
     // },
-    {
-      label: 'Oxford',
-      href: `https://www.oxfordlearnersdictionaries.com/search/american_english/?q=${search}`,
-    },
+    // {
+    //   label: 'Oxford',
+    //   href: `https://www.oxfordlearnersdictionaries.com/search/american_english/?q=${search}`,
+    // },
+    // {
+    //   label: 'WordReference ES',
+    //   href: `https://www.wordreference.com/enes/${search}`,
+    // },
+    // {
+    //   label: '⭐ WordReference FR',
+    //   href: `https://www.wordreference.com/enfr/${search}`,
+    // },
     {
       label: 'WordReference ES',
       href: `https://www.wordreference.com/enes/${search}`,
     },
     {
-      label: '⭐ WordReference FR',
+      label: 'WordReference FR',
       href: `https://www.wordreference.com/enfr/${search}`,
     },
     {
@@ -126,8 +134,12 @@ export default async function Home({
       label: 'WordReference EN',
       href: `https://www.wordreference.com/esen/${search}`,
     },
+    // {
+    //   label: '⭐ WordReference FR',
+    //   href: `https://www.wordreference.com/esfr/${search}`,
+    // },
     {
-      label: '⭐ WordReference FR',
+      label: 'WordReference FR',
       href: `https://www.wordreference.com/esfr/${search}`,
     },
     {
@@ -165,12 +177,20 @@ export default async function Home({
   ].sort((a, b) => a.label.localeCompare(b.label))
 
   const frenchLinks = [
+    // {
+    //   label: '⭐ WordReference EN',
+    //   href: `https://www.wordreference.com/fren/${search}`,
+    // },
+    // {
+    //   label: '⭐ WordReference ES',
+    //   href: `https://www.wordreference.com/fres/${search}`,
+    // },
     {
-      label: '⭐ WordReference EN',
+      label: 'WordReference EN',
       href: `https://www.wordreference.com/fren/${search}`,
     },
     {
-      label: '⭐ WordReference ES',
+      label: 'WordReference ES',
       href: `https://www.wordreference.com/fres/${search}`,
     },
     {
