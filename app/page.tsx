@@ -84,13 +84,14 @@ export default async function Home({
     //   href: `https://www.wordreference.com/enfr/${search}`,
     // },
     {
-      label: 'WordReference ES',
-      href: `https://www.wordreference.com/enes/${search}`,
-    },
-    {
       label: 'WordReference FR',
       href: `https://www.wordreference.com/enfr/${search}`,
     },
+    {
+      label: 'WordReference ES',
+      href: `https://www.wordreference.com/enes/${search}`,
+    },
+
     {
       label: 'Wiktionary',
       href: `https://en.wiktionary.org/wiki/${search}`,
@@ -127,13 +128,10 @@ export default async function Home({
     //   label: 'Cambridge',
     //   href: `https://dictionary.cambridge.org/search/direct/?datasetsearch=essential-american-english&q=${search}`,
     // },
-  ].sort((a, b) => a.label.localeCompare(b.label))
+  ]
+  // .sort((a, b) => a.label.localeCompare(b.label))
 
   const spanishLinks = [
-    {
-      label: 'WordReference EN',
-      href: `https://www.wordreference.com/esen/${search}`,
-    },
     // {
     //   label: '⭐ WordReference FR',
     //   href: `https://www.wordreference.com/esfr/${search}`,
@@ -141,6 +139,10 @@ export default async function Home({
     {
       label: 'WordReference FR',
       href: `https://www.wordreference.com/esfr/${search}`,
+    },
+    {
+      label: 'WordReference EN',
+      href: `https://www.wordreference.com/esen/${search}`,
     },
     {
       label: 'Wikcionario',
@@ -174,7 +176,8 @@ export default async function Home({
     //   label: 'Google FR',
     //   href: `https://translate.google.com/?op=translate&sl=es&tl=fr&text=${search}`,
     // },
-  ].sort((a, b) => a.label.localeCompare(b.label))
+  ]
+  // .sort((a, b) => a.label.localeCompare(b.label))
 
   const frenchLinks = [
     // {
@@ -229,7 +232,8 @@ export default async function Home({
     //   label: 'Google ES',
     //   href: `https://translate.google.com/?op=translate&sl=fr&tl=es&text=${search}`,
     // },
-  ].sort((a, b) => a.label.localeCompare(b.label))
+  ]
+  // .sort((a, b) => a.label.localeCompare(b.label))
 
   const iframeLinks = [
     {
