@@ -113,7 +113,7 @@ export default async function Home({
             <ButtonGroup>
               <Button
                 asChild
-                className='w-32 bg-indigo-700'
+                className='w-32 bg-purple-500'
               >
                 <Link
                   href={`https://www.wordreference.com/enes/${search}`}
@@ -123,19 +123,7 @@ export default async function Home({
               </Button>
               <Button
                 asChild
-                className='w-32 bg-amber-600'
-              >
-                <Link
-                  href={`https://www.wordreference.com/esen/${search}`}
-                >
-                  ES→EN
-                </Link>
-              </Button>
-            </ButtonGroup>
-            <ButtonGroup>
-              <Button
-                asChild
-                className='w-32 bg-indigo-700'
+                className='w-32 bg-purple-500'
               >
                 <Link
                   href={`https://www.wordreference.com/enfr/${search}`}
@@ -143,21 +131,22 @@ export default async function Home({
                   EN→FR
                 </Link>
               </Button>
-              <Button
-                asChild
-                className='w-32 bg-amber-600'
-              >
-                <Link
-                  href={`https://www.wordreference.com/fren/${search}`}
-                >
-                  FR→EN
-                </Link>
-              </Button>
             </ButtonGroup>
+
             <ButtonGroup>
               <Button
                 asChild
-                className='w-32 bg-indigo-700'
+                className='w-32 bg-red-500'
+              >
+                <Link
+                  href={`https://www.wordreference.com/esen/${search}`}
+                >
+                  ES→EN
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className='w-32 bg-red-500'
               >
                 <Link
                   href={`https://www.wordreference.com/esfr/${search}`}
@@ -165,9 +154,22 @@ export default async function Home({
                   ES→FR
                 </Link>
               </Button>
+            </ButtonGroup>
+
+            <ButtonGroup>
               <Button
                 asChild
-                className='w-32 bg-amber-600'
+                className='w-32 bg-gray-500'
+              >
+                <Link
+                  href={`https://www.wordreference.com/fren/${search}`}
+                >
+                  FR→EN
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className='w-32 bg-gray-500'
               >
                 <Link
                   href={`https://www.wordreference.com/fres/${search}`}
