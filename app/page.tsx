@@ -41,6 +41,9 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 
+import { Button } from '@/components/ui/button'
+import { ButtonGroup } from '@/components/ui/button-group'
+
 export async function generateMetadata({
   searchParams,
 }: {
@@ -57,6 +60,31 @@ export async function generateMetadata({
       icon: '/SD.png',
     },
   }
+}
+
+const items = [
+  { href: '/one', label: 'One' },
+  { href: '/two', label: 'Two' },
+  { href: '/three', label: 'Three' },
+  { href: '/four', label: 'Four' },
+  { href: '/five', label: 'Five' },
+  { href: '/six', label: 'Six' },
+]
+
+export function ButtonGrid() {
+  return (
+    <div className='flex justify-center'>
+      <div className='grid grid-cols-2 gap-4 max-w-md'>
+        <Button asChild className='w-32'>
+          <Link
+            href={`https://www.wordreference.com/enes/${search}`}
+          >
+            EN→ES
+          </Link>
+        </Button>
+      </div>
+    </div>
+  )
 }
 
 export default async function Home({
@@ -276,7 +304,7 @@ export default async function Home({
         {search}
       </ScrollArea>
 
-      <NavigationMenu>
+      {/* <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger>
@@ -344,16 +372,17 @@ export default async function Home({
                 ))}
             </NavigationMenuContent>
           </NavigationMenuItem> */}
-        </NavigationMenuList>
-      </NavigationMenu>
+      {/* </NavigationMenuList> */}
+      {/* </NavigationMenu> */}
 
       {/* <iframe
         src={`https://www.merriam-webster.com/dictionary/${search}`}
         className='w-full h-[50vh]'
       ></iframe> */}
 
-      <Tabs className='w-full'>
+      <Tabs defaultValue='wr' className='w-full'>
         <TabsList className='w-full'>
+          <TabsTrigger value='wr'>WR</TabsTrigger>
           {iframeLinks.map(dict => (
             <TabsTrigger
               value={dict.label}
@@ -362,7 +391,81 @@ export default async function Home({
               {dict.label}
             </TabsTrigger>
           ))}
+          <TabsTrigger value='w'>W</TabsTrigger>
         </TabsList>
+        <TabsContent
+          value='wr'
+          className='flex justify-center'
+        >
+          <div className='grid gap-2'>
+            <ButtonGroup>
+              <Button
+                asChild
+                className='w-32 bg-indigo-700'
+              >
+                <Link
+                  href={`https://www.wordreference.com/enes/${search}`}
+                >
+                  EN→ES
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className='w-32 bg-amber-600'
+              >
+                <Link
+                  href={`https://www.wordreference.com/esen/${search}`}
+                >
+                  ES→EN
+                </Link>
+              </Button>
+            </ButtonGroup>
+            <ButtonGroup>
+              <Button
+                asChild
+                className='w-32 bg-indigo-700'
+              >
+                <Link
+                  href={`https://www.wordreference.com/enfr/${search}`}
+                >
+                  EN→FR
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className='w-32 bg-amber-600'
+              >
+                <Link
+                  href={`https://www.wordreference.com/fren/${search}`}
+                >
+                  FR→EN
+                </Link>
+              </Button>
+            </ButtonGroup>
+            <ButtonGroup>
+              <Button
+                asChild
+                className='w-32 bg-indigo-700'
+              >
+                <Link
+                  href={`https://www.wordreference.com/esfr/${search}`}
+                >
+                  ES→FR
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className='w-32 bg-amber-600'
+              >
+                <Link
+                  href={`https://www.wordreference.com/fres/${search}`}
+                >
+                  FR→ES
+                </Link>
+              </Button>
+            </ButtonGroup>
+          </div>
+        </TabsContent>
         {iframeLinks.map(dict => (
           <TabsContent
             value={dict.label}
@@ -374,6 +477,39 @@ export default async function Home({
             ></iframe>
           </TabsContent>
         ))}
+        <TabsContent value='w'>
+          <Tabs className='w-full'>
+            <TabsList className='w-full'>
+              <TabsTrigger value='en'>
+                EN
+              </TabsTrigger>
+              <TabsTrigger value='es'>
+                ES
+              </TabsTrigger>
+              <TabsTrigger value='fr'>
+                FR
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value='en'>
+              <iframe
+                src={`https://en.wiktionary.org/wiki/${search}`}
+                className='w-full h-[50vh]'
+              ></iframe>
+            </TabsContent>
+            <TabsContent value='es'>
+              <iframe
+                src={`https://es.wiktionary.org/wiki/${search}`}
+                className='w-full h-[50vh]'
+              ></iframe>
+            </TabsContent>
+            <TabsContent value='fr'>
+              <iframe
+                src={`https://fr.wiktionary.org/wiki/${search}`}
+                className='w-full h-[50vh]'
+              ></iframe>
+            </TabsContent>
+          </Tabs>
+        </TabsContent>
       </Tabs>
     </div>
   )
