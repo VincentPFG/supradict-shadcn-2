@@ -71,7 +71,7 @@ const items = [
   { href: '/six', label: 'Six' },
 ]
 
-export function ButtonGrid() {
+function ButtonGrid() {
   return (
     <div className='flex justify-center'>
       <div className='grid grid-cols-2 gap-4 max-w-md'>
