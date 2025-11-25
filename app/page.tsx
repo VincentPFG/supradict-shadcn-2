@@ -43,6 +43,10 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { ButtonGroup } from '@/components/ui/button-group'
+import {
+  ArrowLeftRight,
+  ArrowRight,
+} from 'lucide-react'
 
 export async function generateMetadata({
   searchParams,
@@ -109,72 +113,84 @@ export default async function Home({
           value='wr'
           className='flex justify-center'
         >
-          <div className='grid gap-2'>
-            <ButtonGroup>
+          <div className='grid gap-2 w-full max-w-md'>
+            <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
-                className='w-32 bg-purple-500'
+                className='bg-purple-500'
               >
                 <Link
                   href={`https://www.wordreference.com/enes/${search}`}
                 >
-                  EN→ES
+                  EN
+                  <ArrowRight />
+                  ES
                 </Link>
               </Button>
               <Button
                 asChild
-                className='w-32 bg-purple-500'
+                className='bg-purple-500'
               >
                 <Link
                   href={`https://www.wordreference.com/enfr/${search}`}
                 >
-                  EN→FR
+                  EN
+                  <ArrowRight />
+                  FR
                 </Link>
               </Button>
             </ButtonGroup>
 
-            <ButtonGroup>
+            <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
-                className='w-32 bg-red-500'
+                className='bg-red-500'
               >
                 <Link
                   href={`https://www.wordreference.com/esen/${search}`}
                 >
-                  ES→EN
+                  ES
+                  <ArrowRight />
+                  EN
                 </Link>
               </Button>
               <Button
                 asChild
-                className='w-32 bg-red-500'
+                className='bg-red-500'
               >
                 <Link
                   href={`https://www.wordreference.com/esfr/${search}`}
                 >
-                  ES→FR
+                  ES
+                  <ArrowRight />
+                  FR
                 </Link>
               </Button>
             </ButtonGroup>
 
-            <ButtonGroup>
+            <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
-                className='w-32 bg-gray-500'
+                className='bg-gray-500'
               >
                 <Link
                   href={`https://www.wordreference.com/fren/${search}`}
                 >
-                  FR→EN
+                  FR
+                  <ArrowRight />
+                  EN
                 </Link>
               </Button>
               <Button
                 asChild
-                className='w-32 bg-gray-500'
+                className='bg-gray-500'
               >
                 <Link
                   href={`https://www.wordreference.com/fres/${search}`}
                 >
-                  FR→ES
+                  FR
+                  <ArrowRight />
+                  ES
                 </Link>
               </Button>
             </ButtonGroup>
