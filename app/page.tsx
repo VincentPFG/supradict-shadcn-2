@@ -115,10 +115,7 @@ export default async function Home({
         >
           <div className='grid gap-2 w-full max-w-md'>
             <ButtonGroup className='grid grid-cols-2 w-full'>
-              <Button
-                asChild
-                className='bg-yellow-500'
-              >
+              <Button asChild>
                 <Link
                   href={`https://www.wordreference.com/enes/${search}`}
                 >
@@ -127,10 +124,7 @@ export default async function Home({
                   ES
                 </Link>
               </Button>
-              <Button
-                asChild
-                className='bg-yellow-500'
-              >
+              <Button asChild>
                 <Link
                   href={`https://www.wordreference.com/enfr/${search}`}
                 >
@@ -142,10 +136,7 @@ export default async function Home({
             </ButtonGroup>
 
             <ButtonGroup className='grid grid-cols-2 w-full'>
-              <Button
-                asChild
-                className='bg-red-600'
-              >
+              <Button asChild>
                 <Link
                   href={`https://www.wordreference.com/esen/${search}`}
                 >
@@ -154,10 +145,7 @@ export default async function Home({
                   EN
                 </Link>
               </Button>
-              <Button
-                asChild
-                className='bg-red-600'
-              >
+              <Button asChild>
                 <Link
                   href={`https://www.wordreference.com/esfr/${search}`}
                 >
@@ -169,10 +157,7 @@ export default async function Home({
             </ButtonGroup>
 
             <ButtonGroup className='grid grid-cols-2 w-full'>
-              <Button
-                asChild
-                className='bg-rose-400'
-              >
+              <Button asChild>
                 <Link
                   href={`https://www.wordreference.com/fren/${search}`}
                 >
@@ -181,10 +166,7 @@ export default async function Home({
                   EN
                 </Link>
               </Button>
-              <Button
-                asChild
-                className='bg-rose-400'
-              >
+              <Button asChild>
                 <Link
                   href={`https://www.wordreference.com/fres/${search}`}
                 >
