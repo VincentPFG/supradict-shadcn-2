@@ -115,7 +115,10 @@ export default async function Home({
         >
           <div className='grid gap-2 w-full max-w-md'>
             <ButtonGroup className='grid grid-cols-2 w-full'>
-              <Button asChild>
+              <Button
+                asChild
+                className='bg-purple-500 hover:bg-purple-600'
+              >
                 <Link
                   href={`https://www.wordreference.com/enes/${search}`}
                 >
@@ -124,7 +127,10 @@ export default async function Home({
                   ES
                 </Link>
               </Button>
-              <Button asChild>
+              <Button
+                asChild
+                className='bg-purple-500 hover:bg-purple-600'
+              >
                 <Link
                   href={`https://www.wordreference.com/enfr/${search}`}
                 >
@@ -136,7 +142,10 @@ export default async function Home({
             </ButtonGroup>
 
             <ButtonGroup className='grid grid-cols-2 w-full'>
-              <Button asChild>
+              <Button
+                asChild
+                className='bg-red-500 hover:bg-red-600'
+              >
                 <Link
                   href={`https://www.wordreference.com/esen/${search}`}
                 >
@@ -145,7 +154,10 @@ export default async function Home({
                   EN
                 </Link>
               </Button>
-              <Button asChild>
+              <Button
+                asChild
+                className='bg-red-500 hover:bg-red-600'
+              >
                 <Link
                   href={`https://www.wordreference.com/esfr/${search}`}
                 >
@@ -157,7 +169,10 @@ export default async function Home({
             </ButtonGroup>
 
             <ButtonGroup className='grid grid-cols-2 w-full'>
-              <Button asChild>
+              <Button
+                asChild
+                className='bg-slate-500 hover:bg-slate-600'
+              >
                 <Link
                   href={`https://www.wordreference.com/fren/${search}`}
                 >
@@ -166,7 +181,10 @@ export default async function Home({
                   EN
                 </Link>
               </Button>
-              <Button asChild>
+              <Button
+                asChild
+                className='bg-slate-500 hover:bg-slate-600'
+              >
                 <Link
                   href={`https://www.wordreference.com/fres/${search}`}
                 >
