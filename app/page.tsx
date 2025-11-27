@@ -117,7 +117,7 @@ export default async function Home({
             <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
-                className='bg-purple-500'
+                className='bg-yellow-500'
               >
                 <Link
                   href={`https://www.wordreference.com/enes/${search}`}
@@ -129,7 +129,7 @@ export default async function Home({
               </Button>
               <Button
                 asChild
-                className='bg-purple-500'
+                className='bg-yellow-500'
               >
                 <Link
                   href={`https://www.wordreference.com/enfr/${search}`}
@@ -144,7 +144,7 @@ export default async function Home({
             <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
-                className='bg-red-500'
+                className='bg-red-600'
               >
                 <Link
                   href={`https://www.wordreference.com/esen/${search}`}
@@ -156,7 +156,7 @@ export default async function Home({
               </Button>
               <Button
                 asChild
-                className='bg-red-500'
+                className='bg-red-600'
               >
                 <Link
                   href={`https://www.wordreference.com/esfr/${search}`}
@@ -171,7 +171,7 @@ export default async function Home({
             <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
-                className='bg-gray-500'
+                className='bg-rose-400'
               >
                 <Link
                   href={`https://www.wordreference.com/fren/${search}`}
@@ -183,7 +183,7 @@ export default async function Home({
               </Button>
               <Button
                 asChild
-                className='bg-gray-500'
+                className='bg-rose-400'
               >
                 <Link
                   href={`https://www.wordreference.com/fres/${search}`}
