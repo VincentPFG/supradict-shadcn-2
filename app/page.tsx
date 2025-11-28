@@ -116,7 +116,7 @@ export default async function Home({
           value='wr'
           className='w-full flex justify-center'
         >
-          <div className='grid gap-2 w-full max-w-md'>
+          {/* <div className='grid gap-2 w-full max-w-md'>
             <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
@@ -203,7 +203,108 @@ export default async function Home({
                 </Link>
               </Button>
             </ButtonGroup>
-          </div>
+          </div> */}
+
+          <Tabs className='w-full items-center'>
+            <TabsList className='w-full max-w-md'>
+              <TabsTrigger value='en'>
+                EN
+              </TabsTrigger>
+              <TabsTrigger value='es'>
+                ES
+              </TabsTrigger>
+              <TabsTrigger value='fr'>
+                FR
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent
+              value='en'
+              className='w-full max-w-md'
+            >
+              <ButtonGroup className='grid grid-cols-2 w-full'>
+                <Button
+                  asChild
+                  // className='bg-purple-500 hover:bg-purple-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/enes/${search}`}
+                  >
+                    ES
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-purple-500 hover:bg-purple-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/enfr/${search}`}
+                  >
+                    FR
+                  </Link>
+                </Button>
+              </ButtonGroup>
+            </TabsContent>
+            <TabsContent
+              value='es'
+              className='w-full max-w-md'
+            >
+              <ButtonGroup className='grid grid-cols-2 w-full'>
+                <Button
+                  asChild
+                  // className='bg-red-500 hover:bg-red-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/esen/${search}`}
+                  >
+                    EN
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-red-500 hover:bg-red-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/esfr/${search}`}
+                  >
+                    FR
+                  </Link>
+                </Button>
+              </ButtonGroup>
+            </TabsContent>
+            <TabsContent
+              value='fr'
+              className='w-full max-w-md'
+            >
+              <ButtonGroup className='grid grid-cols-2 w-full'>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/fren/${search}`}
+                  >
+                    EN
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/fres/${search}`}
+                  >
+                    ES
+                  </Link>
+                </Button>
+              </ButtonGroup>
+            </TabsContent>
+          </Tabs>
 
           {/* <NavigationMenu viewport='ism'>
             <NavigationMenuList>
