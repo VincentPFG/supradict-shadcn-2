@@ -99,8 +99,11 @@ export default async function Home({
         {search}
       </ScrollArea>
 
-      <Tabs defaultValue='wr' className='w-full'>
-        <TabsList className='w-full'>
+      <Tabs
+        defaultValue='wr'
+        className='w-full items-center'
+      >
+        <TabsList className='w-full max-w-md'>
           <TabsTrigger value='wr'>WR</TabsTrigger>
 
           <TabsTrigger value='mw'>MW</TabsTrigger>
@@ -111,7 +114,7 @@ export default async function Home({
         </TabsList>
         <TabsContent
           value='wr'
-          className='flex justify-center'
+          className='w-full flex justify-center'
         >
           <div className='grid gap-2 w-full max-w-md'>
             <ButtonGroup className='grid grid-cols-2 w-full'>
@@ -196,29 +199,38 @@ export default async function Home({
             </ButtonGroup>
           </div>
         </TabsContent>
-        <TabsContent value='mw'>
+        <TabsContent
+          value='mw'
+          className='w-full'
+        >
           <iframe
             src={`https://www.merriam-webster.com/dictionary/${search}`}
             className='w-full h-[50vh]'
           ></iframe>
         </TabsContent>
 
-        <TabsContent value='en'>
+        <TabsContent
+          value='en'
+          className='w-full'
+        >
           <iframe
             src={`https://www.linguee.fr/francais-anglais/search?query=${search}`}
             className='w-full h-[50vh]'
           ></iframe>
         </TabsContent>
-        <TabsContent value='es'>
+        <TabsContent
+          value='es'
+          className='w-full'
+        >
           <iframe
             src={`https://www.linguee.fr/francais-espagnol/search?query=${search}`}
             className='w-full h-[50vh]'
           ></iframe>
         </TabsContent>
 
-        <TabsContent value='w'>
-          <Tabs className='w-full'>
-            <TabsList className='w-full'>
+        <TabsContent value='w' className='w-full'>
+          <Tabs className='w-full items-center'>
+            <TabsList className='w-full max-w-md'>
               <TabsTrigger value='en'>
                 EN
               </TabsTrigger>
@@ -229,19 +241,28 @@ export default async function Home({
                 FR
               </TabsTrigger>
             </TabsList>
-            <TabsContent value='en'>
+            <TabsContent
+              value='en'
+              className='w-full'
+            >
               <iframe
                 src={`https://en.wiktionary.org/wiki/${search}`}
                 className='w-full h-[50vh]'
               ></iframe>
             </TabsContent>
-            <TabsContent value='es'>
+            <TabsContent
+              value='es'
+              className='w-full'
+            >
               <iframe
                 src={`https://es.wiktionary.org/wiki/${search}`}
                 className='w-full h-[50vh]'
               ></iframe>
             </TabsContent>
-            <TabsContent value='fr'>
+            <TabsContent
+              value='fr'
+              className='w-full'
+            >
               <iframe
                 src={`https://fr.wiktionary.org/wiki/${search}`}
                 className='w-full h-[50vh]'
