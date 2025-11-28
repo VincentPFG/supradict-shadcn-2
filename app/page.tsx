@@ -120,7 +120,8 @@ export default async function Home({
             <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
-                className='bg-purple-500 hover:bg-purple-600'
+                // className='bg-purple-500 hover:bg-purple-600'
+                variant='outline'
               >
                 <Link
                   href={`https://www.wordreference.com/enes/${search}`}
@@ -132,7 +133,8 @@ export default async function Home({
               </Button>
               <Button
                 asChild
-                className='bg-purple-500 hover:bg-purple-600'
+                // className='bg-purple-500 hover:bg-purple-600'
+                variant='outline'
               >
                 <Link
                   href={`https://www.wordreference.com/enfr/${search}`}
@@ -147,7 +149,8 @@ export default async function Home({
             <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
-                className='bg-red-500 hover:bg-red-600'
+                // className='bg-red-500 hover:bg-red-600'
+                variant='outline'
               >
                 <Link
                   href={`https://www.wordreference.com/esen/${search}`}
@@ -159,7 +162,8 @@ export default async function Home({
               </Button>
               <Button
                 asChild
-                className='bg-red-500 hover:bg-red-600'
+                // className='bg-red-500 hover:bg-red-600'
+                variant='outline'
               >
                 <Link
                   href={`https://www.wordreference.com/esfr/${search}`}
@@ -174,7 +178,8 @@ export default async function Home({
             <ButtonGroup className='grid grid-cols-2 w-full'>
               <Button
                 asChild
-                className='bg-slate-500 hover:bg-slate-600'
+                // className='bg-slate-500 hover:bg-slate-600'
+                variant='outline'
               >
                 <Link
                   href={`https://www.wordreference.com/fren/${search}`}
@@ -186,7 +191,8 @@ export default async function Home({
               </Button>
               <Button
                 asChild
-                className='bg-slate-500 hover:bg-slate-600'
+                // className='bg-slate-500 hover:bg-slate-600'
+                variant='outline'
               >
                 <Link
                   href={`https://www.wordreference.com/fres/${search}`}
@@ -198,6 +204,62 @@ export default async function Home({
               </Button>
             </ButtonGroup>
           </div>
+
+          {/* <NavigationMenu viewport='ism'>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>
+                  EN
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink
+                    href={`https://www.wordreference.com/enes/${search}`}
+                  >
+                    ES
+                  </NavigationMenuLink>
+                  <NavigationMenuLink
+                    href={`https://www.wordreference.com/enfr/${search}`}
+                  >
+                    FR
+                  </NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>
+                  ES
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink
+                    href={`https://www.wordreference.com/esen/${search}`}
+                  >
+                    EN
+                  </NavigationMenuLink>
+                  <NavigationMenuLink
+                    href={`https://www.wordreference.com/esfr/${search}`}
+                  >
+                    FR
+                  </NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>
+                  FR
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink
+                    href={`https://www.wordreference.com/fren/${search}`}
+                  >
+                    EN
+                  </NavigationMenuLink>
+                  <NavigationMenuLink
+                    href={`https://www.wordreference.com/fres/${search}`}
+                  >
+                    ES
+                  </NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu> */}
         </TabsContent>
         <TabsContent
           value='mw'
