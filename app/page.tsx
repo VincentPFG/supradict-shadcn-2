@@ -107,8 +107,9 @@ export default async function Home({
           <TabsTrigger value='wr'>WR</TabsTrigger>
 
           <TabsTrigger value='mw'>MW</TabsTrigger>
-          <TabsTrigger value='en'>EN</TabsTrigger>
-          <TabsTrigger value='es'>ES</TabsTrigger>
+          {/* <TabsTrigger value='en'>EN</TabsTrigger>
+          <TabsTrigger value='es'>ES</TabsTrigger> */}
+          <TabsTrigger value='g'>G</TabsTrigger>
 
           <TabsTrigger value='w'>W</TabsTrigger>
         </TabsList>
@@ -372,7 +373,7 @@ export default async function Home({
           ></iframe>
         </TabsContent>
 
-        <TabsContent
+        {/* <TabsContent
           value='en'
           className='w-full'
         >
@@ -389,6 +390,112 @@ export default async function Home({
             src={`https://www.linguee.fr/francais-espagnol/search?query=${search}`}
             className='w-full h-[50vh]'
           ></iframe>
+        </TabsContent> */}
+
+        <TabsContent
+          value='g'
+          className='w-full flex justify-center'
+        >
+          <Tabs className='w-full items-center'>
+            <TabsList className='w-full max-w-md'>
+              <TabsTrigger value='en'>
+                EN
+              </TabsTrigger>
+              <TabsTrigger value='es'>
+                ES
+              </TabsTrigger>
+              <TabsTrigger value='fr'>
+                FR
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent
+              value='en'
+              className='w-full max-w-md'
+            >
+              <ButtonGroup className='grid grid-cols-2 w-full'>
+                <Button
+                  asChild
+                  // className='bg-purple-500 hover:bg-purple-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=en&tl=es&text=${search}`}
+                  >
+                    ES
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-purple-500 hover:bg-purple-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=en&tl=fr&text=${search}`}
+                  >
+                    FR
+                  </Link>
+                </Button>
+              </ButtonGroup>
+            </TabsContent>
+            <TabsContent
+              value='es'
+              className='w-full max-w-md'
+            >
+              <ButtonGroup className='grid grid-cols-2 w-full'>
+                <Button
+                  asChild
+                  // className='bg-red-500 hover:bg-red-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=es&tl=en&text=${search}`}
+                  >
+                    EN
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-red-500 hover:bg-red-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=es&tl=fr&text=${search}`}
+                  >
+                    FR
+                  </Link>
+                </Button>
+              </ButtonGroup>
+            </TabsContent>
+            <TabsContent
+              value='fr'
+              className='w-full max-w-md'
+            >
+              <ButtonGroup className='grid grid-cols-2 w-full'>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=fr&tl=en&text=${search}`}
+                  >
+                    EN
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=fr&tl=es&text=${search}`}
+                  >
+                    ES
+                  </Link>
+                </Button>
+              </ButtonGroup>
+            </TabsContent>
+          </Tabs>
         </TabsContent>
 
         <TabsContent value='w' className='w-full'>
