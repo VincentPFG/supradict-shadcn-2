@@ -217,6 +217,9 @@ export default async function Home({
               <TabsTrigger value='fr'>
                 FR
               </TabsTrigger>
+              <TabsTrigger value='it'>
+                IT
+              </TabsTrigger>
             </TabsList>
             <TabsContent
               value='en'
@@ -243,6 +246,17 @@ export default async function Home({
                     href={`https://www.wordreference.com/enfr/${search}`}
                   >
                     FR
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/enit/${search}`}
+                  >
+                    IT
                   </Link>
                 </Button>
               </ButtonGroup>
@@ -274,6 +288,17 @@ export default async function Home({
                     FR
                   </Link>
                 </Button>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/esit/${search}`}
+                  >
+                    IT
+                  </Link>
+                </Button>
               </ButtonGroup>
             </TabsContent>
             <TabsContent
@@ -301,6 +326,57 @@ export default async function Home({
                     href={`https://www.wordreference.com/fres/${search}`}
                   >
                     ES
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/frit/${search}`}
+                  >
+                    IT
+                  </Link>
+                </Button>
+              </ButtonGroup>
+            </TabsContent>
+            <TabsContent
+              value='it'
+              className='w-full max-w-md'
+            >
+              <ButtonGroup className='grid grid-cols-2 w-full'>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/iten/${search}`}
+                  >
+                    EN
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/ites/${search}`}
+                  >
+                    ES
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://www.wordreference.com/itfr/${search}`}
+                  >
+                    FR
                   </Link>
                 </Button>
               </ButtonGroup>
@@ -407,12 +483,15 @@ export default async function Home({
               <TabsTrigger value='fr'>
                 FR
               </TabsTrigger>
+              <TabsTrigger value='it'>
+                IT
+              </TabsTrigger>
             </TabsList>
             <TabsContent
               value='en'
               className='w-full max-w-md'
             >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
+              <ButtonGroup className='grid grid-cols-3 w-full'>
                 <Button
                   asChild
                   // className='bg-purple-500 hover:bg-purple-600'
@@ -435,13 +514,24 @@ export default async function Home({
                     FR
                   </Link>
                 </Button>
+                <Button
+                  asChild
+                  // className='bg-purple-500 hover:bg-purple-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=en&tl=it&text=${search}`}
+                  >
+                    IT
+                  </Link>
+                </Button>
               </ButtonGroup>
             </TabsContent>
             <TabsContent
               value='es'
               className='w-full max-w-md'
             >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
+              <ButtonGroup className='grid grid-cols-3 w-full'>
                 <Button
                   asChild
                   // className='bg-red-500 hover:bg-red-600'
@@ -464,13 +554,24 @@ export default async function Home({
                     FR
                   </Link>
                 </Button>
+                <Button
+                  asChild
+                  // className='bg-purple-500 hover:bg-purple-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=es&tl=it&text=${search}`}
+                  >
+                    IT
+                  </Link>
+                </Button>
               </ButtonGroup>
             </TabsContent>
             <TabsContent
               value='fr'
               className='w-full max-w-md'
             >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
+              <ButtonGroup className='grid grid-cols-3 w-full'>
                 <Button
                   asChild
                   // className='bg-slate-500 hover:bg-slate-600'
@@ -493,6 +594,57 @@ export default async function Home({
                     ES
                   </Link>
                 </Button>
+                <Button
+                  asChild
+                  // className='bg-purple-500 hover:bg-purple-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=fr&tl=it&text=${search}`}
+                  >
+                    IT
+                  </Link>
+                </Button>
+              </ButtonGroup>
+            </TabsContent>
+            <TabsContent
+              value='it'
+              className='w-full max-w-md'
+            >
+              <ButtonGroup className='grid grid-cols-3 w-full'>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=it&tl=en&text=${search}`}
+                  >
+                    EN
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-slate-500 hover:bg-slate-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=it&tl=es&text=${search}`}
+                  >
+                    ES
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  // className='bg-purple-500 hover:bg-purple-600'
+                  variant='outline'
+                >
+                  <Link
+                    href={`https://translate.google.com/?op=translate&sl=it&tl=fr&text=${search}`}
+                  >
+                    FR
+                  </Link>
+                </Button>
               </ButtonGroup>
             </TabsContent>
           </Tabs>
@@ -509,6 +661,9 @@ export default async function Home({
               </TabsTrigger>
               <TabsTrigger value='fr'>
                 FR
+              </TabsTrigger>
+              <TabsTrigger value='it'>
+                IT
               </TabsTrigger>
             </TabsList>
             <TabsContent
@@ -535,6 +690,15 @@ export default async function Home({
             >
               <iframe
                 src={`https://fr.wiktionary.org/wiki/${search}`}
+                className='w-full h-[50vh]'
+              ></iframe>
+            </TabsContent>
+            <TabsContent
+              value='it'
+              className='w-full'
+            >
+              <iframe
+                src={`https://it.wiktionary.org/wiki/${search}`}
                 className='w-full h-[50vh]'
               ></iframe>
             </TabsContent>
