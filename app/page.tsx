@@ -225,7 +225,7 @@ export default async function Home({
               value='en'
               className='w-full max-w-md'
             >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
+              <ButtonGroup className='grid grid-cols-3 w-full'>
                 <Button
                   asChild
                   // className='bg-purple-500 hover:bg-purple-600'
@@ -265,7 +265,7 @@ export default async function Home({
               value='es'
               className='w-full max-w-md'
             >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
+              <ButtonGroup className='grid grid-cols-3 w-full'>
                 <Button
                   asChild
                   // className='bg-red-500 hover:bg-red-600'
@@ -305,7 +305,7 @@ export default async function Home({
               value='fr'
               className='w-full max-w-md'
             >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
+              <ButtonGroup className='grid grid-cols-3 w-full'>
                 <Button
                   asChild
                   // className='bg-slate-500 hover:bg-slate-600'
@@ -345,7 +345,7 @@ export default async function Home({
               value='it'
               className='w-full max-w-md'
             >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
+              <ButtonGroup className='grid grid-cols-3 w-full'>
                 <Button
                   asChild
                   // className='bg-slate-500 hover:bg-slate-600'
