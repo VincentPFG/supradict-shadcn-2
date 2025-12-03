@@ -1,29 +1,5 @@
-import { DeepLDropdown } from '@/components/dictionaries/DeepLDropdown'
-import { LeRobertDropdown } from '@/components/dictionaries/LeRobertDropdown'
-import { MerriamWebster } from '@/components/dictionaries/MerriamWebster'
-import { MerriamWebsterDropdown } from '@/components/dictionaries/MerriamWebsterDropdown'
-import { Oxford } from '@/components/dictionaries/Oxford'
-import { OxfordAmerican } from '@/components/dictionaries/OxfordAmerican'
-import { OxfordDropdown } from '@/components/dictionaries/OxfordDropdown'
-import { WiktionaryDropdown } from '@/components/dictionaries/WiktionaryDropdown'
-import { WordReferenceDropdown } from '@/components/dictionaries/WordReferenceDropdown'
-import { YouGlishDropdown } from '@/components/dictionaries/YouGlishDropdown'
-import { French } from '@/components/languages/French'
-import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import Link from 'next/link'
-import { Spanish } from './../components/languages/Spanish'
-import { English } from '@/components/languages/English'
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from '@/components/ui/navigation-menu'
 import {
   Tabs,
   TabsContent,
@@ -31,22 +7,9 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs'
 import { ScrollArea } from '@/components/ui/scroll-area'
-// import { useState } from 'react'
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
 
 import { Button } from '@/components/ui/button'
 import { ButtonGroup } from '@/components/ui/button-group'
-import {
-  ArrowLeftRight,
-  ArrowRight,
-} from 'lucide-react'
 
 export async function generateMetadata({
   searchParams,
@@ -66,12 +29,57 @@ export async function generateMetadata({
   }
 }
 
+const languages = ['en', 'es', 'fr', 'it', 'pt']
+const tabsList = (
+  <TabsList className='w-full max-w-md'>
+    {languages.map(lang => (
+      <TabsTrigger value={lang}>
+        {lang.toUpperCase()}
+      </TabsTrigger>
+    ))}
+  </TabsList>
+)
+
 export default async function Home({
   searchParams,
 }: {
   searchParams: Promise<{ search?: string }>
 }) {
   const { search = '' } = await searchParams
+
+  const subTabs = url => (
+    <Tabs className='w-full items-center'>
+      {tabsList}
+
+      {languages.map(sl => (
+        <TabsContent
+          value={sl}
+          className='w-full max-w-md'
+        >
+          <ButtonGroup
+            className={`grid w-full`}
+            style={{
+              gridTemplateColumns: `repeat(${
+                languages.length - 1
+              }, minmax(0, 1fr))`,
+            }}
+          >
+            {languages
+              .filter(tl => tl != sl)
+              .map(tl => (
+                <Button asChild variant='outline'>
+                  <Link
+                    href={url(sl, tl, search)}
+                  >
+                    {tl.toUpperCase()}
+                  </Link>
+                </Button>
+              ))}
+          </ButtonGroup>
+        </TabsContent>
+      ))}
+    </Tabs>
+  )
 
   return (
     <div className='grid w-full place-items-center gap-5 p-5'>
@@ -105,264 +113,21 @@ export default async function Home({
       >
         <TabsList className='w-full max-w-md'>
           <TabsTrigger value='wr'>WR</TabsTrigger>
-
           <TabsTrigger value='mw'>MW</TabsTrigger>
-          {/* <TabsTrigger value='en'>EN</TabsTrigger>
-          <TabsTrigger value='es'>ES</TabsTrigger> */}
           <TabsTrigger value='g'>G</TabsTrigger>
-
           <TabsTrigger value='w'>W</TabsTrigger>
         </TabsList>
+
         <TabsContent
           value='wr'
           className='w-full flex justify-center'
         >
-          {/* <div className='grid gap-2 w-full max-w-md'>
-            <ButtonGroup className='grid grid-cols-2 w-full'>
-              <Button
-                asChild
-                // className='bg-purple-500 hover:bg-purple-600'
-                variant='outline'
-              >
-                <Link
-                  href={`https://www.wordreference.com/enes/${search}`}
-                >
-                  EN
-                  <ArrowRight />
-                  ES
-                </Link>
-              </Button>
-              <Button
-                asChild
-                // className='bg-purple-500 hover:bg-purple-600'
-                variant='outline'
-              >
-                <Link
-                  href={`https://www.wordreference.com/enfr/${search}`}
-                >
-                  EN
-                  <ArrowRight />
-                  FR
-                </Link>
-              </Button>
-            </ButtonGroup>
-
-            <ButtonGroup className='grid grid-cols-2 w-full'>
-              <Button
-                asChild
-                // className='bg-red-500 hover:bg-red-600'
-                variant='outline'
-              >
-                <Link
-                  href={`https://www.wordreference.com/esen/${search}`}
-                >
-                  ES
-                  <ArrowRight />
-                  EN
-                </Link>
-              </Button>
-              <Button
-                asChild
-                // className='bg-red-500 hover:bg-red-600'
-                variant='outline'
-              >
-                <Link
-                  href={`https://www.wordreference.com/esfr/${search}`}
-                >
-                  ES
-                  <ArrowRight />
-                  FR
-                </Link>
-              </Button>
-            </ButtonGroup>
-
-            <ButtonGroup className='grid grid-cols-2 w-full'>
-              <Button
-                asChild
-                // className='bg-slate-500 hover:bg-slate-600'
-                variant='outline'
-              >
-                <Link
-                  href={`https://www.wordreference.com/fren/${search}`}
-                >
-                  FR
-                  <ArrowRight />
-                  EN
-                </Link>
-              </Button>
-              <Button
-                asChild
-                // className='bg-slate-500 hover:bg-slate-600'
-                variant='outline'
-              >
-                <Link
-                  href={`https://www.wordreference.com/fres/${search}`}
-                >
-                  FR
-                  <ArrowRight />
-                  ES
-                </Link>
-              </Button>
-            </ButtonGroup>
-          </div> */}
-
-          <Tabs className='w-full items-center'>
-            <TabsList className='w-full max-w-md'>
-              <TabsTrigger value='en'>
-                EN
-              </TabsTrigger>
-              <TabsTrigger value='es'>
-                ES
-              </TabsTrigger>
-              <TabsTrigger value='fr'>
-                FR
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent
-              value='en'
-              className='w-full max-w-md'
-            >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
-                <Button
-                  asChild
-                  // className='bg-purple-500 hover:bg-purple-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://www.wordreference.com/enes/${search}`}
-                  >
-                    ES
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  // className='bg-purple-500 hover:bg-purple-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://www.wordreference.com/enfr/${search}`}
-                  >
-                    FR
-                  </Link>
-                </Button>
-              </ButtonGroup>
-            </TabsContent>
-            <TabsContent
-              value='es'
-              className='w-full max-w-md'
-            >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
-                <Button
-                  asChild
-                  // className='bg-red-500 hover:bg-red-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://www.wordreference.com/esen/${search}`}
-                  >
-                    EN
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  // className='bg-red-500 hover:bg-red-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://www.wordreference.com/esfr/${search}`}
-                  >
-                    FR
-                  </Link>
-                </Button>
-              </ButtonGroup>
-            </TabsContent>
-            <TabsContent
-              value='fr'
-              className='w-full max-w-md'
-            >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
-                <Button
-                  asChild
-                  // className='bg-slate-500 hover:bg-slate-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://www.wordreference.com/fren/${search}`}
-                  >
-                    EN
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  // className='bg-slate-500 hover:bg-slate-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://www.wordreference.com/fres/${search}`}
-                  >
-                    ES
-                  </Link>
-                </Button>
-              </ButtonGroup>
-            </TabsContent>
-          </Tabs>
-
-          {/* <NavigationMenu viewport='ism'>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>
-                  EN
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <NavigationMenuLink
-                    href={`https://www.wordreference.com/enes/${search}`}
-                  >
-                    ES
-                  </NavigationMenuLink>
-                  <NavigationMenuLink
-                    href={`https://www.wordreference.com/enfr/${search}`}
-                  >
-                    FR
-                  </NavigationMenuLink>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>
-                  ES
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <NavigationMenuLink
-                    href={`https://www.wordreference.com/esen/${search}`}
-                  >
-                    EN
-                  </NavigationMenuLink>
-                  <NavigationMenuLink
-                    href={`https://www.wordreference.com/esfr/${search}`}
-                  >
-                    FR
-                  </NavigationMenuLink>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>
-                  FR
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <NavigationMenuLink
-                    href={`https://www.wordreference.com/fren/${search}`}
-                  >
-                    EN
-                  </NavigationMenuLink>
-                  <NavigationMenuLink
-                    href={`https://www.wordreference.com/fres/${search}`}
-                  >
-                    ES
-                  </NavigationMenuLink>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu> */}
+          {subTabs(
+            (sl, tl) =>
+              `https://www.wordreference.com/${sl}${tl}/${search}`
+          )}
         </TabsContent>
+
         <TabsContent
           value='mw'
           className='w-full'
@@ -373,171 +138,30 @@ export default async function Home({
           ></iframe>
         </TabsContent>
 
-        {/* <TabsContent
-          value='en'
-          className='w-full'
-        >
-          <iframe
-            src={`https://www.linguee.fr/francais-anglais/search?query=${search}`}
-            className='w-full h-[50vh]'
-          ></iframe>
-        </TabsContent>
-        <TabsContent
-          value='es'
-          className='w-full'
-        >
-          <iframe
-            src={`https://www.linguee.fr/francais-espagnol/search?query=${search}`}
-            className='w-full h-[50vh]'
-          ></iframe>
-        </TabsContent> */}
-
         <TabsContent
           value='g'
           className='w-full flex justify-center'
         >
-          <Tabs className='w-full items-center'>
-            <TabsList className='w-full max-w-md'>
-              <TabsTrigger value='en'>
-                EN
-              </TabsTrigger>
-              <TabsTrigger value='es'>
-                ES
-              </TabsTrigger>
-              <TabsTrigger value='fr'>
-                FR
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent
-              value='en'
-              className='w-full max-w-md'
-            >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
-                <Button
-                  asChild
-                  // className='bg-purple-500 hover:bg-purple-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://translate.google.com/?op=translate&sl=en&tl=es&text=${search}`}
-                  >
-                    ES
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  // className='bg-purple-500 hover:bg-purple-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://translate.google.com/?op=translate&sl=en&tl=fr&text=${search}`}
-                  >
-                    FR
-                  </Link>
-                </Button>
-              </ButtonGroup>
-            </TabsContent>
-            <TabsContent
-              value='es'
-              className='w-full max-w-md'
-            >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
-                <Button
-                  asChild
-                  // className='bg-red-500 hover:bg-red-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://translate.google.com/?op=translate&sl=es&tl=en&text=${search}`}
-                  >
-                    EN
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  // className='bg-red-500 hover:bg-red-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://translate.google.com/?op=translate&sl=es&tl=fr&text=${search}`}
-                  >
-                    FR
-                  </Link>
-                </Button>
-              </ButtonGroup>
-            </TabsContent>
-            <TabsContent
-              value='fr'
-              className='w-full max-w-md'
-            >
-              <ButtonGroup className='grid grid-cols-2 w-full'>
-                <Button
-                  asChild
-                  // className='bg-slate-500 hover:bg-slate-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://translate.google.com/?op=translate&sl=fr&tl=en&text=${search}`}
-                  >
-                    EN
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  // className='bg-slate-500 hover:bg-slate-600'
-                  variant='outline'
-                >
-                  <Link
-                    href={`https://translate.google.com/?op=translate&sl=fr&tl=es&text=${search}`}
-                  >
-                    ES
-                  </Link>
-                </Button>
-              </ButtonGroup>
-            </TabsContent>
-          </Tabs>
+          {subTabs(
+            (sl, tl) =>
+              `https://translate.google.com/?op=translate&sl=${sl}&tl=${tl}&text=${search}`
+          )}
         </TabsContent>
 
         <TabsContent value='w' className='w-full'>
           <Tabs className='w-full items-center'>
-            <TabsList className='w-full max-w-md'>
-              <TabsTrigger value='en'>
-                EN
-              </TabsTrigger>
-              <TabsTrigger value='es'>
-                ES
-              </TabsTrigger>
-              <TabsTrigger value='fr'>
-                FR
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent
-              value='en'
-              className='w-full'
-            >
-              <iframe
-                src={`https://en.wiktionary.org/wiki/${search}`}
-                className='w-full h-[50vh]'
-              ></iframe>
-            </TabsContent>
-            <TabsContent
-              value='es'
-              className='w-full'
-            >
-              <iframe
-                src={`https://es.wiktionary.org/wiki/${search}`}
-                className='w-full h-[50vh]'
-              ></iframe>
-            </TabsContent>
-            <TabsContent
-              value='fr'
-              className='w-full'
-            >
-              <iframe
-                src={`https://fr.wiktionary.org/wiki/${search}`}
-                className='w-full h-[50vh]'
-              ></iframe>
-            </TabsContent>
+            {tabsList}
+            {languages.map(sl => (
+              <TabsContent
+                value={sl}
+                className='w-full'
+              >
+                <iframe
+                  src={`https://${sl}.wiktionary.org/wiki/${search}`}
+                  className='w-full h-[50vh]'
+                ></iframe>
+              </TabsContent>
+            ))}
           </Tabs>
         </TabsContent>
       </Tabs>
