@@ -32,9 +32,9 @@ export async function generateMetadata({
 const languages = ['en', 'es', 'fr', 'it', 'pt']
 const tabsList = (
   <TabsList className='w-full max-w-md'>
-    {languages.map(lang => (
-      <TabsTrigger value={lang}>
-        {lang.toUpperCase()}
+    {languages.map(sl => (
+      <TabsTrigger value={sl} key={sl}>
+        {sl.toUpperCase()}
       </TabsTrigger>
     ))}
   </TabsList>
@@ -55,6 +55,7 @@ export default async function Home({
         <TabsContent
           value={sl}
           className='w-full max-w-md'
+          key={sl}
         >
           <ButtonGroup
             className={`grid w-full`}
@@ -67,7 +68,11 @@ export default async function Home({
             {languages
               .filter(tl => tl != sl)
               .map(tl => (
-                <Button asChild variant='outline'>
+                <Button
+                  asChild
+                  variant='outline'
+                  key={tl}
+                >
                   <Link
                     href={url(sl, tl, search)}
                   >
@@ -155,6 +160,7 @@ export default async function Home({
               <TabsContent
                 value={sl}
                 className='w-full'
+                key={sl}
               >
                 <iframe
                   src={`https://${sl}.wiktionary.org/wiki/${search}`}
