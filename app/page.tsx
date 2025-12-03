@@ -10,6 +10,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 
 import { Button } from '@/components/ui/button'
 import { ButtonGroup } from '@/components/ui/button-group'
+import { ReactNode } from 'react'
 
 export async function generateMetadata({
   searchParams,
@@ -47,7 +48,13 @@ export default async function Home({
 }) {
   const { search = '' } = await searchParams
 
-  const subTabs = url => (
+  const subTabs = (
+    url: (
+      sl: string,
+      tl: string,
+      search: string
+    ) => string
+  ) => (
     <Tabs className='w-full items-center'>
       {tabsList}
 
@@ -128,7 +135,7 @@ export default async function Home({
           className='w-full flex justify-center'
         >
           {subTabs(
-            (sl, tl) =>
+            (sl: string, tl: string) =>
               `https://www.wordreference.com/${sl}${tl}/${search}`
           )}
         </TabsContent>
@@ -148,7 +155,7 @@ export default async function Home({
           className='w-full flex justify-center'
         >
           {subTabs(
-            (sl, tl) =>
+            (sl: string, tl: string) =>
               `https://translate.google.com/?op=translate&sl=${sl}&tl=${tl}&text=${search}`
           )}
         </TabsContent>
