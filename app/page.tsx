@@ -30,23 +30,67 @@ export async function generateMetadata({
   }
 }
 
-const languages = ['en', 'es', 'fr', 'it', 'pt']
-const tabsList = (
-  <TabsList className='w-full max-w-md'>
-    {languages.map(sl => (
-      <TabsTrigger value={sl} key={sl}>
-        {sl.toUpperCase()}
-      </TabsTrigger>
-    ))}
-  </TabsList>
-)
+// const languages = ['en', 'es', 'fr', 'it', 'pt']
+// const tabsList = (
+//   <TabsList className='w-full max-w-md'>
+//     {languages.map(sl => (
+//       <TabsTrigger value={sl} key={sl}>
+//         {sl.toUpperCase()}
+//       </TabsTrigger>
+//     ))}
+//   </TabsList>
+// )
 
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ search?: string }>
+  searchParams: Promise<{
+    search?: string
+    lang?: string
+  }>
 }) {
-  const { search = '' } = await searchParams
+  const { search = '', lang = '' } =
+    await searchParams
+
+  const languages = lang.split('-')
+
+  const twoSubTabs = (
+    url: (
+      sl: string,
+      tl: string,
+      search: string
+    ) => string
+  ) => (
+    <ButtonGroup
+      className={`grid grid-cols-2 w-full max-w-md`}
+    >
+      {[0, 1].map(n => {
+        const sl = languages[n]
+        const tl = languages[(n + 1) % 2]
+        return (
+          <Button
+            asChild
+            variant='outline'
+            key={languages[n]}
+          >
+            <Link href={url(sl, tl, search)}>
+              {sl.toUpperCase()}
+            </Link>
+          </Button>
+        )
+      })}
+    </ButtonGroup>
+  )
+
+  const tabsList = (
+    <TabsList className='w-full max-w-md'>
+      {languages.map(sl => (
+        <TabsTrigger value={sl} key={sl}>
+          {sl.toUpperCase()}
+        </TabsTrigger>
+      ))}
+    </TabsList>
+  )
 
   const subTabs = (
     url: (
@@ -97,7 +141,7 @@ export default async function Home({
     <div className='grid w-full place-items-center gap-5 p-5'>
       <h1 className='text-4xl sm:text-5xl font-semibold'>
         <Link
-          href='/'
+          href={`?lang=${lang}`}
           className='text-inherit no-underline hover:underline'
         >
           SupraDictionary
@@ -105,6 +149,11 @@ export default async function Home({
       </h1>
 
       <form className='w-full max-w-md'>
+        <input
+          type='hidden'
+          name='lang'
+          value={lang}
+        />
         <Input
           id='search'
           type='text'
@@ -125,7 +174,11 @@ export default async function Home({
       >
         <TabsList className='w-full max-w-md'>
           <TabsTrigger value='wr'>WR</TabsTrigger>
-          <TabsTrigger value='mw'>MW</TabsTrigger>
+          {languages.includes('en') && (
+            <TabsTrigger value='mw'>
+              MW
+            </TabsTrigger>
+          )}
           <TabsTrigger value='g'>G</TabsTrigger>
           <TabsTrigger value='w'>W</TabsTrigger>
         </TabsList>
@@ -134,30 +187,44 @@ export default async function Home({
           value='wr'
           className='w-full flex justify-center'
         >
-          {subTabs(
-            (sl: string, tl: string) =>
+          {(() => {
+            const wrURL = (
+              sl: string,
+              tl: string
+            ) =>
               `https://www.wordreference.com/${sl}${tl}/${search}`
-          )}
+            return languages.length === 2
+              ? twoSubTabs(wrURL)
+              : subTabs(wrURL)
+          })()}
         </TabsContent>
 
-        <TabsContent
-          value='mw'
-          className='w-full'
-        >
-          <iframe
-            src={`https://www.merriam-webster.com/dictionary/${search}`}
-            className='w-full h-[50vh]'
-          ></iframe>
-        </TabsContent>
+        {languages.includes('en') && (
+          <TabsContent
+            value='mw'
+            className='w-full'
+          >
+            <iframe
+              src={`https://www.merriam-webster.com/dictionary/${search}`}
+              className='w-full h-[50vh]'
+            ></iframe>
+          </TabsContent>
+        )}
 
         <TabsContent
           value='g'
           className='w-full flex justify-center'
         >
-          {subTabs(
-            (sl: string, tl: string) =>
+          {(() => {
+            const wrURL = (
+              sl: string,
+              tl: string
+            ) =>
               `https://translate.google.com/?op=translate&sl=${sl}&tl=${tl}&text=${search}`
-          )}
+            return languages.length === 2
+              ? twoSubTabs(wrURL)
+              : subTabs(wrURL)
+          })()}
         </TabsContent>
 
         <TabsContent value='w' className='w-full'>
