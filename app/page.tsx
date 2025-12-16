@@ -10,7 +10,19 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 
 import { Button } from '@/components/ui/button'
 import { ButtonGroup } from '@/components/ui/button-group'
-import { ReactNode } from 'react'
+import { Fragment, ReactNode } from 'react'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+
+import { Info } from 'lucide-react'
 
 export async function generateMetadata({
   searchParams,
@@ -54,6 +66,13 @@ export default async function Home({
 
   const languages = lang.split('-')
 
+  const dicts = {
+    wr: 'WordReference',
+    mw: 'Merriam-Webster',
+    g: 'Google Translate',
+    w: 'Wiktionary',
+  }
+
   const twoSubTabs = (
     url: (
       sl: string,
@@ -71,7 +90,7 @@ export default async function Home({
           <Button
             asChild
             variant='outline'
-            key={languages[n]}
+            key={sl}
           >
             <Link href={url(sl, tl, search)}>
               {sl.toUpperCase()}
@@ -164,23 +183,63 @@ export default async function Home({
         />
       </form>
 
-      <ScrollArea className='h-[50px] w-full max-w-md rounded-md border px-1'>
-        {search}
-      </ScrollArea>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <ScrollArea className='h-[50px] w-full max-w-md rounded-md border px-1'>
+            {search}
+          </ScrollArea>
+        </TooltipTrigger>
+        <TooltipContent>
+          Current Search
+        </TooltipContent>
+      </Tooltip>
 
       <Tabs
         defaultValue='wr'
         className='w-full items-center'
       >
         <TabsList className='w-full max-w-md'>
-          <TabsTrigger value='wr'>WR</TabsTrigger>
+          {Object.entries(dicts).map(
+            ([key, value]) =>
+              !(
+                key === 'mw' &&
+                !languages.includes('en')
+              ) && (
+                <TabsTrigger
+                  key={key}
+                  value={key}
+                >
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span>
+                        {key.toUpperCase()}
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {value}
+                    </TooltipContent>
+                  </Tooltip>
+                </TabsTrigger>
+              )
+          )}
+          {/* <Tooltip>
+            <TooltipTrigger asChild>
+              <TabsTrigger value='wr'>
+                WR
+              </TabsTrigger>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Add to library</p>
+            </TooltipContent>
+          </Tooltip>
+
           {languages.includes('en') && (
             <TabsTrigger value='mw'>
               MW
             </TabsTrigger>
           )}
           <TabsTrigger value='g'>G</TabsTrigger>
-          <TabsTrigger value='w'>W</TabsTrigger>
+          <TabsTrigger value='w'>W</TabsTrigger> */}
         </TabsList>
 
         <TabsContent
@@ -193,7 +252,7 @@ export default async function Home({
               tl: string
             ) =>
               `https://www.wordreference.com/${sl}${tl}/${search}`
-            return languages.length === 2
+            return languages.length === -1
               ? twoSubTabs(wrURL)
               : subTabs(wrURL)
           })()}
@@ -221,7 +280,7 @@ export default async function Home({
               tl: string
             ) =>
               `https://translate.google.com/?op=translate&sl=${sl}&tl=${tl}&text=${search}`
-            return languages.length === 2
+            return languages.length === -1
               ? twoSubTabs(wrURL)
               : subTabs(wrURL)
           })()}
@@ -245,6 +304,42 @@ export default async function Home({
           </Tabs>
         </TabsContent>
       </Tabs>
+
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant='ghost'
+            size='icon'
+            aria-label='Legend'
+            className='h-8 w-8'
+          >
+            <Info className='h-4 w-4' />
+          </Button>
+        </PopoverTrigger>
+
+        <PopoverContent>
+          <div className='space-y-2 grid grid-cols-2'>
+            {/* dictionaries */}
+            {Object.entries(dicts).map(
+              ([key, name]) => (
+                <Fragment key={key}>
+                  <span>{key.toUpperCase()}</span>
+                  <span>{name}</span>
+                </Fragment>
+              )
+            )}
+
+            <span>Row 1</span>
+            <span>Dictionary</span>
+
+            <span>Row 2</span>
+            <span>Source Language</span>
+
+            <span>Row 3</span>
+            <span>Target Language</span>
+          </div>
+        </PopoverContent>
+      </Popover>
     </div>
   )
 }
