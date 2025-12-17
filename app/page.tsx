@@ -317,27 +317,25 @@ export default async function Home({
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent>
-          <div className='space-y-2 grid grid-cols-2'>
-            {/* dictionaries */}
-            {Object.entries(dicts).map(
-              ([key, name]) => (
-                <Fragment key={key}>
-                  <span>{key.toUpperCase()}</span>
-                  <span>{name}</span>
-                </Fragment>
-              )
-            )}
+        <PopoverContent className='space-y-2 grid grid-cols-[1fr_2fr]'>
+          {/* dictionaries */}
+          {Object.entries(dicts).map(
+            ([key, name]) => (
+              <Fragment key={key}>
+                <span>{key.toUpperCase()}</span>
+                <span>{name}</span>
+              </Fragment>
+            )
+          )}
 
-            <span>Row 1</span>
-            <span>Dictionary</span>
+          <span>Row 1</span>
+          <span>Dictionary</span>
 
-            <span>Row 2</span>
-            <span>Source Language</span>
+          <span>Row 2</span>
+          <span>Source Language</span>
 
-            <span>Row 3</span>
-            <span>Target Language</span>
-          </div>
+          <span>Row 3</span>
+          <span>Target Language</span>
         </PopoverContent>
       </Popover>
     </div>
