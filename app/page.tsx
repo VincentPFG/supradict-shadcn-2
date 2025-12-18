@@ -11,11 +11,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Button } from '@/components/ui/button'
 import { ButtonGroup } from '@/components/ui/button-group'
 import { Fragment, ReactNode } from 'react'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
+
 import {
   Popover,
   PopoverContent,
@@ -41,17 +37,6 @@ export async function generateMetadata({
     },
   }
 }
-
-// const languages = ['en', 'es', 'fr', 'it', 'pt']
-// const tabsList = (
-//   <TabsList className='w-full max-w-md'>
-//     {languages.map(sl => (
-//       <TabsTrigger value={sl} key={sl}>
-//         {sl.toUpperCase()}
-//       </TabsTrigger>
-//     ))}
-//   </TabsList>
-// )
 
 type Dicts = {
   wr: string
@@ -84,33 +69,33 @@ export default async function Home({
     delete dicts.mw
   }
 
-  const twoSubTabs = (
-    url: (
-      sl: string,
-      tl: string,
-      search: string
-    ) => string
-  ) => (
-    <ButtonGroup
-      className={`grid grid-cols-2 w-full max-w-md`}
-    >
-      {[0, 1].map(n => {
-        const sl = languages[n]
-        const tl = languages[(n + 1) % 2]
-        return (
-          <Button
-            asChild
-            variant='outline'
-            key={sl}
-          >
-            <Link href={url(sl, tl, search)}>
-              {sl.toUpperCase()}
-            </Link>
-          </Button>
-        )
-      })}
-    </ButtonGroup>
-  )
+  // const twoSubTabs = (
+  //   url: (
+  //     sl: string,
+  //     tl: string,
+  //     search: string
+  //   ) => string
+  // ) => (
+  //   <ButtonGroup
+  //     className={`grid grid-cols-2 w-full max-w-md`}
+  //   >
+  //     {[0, 1].map(n => {
+  //       const sl = languages[n]
+  //       const tl = languages[(n + 1) % 2]
+  //       return (
+  //         <Button
+  //           asChild
+  //           variant='outline'
+  //           key={sl}
+  //         >
+  //           <Link href={url(sl, tl, search)}>
+  //             {sl.toUpperCase()}
+  //           </Link>
+  //         </Button>
+  //       )
+  //     })}
+  //   </ButtonGroup>
+  // )
 
   const tabsList = (
     <TabsList className='w-full max-w-md'>
@@ -168,164 +153,116 @@ export default async function Home({
   )
 
   return (
-    <div className='grid w-full place-items-center gap-5 p-5'>
-      <h1 className='text-4xl sm:text-5xl font-semibold'>
-        <Link
-          href={`?lang=${lang}`}
-          className='text-inherit no-underline hover:underline'
+    <div className='min-h-screen flex flex-col'>
+      <div className='grid w-full place-items-center gap-5 p-5'>
+        <h1 className='text-4xl sm:text-5xl font-semibold'>
+          <Link
+            href={`?lang=${lang}`}
+            className='text-inherit no-underline hover:underline'
+          >
+            SupraDictionary
+          </Link>
+        </h1>
+
+        <form className='w-full max-w-md'>
+          <input
+            type='hidden'
+            name='lang'
+            value={lang}
+          />
+          <Input
+            id='search'
+            type='text'
+            name='search'
+            placeholder='Type here then press Enter'
+            autoFocus
+            autoCapitalize='off'
+          />
+        </form>
+
+        <ScrollArea className='h-[50px] w-full max-w-md rounded-md border px-1'>
+          {search}
+        </ScrollArea>
+
+        <Tabs
+          defaultValue='wr'
+          className='w-full items-center'
         >
-          SupraDictionary
-        </Link>
-      </h1>
-
-      <form className='w-full max-w-md'>
-        <input
-          type='hidden'
-          name='lang'
-          value={lang}
-        />
-        <Input
-          id='search'
-          type='text'
-          name='search'
-          placeholder='Type here then press Enter'
-          autoFocus
-          autoCapitalize='off'
-        />
-      </form>
-
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <ScrollArea className='h-[50px] w-full max-w-md rounded-md border px-1'>
-            {search}
-          </ScrollArea>
-        </TooltipTrigger>
-        <TooltipContent>
-          Current Search
-        </TooltipContent>
-      </Tooltip>
-
-      <Tabs
-        defaultValue='wr'
-        className='w-full items-center'
-      >
-        <TabsList className='w-full max-w-md'>
-          {Object.entries(dicts).map(
-            ([key, value]) => (
-              <TabsTrigger key={key} value={key}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span>
-                      {key.toUpperCase()}
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {value}
-                  </TooltipContent>
-                </Tooltip>
+          <TabsList className='w-full max-w-md'>
+            {Object.keys(dicts).map(key => (
+              <TabsTrigger value={key} key={key}>
+                {key.toUpperCase()}
               </TabsTrigger>
-            )
-          )}
-          {/* <Tooltip>
-            <TooltipTrigger asChild>
-              <TabsTrigger value='wr'>
-                WR
-              </TabsTrigger>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Add to library</p>
-            </TooltipContent>
-          </Tooltip>
+            ))}
+          </TabsList>
+
+          <TabsContent
+            value='wr'
+            className='w-full flex justify-center'
+          >
+            {(() => {
+              const wrURL = (
+                sl: string,
+                tl: string
+              ) =>
+                `https://www.wordreference.com/${sl}${tl}/${search}`
+              return subTabs(wrURL)
+            })()}
+          </TabsContent>
 
           {languages.includes('en') && (
-            <TabsTrigger value='mw'>
-              MW
-            </TabsTrigger>
+            <TabsContent
+              value='mw'
+              className='w-full'
+            >
+              <iframe
+                src={`https://www.merriam-webster.com/dictionary/${search}`}
+                className='w-full h-[50vh]'
+              ></iframe>
+            </TabsContent>
           )}
-          <TabsTrigger value='g'>G</TabsTrigger>
-          <TabsTrigger value='w'>W</TabsTrigger> */}
-        </TabsList>
 
-        <TabsContent
-          value='wr'
-          className='w-full flex justify-center'
-        >
-          {(() => {
-            const wrURL = (
-              sl: string,
-              tl: string
-            ) =>
-              `https://www.wordreference.com/${sl}${tl}/${search}`
-            return languages.length === -1
-              ? twoSubTabs(wrURL)
-              : subTabs(wrURL)
-          })()}
-        </TabsContent>
-
-        {languages.includes('en') && (
           <TabsContent
-            value='mw'
+            value='g'
+            className='w-full flex justify-center'
+          >
+            {(() => {
+              const wrURL = (
+                sl: string,
+                tl: string
+              ) =>
+                `https://translate.google.com/?op=translate&sl=${sl}&tl=${tl}&text=${search}`
+              return subTabs(wrURL)
+            })()}
+          </TabsContent>
+
+          <TabsContent
+            value='w'
             className='w-full'
           >
-            <iframe
-              src={`https://www.merriam-webster.com/dictionary/${search}`}
-              className='w-full h-[50vh]'
-            ></iframe>
+            <Tabs className='w-full items-center'>
+              {tabsList}
+              {languages.map(sl => (
+                <TabsContent
+                  value={sl}
+                  className='w-full'
+                  key={sl}
+                >
+                  <iframe
+                    src={`https://${sl}.wiktionary.org/wiki/${search}`}
+                    className='w-full h-[50vh]'
+                  ></iframe>
+                </TabsContent>
+              ))}
+            </Tabs>
           </TabsContent>
-        )}
-
-        <TabsContent
-          value='g'
-          className='w-full flex justify-center'
-        >
-          {(() => {
-            const wrURL = (
-              sl: string,
-              tl: string
-            ) =>
-              `https://translate.google.com/?op=translate&sl=${sl}&tl=${tl}&text=${search}`
-            return languages.length === -1
-              ? twoSubTabs(wrURL)
-              : subTabs(wrURL)
-          })()}
-        </TabsContent>
-
-        <TabsContent value='w' className='w-full'>
-          <Tabs className='w-full items-center'>
-            {tabsList}
-            {languages.map(sl => (
-              <TabsContent
-                value={sl}
-                className='w-full'
-                key={sl}
-              >
-                <iframe
-                  src={`https://${sl}.wiktionary.org/wiki/${search}`}
-                  className='w-full h-[50vh]'
-                ></iframe>
-              </TabsContent>
-            ))}
-          </Tabs>
-        </TabsContent>
-      </Tabs>
-
-      <Tooltip>
+        </Tabs>
+      </div>
+      <div className='mt-auto flex items-center justify-center p-5'>
         <Popover>
-          <TooltipTrigger asChild>
-            <PopoverTrigger asChild>
-              <Button
-                variant='ghost'
-                size='icon'
-                aria-label='Legend'
-                className='h-8 w-8'
-              >
-                <Info className='h-4 w-4' />
-              </Button>
-            </PopoverTrigger>
-          </TooltipTrigger>
-
-          <TooltipContent>Help</TooltipContent>
-
+          <PopoverTrigger asChild>
+            <Info size={30} />
+          </PopoverTrigger>
           <PopoverContent className='space-y-2 grid grid-cols-[1fr_2fr]'>
             {/* dictionaries */}
             {Object.entries(dicts).map(
@@ -347,7 +284,7 @@ export default async function Home({
             <span>Target Language</span>
           </PopoverContent>
         </Popover>
-      </Tooltip>
+      </div>
     </div>
   )
 }
