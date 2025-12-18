@@ -53,6 +53,13 @@ export async function generateMetadata({
 //   </TabsList>
 // )
 
+type Dicts = {
+  wr: string
+  mw?: string
+  g: string
+  w: string
+}
+
 export default async function Home({
   searchParams,
 }: {
@@ -66,11 +73,15 @@ export default async function Home({
 
   const languages = lang.split('-')
 
-  const dicts = {
+  const dicts: Dicts = {
     wr: 'WordReference',
     mw: 'Merriam-Webster',
     g: 'Google Translate',
     w: 'Wiktionary',
+  }
+
+  if (!languages.includes('en')) {
+    delete dicts.mw
   }
 
   const twoSubTabs = (
@@ -200,27 +211,20 @@ export default async function Home({
       >
         <TabsList className='w-full max-w-md'>
           {Object.entries(dicts).map(
-            ([key, value]) =>
-              !(
-                key === 'mw' &&
-                !languages.includes('en')
-              ) && (
-                <TabsTrigger
-                  key={key}
-                  value={key}
-                >
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <span>
-                        {key.toUpperCase()}
-                      </span>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      {value}
-                    </TooltipContent>
-                  </Tooltip>
-                </TabsTrigger>
-              )
+            ([key, value]) => (
+              <TabsTrigger key={key} value={key}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span>
+                      {key.toUpperCase()}
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {value}
+                  </TooltipContent>
+                </Tooltip>
+              </TabsTrigger>
+            )
           )}
           {/* <Tooltip>
             <TooltipTrigger asChild>
@@ -305,39 +309,45 @@ export default async function Home({
         </TabsContent>
       </Tabs>
 
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant='ghost'
-            size='icon'
-            aria-label='Legend'
-            className='h-8 w-8'
-          >
-            <Info className='h-4 w-4' />
-          </Button>
-        </PopoverTrigger>
+      <Tooltip>
+        <Popover>
+          <TooltipTrigger asChild>
+            <PopoverTrigger asChild>
+              <Button
+                variant='ghost'
+                size='icon'
+                aria-label='Legend'
+                className='h-8 w-8'
+              >
+                <Info className='h-4 w-4' />
+              </Button>
+            </PopoverTrigger>
+          </TooltipTrigger>
 
-        <PopoverContent className='space-y-2 grid grid-cols-[1fr_2fr]'>
-          {/* dictionaries */}
-          {Object.entries(dicts).map(
-            ([key, name]) => (
-              <Fragment key={key}>
-                <span>{key.toUpperCase()}</span>
-                <span>{name}</span>
-              </Fragment>
-            )
-          )}
+          <TooltipContent>Help</TooltipContent>
 
-          <span>Row 1</span>
-          <span>Dictionary</span>
+          <PopoverContent className='space-y-2 grid grid-cols-[1fr_2fr]'>
+            {/* dictionaries */}
+            {Object.entries(dicts).map(
+              ([key, name]) => (
+                <Fragment key={key}>
+                  <span>{key.toUpperCase()}</span>
+                  <span>{name}</span>
+                </Fragment>
+              )
+            )}
 
-          <span>Row 2</span>
-          <span>Source Language</span>
+            <span>Row 1</span>
+            <span>Dictionary</span>
 
-          <span>Row 3</span>
-          <span>Target Language</span>
-        </PopoverContent>
-      </Popover>
+            <span>Row 2</span>
+            <span>Source Language</span>
+
+            <span>Row 3</span>
+            <span>Target Language</span>
+          </PopoverContent>
+        </Popover>
+      </Tooltip>
     </div>
   )
 }
