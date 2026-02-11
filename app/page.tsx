@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/popover'
 
 import { Info } from 'lucide-react'
+import { Separator } from '@/components/ui/separator'
 
 export async function generateMetadata({
   searchParams,
@@ -111,8 +112,8 @@ export default async function Home({
     url: (
       sl: string,
       tl: string,
-      search: string
-    ) => string
+      search: string,
+    ) => string,
   ) => (
     <Tabs className='w-full items-center'>
       {tabsList}
@@ -152,139 +153,286 @@ export default async function Home({
     </Tabs>
   )
 
+  const Help = () => (
+    <Popover>
+      <PopoverTrigger asChild>
+        {/* <Info size={30} /> */}
+        <Button
+          variant='ghost'
+          size='icon'
+          aria-label='Show help information'
+        >
+          <Info className='!h-5 !w-5' />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className='space-y-2 grid grid-cols-[1fr_2fr]'>
+        {/* dictionaries */}
+        {Object.entries(dicts).map(
+          ([key, name]) => (
+            <Fragment key={key}>
+              <span>{key.toUpperCase()}</span>
+              <span>{name}</span>
+            </Fragment>
+          ),
+        )}
+
+        <Separator className='col-span-2' />
+
+        <span>Row 1</span>
+        <span>Dictionary</span>
+
+        <span>Row 2</span>
+        <span>Source Language</span>
+
+        <span>Row 3</span>
+        <span>Target Language</span>
+      </PopoverContent>
+    </Popover>
+  )
+
   return (
-    <div className='min-h-screen flex flex-col'>
-      <div className='grid w-full place-items-center gap-5 p-5'>
-        <h1 className='text-4xl sm:text-5xl font-semibold'>
-          <Link
-            href={`?lang=${lang}`}
-            className='text-inherit no-underline hover:underline'
-          >
-            SupraDictionary
-          </Link>
-        </h1>
+    <div className='grid w-full place-items-center gap-5 p-5'>
+      <h1 className='text-4xl sm:text-5xl font-semibold'>
+        <Link
+          href={`?lang=${lang}`}
+          className='text-inherit no-underline hover:underline'
+        >
+          SupraDictionary
+        </Link>
+      </h1>
 
-        <form className='w-full max-w-md'>
-          <input
-            type='hidden'
-            name='lang'
-            value={lang}
-          />
-          <Input
-            id='search'
-            type='text'
-            name='search'
-            placeholder='Type here then press Enter'
-            autoFocus
-            autoCapitalize='off'
-          />
-        </form>
+      <form className='w-full max-w-md'>
+        <input
+          type='hidden'
+          name='lang'
+          value={lang}
+        />
+        <Input
+          id='search'
+          type='text'
+          name='search'
+          placeholder='Type here then press Enter'
+          autoFocus
+          autoCapitalize='off'
+        />
+      </form>
 
+      <div className='w-full max-w-md flex items-center space-x-1'>
         <ScrollArea className='h-[50px] w-full max-w-md rounded-md border px-1'>
           {search}
         </ScrollArea>
+        <Help />
+      </div>
 
-        <Tabs
-          defaultValue='wr'
-          className='w-full items-center'
+      <Tabs
+        defaultValue='wr'
+        className='w-full items-center'
+      >
+        <TabsList className='w-full max-w-md'>
+          {Object.keys(dicts).map(key => (
+            <TabsTrigger value={key} key={key}>
+              {key.toUpperCase()}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+
+        <TabsContent
+          value='wr'
+          className='w-full flex justify-center'
         >
-          <TabsList className='w-full max-w-md'>
-            {Object.keys(dicts).map(key => (
-              <TabsTrigger value={key} key={key}>
-                {key.toUpperCase()}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          {(() => {
+            const wrURL = (
+              sl: string,
+              tl: string,
+            ) =>
+              `https://www.wordreference.com/${sl}${tl}/${search}`
+            return subTabs(wrURL)
+          })()}
+        </TabsContent>
 
+        {languages.includes('en') && (
           <TabsContent
-            value='wr'
-            className='w-full flex justify-center'
-          >
-            {(() => {
-              const wrURL = (
-                sl: string,
-                tl: string
-              ) =>
-                `https://www.wordreference.com/${sl}${tl}/${search}`
-              return subTabs(wrURL)
-            })()}
-          </TabsContent>
-
-          {languages.includes('en') && (
-            <TabsContent
-              value='mw'
-              className='w-full'
-            >
-              <iframe
-                src={`https://www.merriam-webster.com/dictionary/${search}`}
-                className='w-full h-[50vh]'
-              ></iframe>
-            </TabsContent>
-          )}
-
-          <TabsContent
-            value='g'
-            className='w-full flex justify-center'
-          >
-            {(() => {
-              const wrURL = (
-                sl: string,
-                tl: string
-              ) =>
-                `https://translate.google.com/?op=translate&sl=${sl}&tl=${tl}&text=${search}`
-              return subTabs(wrURL)
-            })()}
-          </TabsContent>
-
-          <TabsContent
-            value='w'
+            value='mw'
             className='w-full'
           >
-            <Tabs className='w-full items-center'>
-              {tabsList}
-              {languages.map(sl => (
-                <TabsContent
-                  value={sl}
-                  className='w-full'
-                  key={sl}
-                >
-                  <iframe
-                    src={`https://${sl}.wiktionary.org/wiki/${search}`}
-                    className='w-full h-[50vh]'
-                  ></iframe>
-                </TabsContent>
-              ))}
-            </Tabs>
+            <iframe
+              src={`https://www.merriam-webster.com/dictionary/${search}`}
+              className='w-full h-[50vh]'
+            ></iframe>
           </TabsContent>
-        </Tabs>
-      </div>
-      <div className='mt-auto flex items-center justify-center p-5'>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Info size={30} />
-          </PopoverTrigger>
-          <PopoverContent className='space-y-2 grid grid-cols-[1fr_2fr]'>
-            {/* dictionaries */}
-            {Object.entries(dicts).map(
-              ([key, name]) => (
-                <Fragment key={key}>
-                  <span>{key.toUpperCase()}</span>
-                  <span>{name}</span>
-                </Fragment>
-              )
-            )}
+        )}
 
-            <span>Row 1</span>
-            <span>Dictionary</span>
+        <TabsContent
+          value='g'
+          className='w-full flex justify-center'
+        >
+          {(() => {
+            const wrURL = (
+              sl: string,
+              tl: string,
+            ) =>
+              `https://translate.google.com/?op=translate&sl=${sl}&tl=${tl}&text=${search}`
+            return subTabs(wrURL)
+          })()}
+        </TabsContent>
 
-            <span>Row 2</span>
-            <span>Source Language</span>
-
-            <span>Row 3</span>
-            <span>Target Language</span>
-          </PopoverContent>
-        </Popover>
-      </div>
+        <TabsContent value='w' className='w-full'>
+          <Tabs className='w-full items-center'>
+            {tabsList}
+            {languages.map(sl => (
+              <TabsContent
+                value={sl}
+                className='w-full'
+                key={sl}
+              >
+                <iframe
+                  src={`https://${sl}.wiktionary.org/wiki/${search}`}
+                  className='w-full h-[50vh]'
+                ></iframe>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </TabsContent>
+      </Tabs>
     </div>
   )
+
+  // return (
+  //   <div className='min-h-screen flex flex-col'>
+  //     <div className='grid w-full place-items-center gap-5 p-5'>
+  //       <h1 className='text-4xl sm:text-5xl font-semibold'>
+  //         <Link
+  //           href={`?lang=${lang}`}
+  //           className='text-inherit no-underline hover:underline'
+  //         >
+  //           SupraDictionary
+  //         </Link>
+  //       </h1>
+
+  //       <form className='w-full max-w-md'>
+  //         <input
+  //           type='hidden'
+  //           name='lang'
+  //           value={lang}
+  //         />
+  //         <Input
+  //           id='search'
+  //           type='text'
+  //           name='search'
+  //           placeholder='Type here then press Enter'
+  //           autoFocus
+  //           autoCapitalize='off'
+  //         />
+  //       </form>
+
+  //       <div className='w-full max-w-md flex items-center space-x-1'>
+  //         <ScrollArea className='h-[50px] w-full max-w-md rounded-md border px-1'>
+  //           {search}
+  //         </ScrollArea>
+  //         <Help />
+  //       </div>
+
+  //       <Tabs
+  //         defaultValue='wr'
+  //         className='w-full items-center'
+  //       >
+  //         <TabsList className='w-full max-w-md'>
+  //           {Object.keys(dicts).map(key => (
+  //             <TabsTrigger value={key} key={key}>
+  //               {key.toUpperCase()}
+  //             </TabsTrigger>
+  //           ))}
+  //         </TabsList>
+
+  //         <TabsContent
+  //           value='wr'
+  //           className='w-full flex justify-center'
+  //         >
+  //           {(() => {
+  //             const wrURL = (
+  //               sl: string,
+  //               tl: string,
+  //             ) =>
+  //               `https://www.wordreference.com/${sl}${tl}/${search}`
+  //             return subTabs(wrURL)
+  //           })()}
+  //         </TabsContent>
+
+  //         {languages.includes('en') && (
+  //           <TabsContent
+  //             value='mw'
+  //             className='w-full'
+  //           >
+  //             <iframe
+  //               src={`https://www.merriam-webster.com/dictionary/${search}`}
+  //               className='w-full h-[50vh]'
+  //             ></iframe>
+  //           </TabsContent>
+  //         )}
+
+  //         <TabsContent
+  //           value='g'
+  //           className='w-full flex justify-center'
+  //         >
+  //           {(() => {
+  //             const wrURL = (
+  //               sl: string,
+  //               tl: string,
+  //             ) =>
+  //               `https://translate.google.com/?op=translate&sl=${sl}&tl=${tl}&text=${search}`
+  //             return subTabs(wrURL)
+  //           })()}
+  //         </TabsContent>
+
+  //         <TabsContent
+  //           value='w'
+  //           className='w-full'
+  //         >
+  //           <Tabs className='w-full items-center'>
+  //             {tabsList}
+  //             {languages.map(sl => (
+  //               <TabsContent
+  //                 value={sl}
+  //                 className='w-full'
+  //                 key={sl}
+  //               >
+  //                 <iframe
+  //                   src={`https://${sl}.wiktionary.org/wiki/${search}`}
+  //                   className='w-full h-[50vh]'
+  //                 ></iframe>
+  //               </TabsContent>
+  //             ))}
+  //           </Tabs>
+  //         </TabsContent>
+  //       </Tabs>
+  //     </div>
+  //     <div className='mt-auto flex items-center justify-center p-5'>
+  //       <Popover>
+  //         <PopoverTrigger asChild>
+  //           <Info size={30} />
+  //         </PopoverTrigger>
+  //         <PopoverContent className='space-y-2 grid grid-cols-[1fr_2fr]'>
+  //           {/* dictionaries */}
+  //           {Object.entries(dicts).map(
+  //             ([key, name]) => (
+  //               <Fragment key={key}>
+  //                 <span>{key.toUpperCase()}</span>
+  //                 <span>{name}</span>
+  //               </Fragment>
+  //             ),
+  //           )}
+
+  //           <span>Row 1</span>
+  //           <span>Dictionary</span>
+
+  //           <span>Row 2</span>
+  //           <span>Source Language</span>
+
+  //           <span>Row 3</span>
+  //           <span>Target Language</span>
+  //         </PopoverContent>
+  //       </Popover>
+  //     </div>
+  //   </div>
+  // )
 }
