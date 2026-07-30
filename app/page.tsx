@@ -228,12 +228,34 @@ export default async function Home({
         defaultValue='wr'
         className='w-full items-center'
       >
-        <TabsList className='w-full max-w-md'>
+        {/* <TabsList className='w-full max-w-md'>
           {Object.keys(dicts).map(key => (
             <TabsTrigger value={key} key={key}>
               {key.toUpperCase()}
             </TabsTrigger>
           ))}
+        </TabsList> */}
+
+        <TabsList className='w-full max-w-md'>
+          {Object.keys(dicts).map(key =>
+            key === 'mw' ? (
+              <TabsTrigger
+                key={key}
+                value={key}
+                asChild
+              >
+                <Link
+                  href={`https://www.merriam-webster.com/dictionary/${search}`}
+                >
+                  {key.toUpperCase()}
+                </Link>
+              </TabsTrigger>
+            ) : (
+              <TabsTrigger key={key} value={key}>
+                {key.toUpperCase()}
+              </TabsTrigger>
+            ),
+          )}
         </TabsList>
 
         <TabsContent
@@ -250,17 +272,17 @@ export default async function Home({
           })()}
         </TabsContent>
 
-        {languages.includes('en') && (
-          <TabsContent
-            value='mw'
-            className='w-full'
-          >
-            <iframe
-              src={`https://www.merriam-webster.com/dictionary/${search}`}
-              className='w-full h-[50vh]'
-            ></iframe>
-          </TabsContent>
-        )}
+        {/* {languages.includes('en') && (
+      <TabsContent
+        value='mw'
+        className='w-full'
+      >
+        <iframe
+          src={`https://www.merriam-webster.com/dictionary/${search}`}
+          className='w-full h-[50vh]'
+        ></iframe>
+      </TabsContent>
+    )} */}
 
         <TabsContent
           value='g'
