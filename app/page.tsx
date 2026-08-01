@@ -21,6 +21,8 @@ import {
 import { Info } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 
+import { YouGlishWidget } from '@/components/youglish-widget'
+
 export async function generateMetadata({
   searchParams,
 }: {
@@ -44,6 +46,7 @@ type Dicts = {
   mw?: string
   g: string
   w: string
+  yg?: string
 }
 
 export default async function Home({
@@ -52,12 +55,25 @@ export default async function Home({
   searchParams: Promise<{
     search?: string
     lang?: string
+    yg?: string
   }>
 }) {
-  const { search = '', lang = '' } =
-    await searchParams
+  const {
+    search = '',
+    lang = '',
+    yg,
+  } = await searchParams
 
   const languages = lang.split('-')
+
+  // const youGlishLanguages: Record<
+  //   string,
+  //   string
+  // > = {
+  //   en: 'english',
+  //   fr: 'french',
+  //   es: 'spanish',
+  // }
 
   const dicts: Dicts = {
     wr: 'WordReference',
@@ -68,6 +84,12 @@ export default async function Home({
 
   if (!languages.includes('en')) {
     delete dicts.mw
+  }
+
+  const hasYouGlish = yg !== undefined
+
+  if (hasYouGlish) {
+    dicts.yg = 'YouGlish'
   }
 
   // const twoSubTabs = (
@@ -194,7 +216,7 @@ export default async function Home({
     <div className='grid w-full place-items-center gap-5 p-5'>
       <h1 className='text-4xl sm:text-5xl font-semibold'>
         <Link
-          href={`?lang=${lang}`}
+          href={`?lang=${lang}${hasYouGlish ? '&yg' : ''}`}
           className='text-inherit no-underline hover:underline'
         >
           SupraDictionary
@@ -207,6 +229,9 @@ export default async function Home({
           name='lang'
           value={lang}
         />
+        {hasYouGlish && (
+          <input type='hidden' name='yg' />
+        )}
         <Input
           id='search'
           type='text'
@@ -315,6 +340,30 @@ export default async function Home({
             ))}
           </Tabs>
         </TabsContent>
+
+        {hasYouGlish && (
+          <TabsContent
+            value='yg'
+            className='w-full'
+          >
+            <Tabs className='w-full items-center'>
+              {tabsList}
+
+              {languages.map(sl => (
+                <TabsContent
+                  value={sl}
+                  className='w-full'
+                  key={sl}
+                >
+                  <YouGlishWidget
+                    search={search}
+                    language={sl}
+                  />
+                </TabsContent>
+              ))}
+            </Tabs>
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   )
