@@ -40,7 +40,7 @@ function WiktionaryContent({
           >
             <iframe
               src={`https://${language}.wiktionary.org/wiki/${search}`}
-              className='w-full h-[50vh]'
+              className='w-full h-[70dvh]'
               title={`Wiktionary — ${language.toUpperCase()}`}
             />
           </TabsContent>
