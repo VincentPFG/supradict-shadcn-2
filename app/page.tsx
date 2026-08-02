@@ -16,7 +16,10 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 
-import { getDictionary } from '@/components/dicts/dictionary-registry'
+import {
+  DICTIONARIES,
+  getDictionary,
+} from '@/components/dicts/dictionary-registry'
 
 const DEFAULT_DICTIONARIES = 'wr-mw-g-w'
 
@@ -95,6 +98,13 @@ export default async function Home({
       return [dictionary]
     })
 
+  const helpDictionaries = [...DICTIONARIES].sort(
+    (firstDictionary, secondDictionary) =>
+      firstDictionary.name.localeCompare(
+        secondDictionary.name,
+      ),
+  )
+
   const defaultDictionary =
     selectedDictionaries.find(
       dictionary =>
@@ -114,7 +124,7 @@ export default async function Home({
       </PopoverTrigger>
 
       <PopoverContent className='space-y-2 grid grid-cols-[1fr_2fr]'>
-        {selectedDictionaries.map(dictionary => (
+        {helpDictionaries.map(dictionary => (
           <Fragment key={dictionary.code}>
             <span>
               {dictionary.code.toUpperCase()}
