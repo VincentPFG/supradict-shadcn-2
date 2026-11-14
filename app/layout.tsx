@@ -1,13 +1,18 @@
-import type { Viewport } from 'next'
+import type { Metadata, Viewport } from 'next'
 import {
   Geist,
   Geist_Mono,
 } from 'next/font/google'
 import './globals.css'
 
+export const metadata: Metadata = {
+  appleWebApp: { capable: true, title: 'SupraDictionary' },
+}
+
 export const viewport: Viewport = {
   // Chromium's automatic darkening opt-out preserves our authored dark palette.
   colorScheme: 'only light',
+  themeColor: '#101116',
 }
 
 const geistSans = Geist({

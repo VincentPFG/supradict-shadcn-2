@@ -37,6 +37,7 @@ export async function generateMetadata({
     description: 'A polyglot’s companion.',
     icons: {
       icon: '/SD.png',
+      apple: '/icon-192.png',
     },
   }
 }
