@@ -143,8 +143,13 @@
 
   .dark body {
     min-height: 100dvh;
-    background:
-      radial-gradient(ellipse at 50% -10rem, #393f4d 0, transparent 38rem),
+    background-color: var(--background);
+    background-image:
+      radial-gradient(
+        ellipse clamp(14rem, 60vw, 48rem) clamp(12rem, 48vw, 32rem) at top center,
+        #393f4d,
+        transparent
+      ),
       linear-gradient(155deg, #191b23, var(--background) 55%, #14161c);
   }
 }
