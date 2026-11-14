@@ -1,9 +1,12 @@
 import Link from 'next/link'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 import { DictionaryPicker } from '@/components/dicts/dictionary-picker'
 import { DictionarySearch } from '@/components/dicts/dictionary-search'
 import { DictionarySettings } from '@/components/dicts/dictionary-settings'
 import { googleLanguageCodes, languageName, readLanguageOrder } from '@/components/dicts/google-languages'
+import { DICTIONARY_PREFERENCES_COOKIE } from '@/lib/dictionary-preferences'
 
 import {
   DICTIONARIES,
@@ -53,6 +56,16 @@ export default async function Home({
   const requestedDictionaries = firstParam(params.dicts)
 
   const needsSetup = requestedLanguages === undefined && requestedDictionaries === undefined
+  if (needsSetup) {
+    const saved = new URLSearchParams((await cookies()).get(DICTIONARY_PREFERENCES_COOKIE)?.value)
+    const savedLanguages = saved.get('lang')
+    const savedDictionaries = saved.get('dicts')
+    if (savedLanguages && savedDictionaries) {
+      const restored = new URLSearchParams({ lang: savedLanguages, dicts: savedDictionaries })
+      if (search) restored.set('search', search)
+      redirect(`/?${restored}`)
+    }
+  }
   const lang = requestedLanguages ?? (needsSetup ? '' : DEFAULT_LANGUAGES)
   const dicts = requestedDictionaries ?? (needsSetup ? '' : DEFAULT_DICTIONARIES)
   const languages = readLanguageOrder(lang)

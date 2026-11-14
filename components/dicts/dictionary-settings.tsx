@@ -24,6 +24,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { SEARCH_FORM_ID } from '@/components/dicts/dictionary-search'
+import { DICTIONARY_PREFERENCES_COOKIE } from '@/lib/dictionary-preferences'
 import styles from './dictionary-settings.module.css'
 
 type Option = { code: string; name: string }
@@ -234,6 +235,8 @@ export function DictionarySettings({
       lang: selectedLanguages.join(selectedLanguages.some(code => code.includes('-')) ? ',' : '-'),
       dicts: selectedDictionaries.join('-'),
     })
+    const secure = window.location.protocol === 'https:' ? '; Secure' : ''
+    document.cookie = `${DICTIONARY_PREFERENCES_COOKIE}=${encodeURIComponent(params.toString())}; Path=/; Max-Age=31536000; SameSite=Lax${secure}`
     const searchForm = document.getElementById(SEARCH_FORM_ID)
     const currentSearch = searchForm instanceof HTMLFormElement
       ? String(new FormData(searchForm).get('search') ?? '')
