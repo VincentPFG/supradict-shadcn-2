@@ -1,9 +1,25 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useId, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowDown, ArrowUp, ChevronDown, Settings } from 'lucide-react'
+import { ChevronDown, GripVertical, Settings } from 'lucide-react'
 import { Dialog } from 'radix-ui'
+import {
+  closestCenter,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core'
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 import { Button } from '@/components/ui/button'
 import { SEARCH_FORM_ID } from '@/components/dicts/dictionary-search'
@@ -46,51 +62,82 @@ function MultipleChoice({ label, options, selected, onChange }: SelectionProps) 
   )
 }
 
-function SelectionOrder({ label, options, selected, onChange }: SelectionProps) {
-  function move(index: number, direction: number) {
-    const reordered = [...selected]
-    const target = index + direction
-    reordered[index] = selected[target]
-    reordered[target] = selected[index]
-    onChange(reordered)
-  }
+function OrderItem({ code, name, disabled }: Option & { disabled: boolean }) {
+  const {
+    attributes, listeners, setNodeRef, setActivatorNodeRef,
+    transform, transition, isDragging,
+  } = useSortable({ id: code, disabled })
 
   return (
-    <fieldset>
-      <legend className='text-sm font-medium'>{label}</legend>
-      {selected.length === 0 && <p className='text-muted-foreground text-sm'>No selection</p>}
-      <ol className='mt-1 divide-y'>
-        {selected.map((code, index) => {
-          const name = options.find(option => option.code === code)?.name ?? code
+    <li
+      ref={setNodeRef}
+      style={{ transform: CSS.Translate.toString(transform), transition }}
+      data-dragging={isDragging || undefined}
+      className='bg-background flex min-h-11 items-center gap-2 rounded-md border pl-3 text-sm data-dragging:relative data-dragging:z-10 data-dragging:shadow-md'
+    >
+      <span className='min-w-0 flex-1'>{name}</span>
+      {!disabled && (
+        <Button
+          ref={setActivatorNodeRef}
+          type='button'
+          variant='ghost'
+          size='icon'
+          className='size-11 touch-none cursor-grab active:cursor-grabbing'
+          {...attributes}
+          {...listeners}
+          aria-label={`Reorder ${name}`}
+        >
+          <GripVertical aria-hidden='true' />
+        </Button>
+      )}
+    </li>
+  )
+}
 
-          return (
-            <li key={code} className='flex min-h-10 items-center gap-2 text-sm'>
-              <span className='min-w-0 flex-1'>{name}</span>
-              <Button
-                type='button'
-                variant='ghost'
-                size='icon'
-                disabled={index === 0}
-                aria-label={`Move ${name} up`}
-                onClick={() => move(index, -1)}
-              >
-                <ArrowUp aria-hidden='true' />
-              </Button>
-              <Button
-                type='button'
-                variant='ghost'
-                size='icon'
-                disabled={index === selected.length - 1}
-                aria-label={`Move ${name} down`}
-                onClick={() => move(index, 1)}
-              >
-                <ArrowDown aria-hidden='true' />
-              </Button>
-            </li>
-          )
-        })}
-      </ol>
-    </fieldset>
+function OrderedSelection(props: SelectionProps) {
+  const { label, options, selected, onChange } = props
+  const id = useId()
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+  )
+
+  return (
+    <div className='space-y-2'>
+      <MultipleChoice {...props} />
+      {selected.length > 0 && (
+        <DndContext
+          id={id}
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          accessibility={{ announcements: {
+            onDragStart: ({ active }) => `Picked up ${options.find(option => option.code === active.id)?.name ?? active.id}.`,
+            onDragOver: ({ over }) => over ? `Position ${selected.indexOf(String(over.id)) + 1} of ${selected.length}.` : undefined,
+            onDragEnd: ({ over }) => over ? `Placed at position ${selected.indexOf(String(over.id)) + 1}.` : 'Order unchanged.',
+            onDragCancel: () => 'Order unchanged.',
+          } }}
+          onDragEnd={({ active, over }) => {
+            if (!over || active.id === over.id) return
+            const from = selected.indexOf(String(active.id))
+            const to = selected.indexOf(String(over.id))
+            if (from >= 0 && to >= 0) onChange(arrayMove(selected, from, to))
+          }}
+        >
+          <SortableContext items={selected} strategy={verticalListSortingStrategy}>
+            <ol aria-label={`${label} display order`} className='space-y-1'>
+              {selected.map(code => (
+                <OrderItem
+                  key={code}
+                  code={code}
+                  name={options.find(option => option.code === code)?.name ?? code}
+                  disabled={selected.length < 2}
+                />
+              ))}
+            </ol>
+          </SortableContext>
+        </DndContext>
+      )}
+    </div>
   )
 }
 
@@ -168,34 +215,18 @@ export function DictionarySettings({
           </Dialog.Description>
 
           <form onSubmit={applySettings} className='mt-4 space-y-4'>
-            <MultipleChoice
+            <OrderedSelection
               label='Languages'
               options={languageOptions}
               selected={selectedLanguages}
               onChange={setSelectedLanguages}
             />
-            <MultipleChoice
+            <OrderedSelection
               label='Dictionaries'
               options={dictionaries}
               selected={selectedDictionaries}
               onChange={setSelectedDictionaries}
             />
-
-            <section aria-labelledby='settings-order' className='space-y-3 border-t pt-3'>
-              <h3 id='settings-order' className='font-semibold'>Display order</h3>
-              <SelectionOrder
-                label='Languages'
-                options={languageOptions}
-                selected={selectedLanguages}
-                onChange={setSelectedLanguages}
-              />
-              <SelectionOrder
-                label='Dictionaries'
-                options={dictionaries}
-                selected={selectedDictionaries}
-                onChange={setSelectedDictionaries}
-              />
-            </section>
 
             {error && <p role='alert' className='text-destructive text-sm'>{error}</p>}
 
