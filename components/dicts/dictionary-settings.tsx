@@ -175,6 +175,7 @@ function OrderedSelection(props: SelectionProps) {
 }
 
 type DictionarySettingsProps = {
+  initiallyOpen: boolean
   search: string
   languages: string[]
   dictionaryCodes: string[]
@@ -183,6 +184,7 @@ type DictionarySettingsProps = {
 }
 
 export function DictionarySettings({
+  initiallyOpen,
   search,
   languages,
   dictionaryCodes,
@@ -190,7 +192,7 @@ export function DictionarySettings({
   dictionaries,
 }: DictionarySettingsProps) {
   const router = useRouter()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(initiallyOpen)
   const [error, setError] = useState('')
   const [selectedLanguages, setSelectedLanguages] = useState(languages)
   const [selectedDictionaries, setSelectedDictionaries] = useState(dictionaryCodes)

@@ -44,10 +44,13 @@ export default async function Home({
 }) {
   const {
     search = '',
-    lang = DEFAULT_LANGUAGES,
-    dicts = DEFAULT_DICTIONARIES,
+    lang: requestedLanguages,
+    dicts: requestedDictionaries,
   } = await searchParams
 
+  const needsSetup = requestedLanguages === undefined && requestedDictionaries === undefined
+  const lang = requestedLanguages ?? (needsSetup ? '' : DEFAULT_LANGUAGES)
+  const dicts = requestedDictionaries ?? (needsSetup ? '' : DEFAULT_DICTIONARIES)
   const languages = readLanguageOrder(lang)
   const languageOptions = [...new Set([...googleLanguageCodes, ...languages])]
     .map(code => ({ code, name: languageName(code) }))
@@ -110,7 +113,7 @@ export default async function Home({
     <div className='grid w-full place-items-center gap-5 p-5'>
       <h1 className='text-4xl sm:text-5xl font-semibold'>
         <Link
-          href={`?${new URLSearchParams({ lang, dicts })}`}
+          href={needsSetup ? '/' : `?${new URLSearchParams({ lang, dicts })}`}
           className='text-inherit no-underline hover:underline'
         >
           SupraDictionary
@@ -120,6 +123,8 @@ export default async function Home({
       <div className='flex w-full max-w-md items-center gap-2'>
         <DictionarySearch search={search} />
         <DictionarySettings
+          key={needsSetup ? 'initial-setup' : 'configured'}
+          initiallyOpen={needsSetup}
           search={search}
           languages={languages}
           dictionaryCodes={dictionaryCodes}
@@ -130,7 +135,9 @@ export default async function Home({
 
       {selectedDictionaries.length === 0 && (
         <p className='text-muted-foreground text-center text-sm'>
-          Choose supported languages or another dictionary in Settings.
+          {needsSetup
+            ? 'Choose your languages and dictionaries in Settings.'
+            : 'Choose supported languages or another dictionary in Settings.'}
         </p>
       )}
 
