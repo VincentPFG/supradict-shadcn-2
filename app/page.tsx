@@ -92,16 +92,12 @@ export default async function Home({
       return [dictionary]
     })
 
-  const dictionaryOptions = [...new Set([
-    ...dictionaryCodes,
-    ...DICTIONARIES.map(dictionary => dictionary.code),
-  ])].flatMap(code => {
-    const dictionary = getDictionary(code)
-    return dictionary ? [{
+  const dictionaryOptions = DICTIONARIES
+    .map(({ code, name }) => ({
       code,
-      name: code === 'mw' ? `${dictionary.name} (English)` : dictionary.name,
-    }] : []
-  })
+      name: code === 'mw' ? `${name} (English)` : name,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name, 'en'))
 
   const defaultDictionary =
     selectedDictionaries.find(
