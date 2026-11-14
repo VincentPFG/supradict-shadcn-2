@@ -230,9 +230,8 @@ export function DictionarySettings({
       setOpen(nextOpen)
     }}>
       <Dialog.Trigger asChild>
-        <Button type='button' variant='outline' aria-label='Settings'>
+        <Button type='button' variant='outline' size='icon' aria-label='Settings'>
           <Settings aria-hidden='true' />
-          <span className='hidden min-[360px]:inline'>Settings</span>
         </Button>
       </Dialog.Trigger>
 
