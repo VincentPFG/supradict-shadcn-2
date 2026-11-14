@@ -27,7 +27,6 @@ function linkedDictionary(
     code,
     name,
     Tab,
-    getHref,
     isAvailable: ({ languages }) => languages.some(code => code.split('-')[0] === language),
   }
 }

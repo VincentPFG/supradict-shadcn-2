@@ -16,6 +16,7 @@ function MerriamWebsterTab(props: DictionaryProps) {
     <TabsTrigger value='mw' asChild>
       <Link
         href={getHref(props)}
+        aria-label='Merriam-Webster'
       >
         MW
       </Link>
@@ -27,7 +28,6 @@ export const merriamWebsterDictionary = {
   code: 'mw',
   name: 'Merriam-Webster',
   Tab: MerriamWebsterTab,
-  getHref,
 
   isAvailable: ({ languages }: DictionaryProps) =>
     languages.includes('en'),

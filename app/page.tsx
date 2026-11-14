@@ -110,7 +110,7 @@ export default async function Home({
     )
 
   return (
-    <div className='grid w-full place-items-center gap-5 p-5'>
+    <div className='grid w-full grid-cols-[minmax(0,1fr)] place-items-center gap-5 p-5'>
       <h1 className='text-4xl sm:text-5xl font-semibold'>
         <Link
           href={needsSetup ? '/' : `?${new URLSearchParams({ lang, dicts })}`}
@@ -144,11 +144,8 @@ export default async function Home({
       <DictionaryPicker
         key={`${lang}:${dicts}`}
         defaultDictionary={defaultDictionary?.code ?? ''}
-        options={selectedDictionaries.map(dictionary => ({
-          code: dictionary.code,
-          name: dictionary.name,
-          href: dictionary.getHref?.(dictionaryProps),
-        }))}
+        hasDictionaries={selectedDictionaries.length > 0}
+        contentCodes={selectedDictionaries.filter(dictionary => dictionary.Content).map(dictionary => dictionary.code)}
         triggers={selectedDictionaries.map(dictionary => {
           const DictionaryTab = dictionary.Tab
 
