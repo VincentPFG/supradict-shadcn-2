@@ -1,0 +1,59 @@
+.panel {
+  color-scheme: dark;
+  --background: #101116;
+  --foreground: #f5f6fa;
+  --muted-foreground: #bdc1cd;
+  --border: #3c404c;
+  --accent: #313541;
+  --accent-foreground: #fff;
+  --ring: #bbc9ee;
+  --primary: #d6dae5;
+  --primary-foreground: #101116;
+  --destructive: #ffaaa5;
+  color: var(--foreground);
+  background:
+    radial-gradient(ellipse at top left, #414652 0, transparent 48%),
+    linear-gradient(148deg, #242730, #101116 55%, #191b22);
+  border-color: #606674;
+  box-shadow:
+    inset 0 1px 0 #ffffff38,
+    0 1px 3px #0009,
+    0 18px 36px #0006,
+    0 34px 72px #0007;
+}
+
+.surface,
+.trigger {
+  background: linear-gradient(174deg, #343842, #1c1f27 58%, #171920);
+  border-color: #484d5a;
+  box-shadow: inset 0 1px 0 #ffffff18, 0 2px 5px #0007;
+}
+
+.trigger {
+  color: #f5f6fa;
+}
+
+.trigger:hover {
+  color: #fff;
+  background: linear-gradient(#454b57, #252830);
+}
+
+.surface[data-dragging] {
+  background: linear-gradient(165deg, #454b59, #242733);
+  border-color: #929bad;
+  box-shadow: inset 0 1px 0 #ffffff32, 0 8px 18px #000a;
+}
+
+.choices {
+  background: #0f1015;
+  accent-color: #bbc9ee;
+}
+
+.apply {
+  background: linear-gradient(#f0f2f8, #b7bdcd);
+  box-shadow: inset 0 1px 0 #fff, 0 3px 8px #0008;
+}
+
+.apply:hover {
+  background: linear-gradient(#fff, #cdd3e2);
+}

@@ -23,6 +23,7 @@ import { CSS } from '@dnd-kit/utilities'
 
 import { Button } from '@/components/ui/button'
 import { SEARCH_FORM_ID } from '@/components/dicts/dictionary-search'
+import styles from './dictionary-settings.module.css'
 
 type Option = { code: string; name: string }
 
@@ -35,7 +36,7 @@ type SelectionProps = {
 
 function MultipleChoice({ label, options, selected, onChange }: SelectionProps) {
   return (
-    <details className='rounded-md border'>
+    <details className={`rounded-md border ${styles.surface}`}>
       <summary className='flex min-h-11 cursor-pointer list-none items-center gap-2 px-3 text-sm font-medium [&::-webkit-details-marker]:hidden'>
         {label}
         <span className='text-muted-foreground ml-auto font-normal'>
@@ -43,7 +44,7 @@ function MultipleChoice({ label, options, selected, onChange }: SelectionProps) 
         </span>
         <ChevronDown className='size-4' aria-hidden='true' />
       </summary>
-      <fieldset className='border-t px-3 py-1'>
+      <fieldset className={`rounded-b-md border-t px-3 py-1 ${styles.choices}`}>
         <legend className='sr-only'>{label}</legend>
         {options.map(({ code, name }) => (
           <label key={code} className='flex min-h-10 items-center gap-2 text-sm'>
@@ -73,7 +74,7 @@ function OrderItem({ code, name, disabled }: Option & { disabled: boolean }) {
       ref={setNodeRef}
       style={{ transform: CSS.Translate.toString(transform), transition }}
       data-dragging={isDragging || undefined}
-      className='bg-background flex min-h-11 items-center gap-2 rounded-md border pl-3 text-sm data-dragging:relative data-dragging:z-10 data-dragging:shadow-md'
+      className={`flex min-h-11 items-center gap-2 rounded-md border pl-3 text-sm data-dragging:relative data-dragging:z-10 ${styles.surface}`}
     >
       <span className='min-w-0 flex-1'>{name}</span>
       {!disabled && (
@@ -200,15 +201,15 @@ export function DictionarySettings({
       setOpen(nextOpen)
     }}>
       <Dialog.Trigger asChild>
-        <Button type='button' variant='outline' size='sm'>
+        <Button type='button' variant='outline' size='sm' className={styles.trigger}>
           <Settings aria-hidden='true' />
           Settings
         </Button>
       </Dialog.Trigger>
 
       <Dialog.Portal>
-        <Dialog.Overlay className='fixed inset-0 z-50 bg-black/45' />
-        <Dialog.Content className='bg-background fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg border p-5 shadow-lg'>
+        <Dialog.Overlay className='fixed inset-0 z-50 bg-black/55 backdrop-blur-[2px]' />
+        <Dialog.Content className={`fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg border p-5 ${styles.panel}`}>
           <Dialog.Title className='text-lg font-semibold'>Settings</Dialog.Title>
           <Dialog.Description className='text-muted-foreground mt-1 text-sm'>
             Choose the languages and dictionaries to show.
@@ -234,7 +235,7 @@ export function DictionarySettings({
               <Dialog.Close asChild>
                 <Button type='button' variant='outline'>Cancel</Button>
               </Dialog.Close>
-              <Button type='submit'>Apply</Button>
+              <Button type='submit' className={styles.apply}>Apply</Button>
             </div>
           </form>
         </Dialog.Content>
