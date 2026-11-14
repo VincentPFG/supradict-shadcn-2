@@ -68,8 +68,7 @@ function MultipleChoice({ label, options, selected, onChange }: SelectionProps) 
               onChange={event => setQuery(event.target.value)}
             />
           )}
-          <fieldset className={`min-h-0 overflow-y-auto overscroll-contain rounded px-2 ${styles.choices}`}>
-            <legend className='sr-only'>{label}</legend>
+          <div role='group' aria-label={label} className={`min-h-0 overflow-y-auto overscroll-contain rounded px-2 ${styles.choices}`}>
             {matches.map(({ code, name }) => (
               <label key={code} className='flex min-h-10 items-center gap-2 text-sm'>
                 <input
@@ -83,7 +82,7 @@ function MultipleChoice({ label, options, selected, onChange }: SelectionProps) 
               </label>
             ))}
             {!matches.length && <p className='py-2 text-sm'>No matches</p>}
-          </fieldset>
+          </div>
           <Popover.Close asChild>
             <Button type='button' variant='outline' size='sm'>Done</Button>
           </Popover.Close>
@@ -231,9 +230,9 @@ export function DictionarySettings({
       setOpen(nextOpen)
     }}>
       <Dialog.Trigger asChild>
-        <Button type='button' variant='outline' size='sm' className={styles.trigger}>
+        <Button type='button' variant='outline' aria-label='Settings'>
           <Settings aria-hidden='true' />
-          Settings
+          <span className='hidden min-[360px]:inline'>Settings</span>
         </Button>
       </Dialog.Trigger>
 

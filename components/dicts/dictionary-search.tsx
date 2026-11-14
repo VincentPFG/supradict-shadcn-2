@@ -60,7 +60,7 @@ export function DictionarySearch({ search }: { search: string }) {
     <form
       id={SEARCH_FORM_ID}
       role='search'
-      className='w-full max-w-md'
+      className='min-w-0 flex-1'
       onSubmit={event => {
         event.preventDefault()
         updateSearch()

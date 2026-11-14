@@ -117,9 +117,8 @@ export default async function Home({
         </Link>
       </h1>
 
-      <DictionarySearch search={search} />
-
-      <div className='flex w-full max-w-md justify-end'>
+      <div className='flex w-full max-w-md items-center gap-2'>
+        <DictionarySearch search={search} />
         <DictionarySettings
           search={search}
           languages={languages}
