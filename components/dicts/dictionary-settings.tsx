@@ -45,8 +45,8 @@ function MultipleChoice({ label, options, selected, onChange }: SelectionProps) 
   return (
     <Popover.Root onOpenChange={open => { if (!open) setQuery('') }}>
       <Popover.Trigger asChild>
-        <Button type='button' variant='outline' className={`min-h-11 w-full justify-start ${styles.surface}`}>
-          {label}
+        <Button type='button' variant='outline' aria-label={`${label} ${selected.length} selected`} className={`min-h-11 w-full justify-start ${styles.surface}`}>
+          Choose {label.toLowerCase()}
           <span className='text-muted-foreground ml-auto font-normal'>
             {selected.length} selected
           </span>
@@ -102,7 +102,7 @@ function OrderItem({ code, name, disabled }: Option & { disabled: boolean }) {
       ref={setNodeRef}
       style={{ transform: CSS.Translate.toString(transform), transition }}
       data-dragging={isDragging || undefined}
-      className={`flex min-h-11 items-center gap-2 rounded-md border pl-3 text-sm data-dragging:relative data-dragging:z-10 ${styles.surface}`}
+      className={`flex min-h-9 items-center gap-2 rounded-md pl-2 text-sm data-dragging:relative data-dragging:z-10 ${styles.orderItem}`}
     >
       <span className='min-w-0 flex-1'>{name}</span>
       {!disabled && (
@@ -111,7 +111,7 @@ function OrderItem({ code, name, disabled }: Option & { disabled: boolean }) {
           type='button'
           variant='ghost'
           size='icon'
-          className='size-11 touch-none cursor-grab active:cursor-grabbing'
+          className='size-9 touch-none cursor-grab text-muted-foreground active:cursor-grabbing'
           {...attributes}
           {...listeners}
           aria-label={`Reorder ${name}`}
@@ -132,7 +132,8 @@ function OrderedSelection(props: SelectionProps) {
   )
 
   return (
-    <div className='space-y-2'>
+    <section aria-labelledby={`${id}-heading`} className={`space-y-2 rounded-lg border p-3 ${styles.section}`}>
+      <h3 id={`${id}-heading`} className='text-base font-semibold'>{label}</h3>
       <MultipleChoice {...props} />
       {selected.length > 0 && (
         <DndContext
@@ -153,20 +154,23 @@ function OrderedSelection(props: SelectionProps) {
           }}
         >
           <SortableContext items={selected} strategy={verticalListSortingStrategy}>
-            <ol aria-label={`${label} display order`} className='space-y-1'>
-              {selected.map(code => (
-                <OrderItem
-                  key={code}
-                  code={code}
-                  name={options.find(option => option.code === code)?.name ?? code}
-                  disabled={selected.length < 2}
-                />
-              ))}
-            </ol>
+            <div className={`rounded-md border p-1.5 ${styles.order}`}>
+              <p className='px-2 pt-1 text-xs font-medium text-muted-foreground'>Display order</p>
+              <ol aria-label={`${label} display order`} className='mt-1 space-y-0.5'>
+                {selected.map(code => (
+                  <OrderItem
+                    key={code}
+                    code={code}
+                    name={options.find(option => option.code === code)?.name ?? code}
+                    disabled={selected.length < 2}
+                  />
+                ))}
+              </ol>
+            </div>
           </SortableContext>
         </DndContext>
       )}
-    </div>
+    </section>
   )
 }
 

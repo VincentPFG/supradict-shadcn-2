@@ -84,7 +84,7 @@ export function DictionaryPicker({
         </DropdownMenu>
       </div>
 
-      <TabsList className='hidden w-full max-w-md sm:inline-flex'>
+      <TabsList className='hidden w-full max-w-md justify-start overflow-x-auto sm:inline-flex'>
         {triggers}
       </TabsList>
       {children}

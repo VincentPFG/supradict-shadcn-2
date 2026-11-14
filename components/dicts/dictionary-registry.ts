@@ -1,6 +1,7 @@
 import type { DictionaryDefinition } from '@/components/dicts/dictionary-types'
 
 import { googleTranslateDictionary } from '@/components/dicts/google-translate'
+import { linkedDictionaries } from '@/components/dicts/linked-dictionaries'
 import { merriamWebsterDictionary } from '@/components/dicts/merriam-webster'
 import { wiktionaryDictionary } from '@/components/dicts/wiktionary'
 import { wordReferenceDictionary } from '@/components/dicts/word-reference'
@@ -13,6 +14,7 @@ export const DICTIONARIES: DictionaryDefinition[] =
     googleTranslateDictionary,
     wiktionaryDictionary,
     youGlishDictionary,
+    ...linkedDictionaries,
   ]
 
 export function getDictionary(
