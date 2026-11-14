@@ -6,7 +6,8 @@ import {
 import './globals.css'
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
+  // Chromium's automatic darkening opt-out preserves our authored dark palette.
+  colorScheme: 'only light',
 }
 
 const geistSans = Geist({
@@ -25,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' className='dark' style={{ colorScheme: 'only dark' }}>
+    <html lang='en' className='dark' style={{ colorScheme: 'only light' }}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
