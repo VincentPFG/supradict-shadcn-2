@@ -1,8 +1,8 @@
 'use client'
 
-import { useId, useState, type FormEvent } from 'react'
+import { useId, useRef, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { ChevronDown, GripVertical, Settings } from 'lucide-react'
+import { ChevronDown, GripVertical, Settings, X } from 'lucide-react'
 import { Dialog, Popover } from 'radix-ui'
 import {
   closestCenter,
@@ -37,6 +37,7 @@ type SelectionProps = {
 
 function MultipleChoice({ label, options, selected, onChange }: SelectionProps) {
   const [query, setQuery] = useState('')
+  const searchInput = useRef<HTMLInputElement>(null)
   const filter = query.trim().toLowerCase()
   const matches = options.filter(({ code, name }) =>
     name.toLowerCase().includes(filter) || code.toLowerCase().includes(filter),
@@ -61,12 +62,31 @@ function MultipleChoice({ label, options, selected, onChange }: SelectionProps) 
         className={`z-[60] flex max-h-[min(40dvh,18rem,var(--radix-popover-content-available-height))] w-(--radix-popover-trigger-width) flex-col gap-2 rounded-md border p-2 ${styles.panel}`}
       >
         {options.length > 12 && (
-          <Input
-            aria-label={`Search ${label.toLowerCase()}`}
-            placeholder={`Search ${label.toLowerCase()}`}
-            value={query}
-            onChange={event => setQuery(event.target.value)}
-          />
+          <div className='relative shrink-0'>
+            <Input
+              ref={searchInput}
+              aria-label={`Search ${label.toLowerCase()}`}
+              placeholder={`Search ${label.toLowerCase()}`}
+              className='pr-10'
+              value={query}
+              onChange={event => setQuery(event.target.value)}
+            />
+            {query && (
+              <Button
+                type='button'
+                variant='ghost'
+                size='icon'
+                className='absolute inset-y-0 right-0 text-muted-foreground'
+                aria-label={`Clear ${label.toLowerCase()} search`}
+                onClick={() => {
+                  setQuery('')
+                  searchInput.current?.focus()
+                }}
+              >
+                <X aria-hidden='true' />
+              </Button>
+            )}
+          </div>
         )}
         <div role='group' aria-label={label} className={`min-h-0 overflow-y-auto overscroll-contain rounded px-2 ${styles.choices}`}>
           {matches.map(({ code, name }) => (
