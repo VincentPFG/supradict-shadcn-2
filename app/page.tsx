@@ -13,14 +13,22 @@ import {
 const DEFAULT_DICTIONARIES = 'wr-mw-g-w'
 const DEFAULT_LANGUAGES = 'en-fr-es'
 
+type SearchParams = {
+  search?: string | string[]
+  lang?: string | string[]
+  dicts?: string | string[]
+}
+
+function firstParam(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value
+}
+
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: Promise<{
-    search?: string
-  }>
+  searchParams: Promise<SearchParams>
 }) {
-  const { search = '' } = await searchParams
+  const search = firstParam((await searchParams).search) ?? ''
 
   return {
     title: `SupraDictionary${
@@ -36,17 +44,12 @@ export async function generateMetadata({
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{
-    search?: string
-    lang?: string
-    dicts?: string
-  }>
+  searchParams: Promise<SearchParams>
 }) {
-  const {
-    search = '',
-    lang: requestedLanguages,
-    dicts: requestedDictionaries,
-  } = await searchParams
+  const params = await searchParams
+  const search = firstParam(params.search) ?? ''
+  const requestedLanguages = firstParam(params.lang)
+  const requestedDictionaries = firstParam(params.dicts)
 
   const needsSetup = requestedLanguages === undefined && requestedDictionaries === undefined
   const lang = requestedLanguages ?? (needsSetup ? '' : DEFAULT_LANGUAGES)

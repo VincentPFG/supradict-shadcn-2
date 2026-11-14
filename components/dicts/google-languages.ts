@@ -20,7 +20,10 @@ const labels: Record<string, string> = {
 }
 
 export function languageName(code: string) {
-  return labels[code] ?? (/^[a-z]{2,3}(?:-[A-Za-z]{2,4})?$/.test(code) ? names.of(code) ?? code : code)
+  if (Object.hasOwn(labels, code)) return labels[code]
+  return /^[a-z]{2,3}(?:-(?:[A-Za-z]{2}|[A-Za-z]{4}))?$/.test(code)
+    ? names.of(code) ?? code
+    : code
 }
 
 export const googleLanguageCodes = new Set(codes)
