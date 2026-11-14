@@ -2,12 +2,97 @@
 
 import { useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { Settings } from 'lucide-react'
+import { ArrowDown, ArrowUp, ChevronDown, Settings } from 'lucide-react'
 import { Dialog } from 'radix-ui'
 
 import { Button } from '@/components/ui/button'
+import { SEARCH_FORM_ID } from '@/components/dicts/dictionary-search'
 
 type Option = { code: string; name: string }
+
+type SelectionProps = {
+  label: string
+  options: Option[]
+  selected: string[]
+  onChange: (codes: string[]) => void
+}
+
+function MultipleChoice({ label, options, selected, onChange }: SelectionProps) {
+  return (
+    <details className='rounded-md border'>
+      <summary className='flex min-h-11 cursor-pointer list-none items-center gap-2 px-3 text-sm font-medium [&::-webkit-details-marker]:hidden'>
+        {label}
+        <span className='text-muted-foreground ml-auto font-normal'>
+          {selected.length} selected
+        </span>
+        <ChevronDown className='size-4' aria-hidden='true' />
+      </summary>
+      <fieldset className='border-t px-3 py-1'>
+        <legend className='sr-only'>{label}</legend>
+        {options.map(({ code, name }) => (
+          <label key={code} className='flex min-h-10 items-center gap-2 text-sm'>
+            <input
+              type='checkbox'
+              checked={selected.includes(code)}
+              onChange={event => onChange(event.target.checked
+                ? [...selected, code]
+                : selected.filter(item => item !== code))}
+            />
+            {name}
+          </label>
+        ))}
+      </fieldset>
+    </details>
+  )
+}
+
+function SelectionOrder({ label, options, selected, onChange }: SelectionProps) {
+  function move(index: number, direction: number) {
+    const reordered = [...selected]
+    const target = index + direction
+    reordered[index] = selected[target]
+    reordered[target] = selected[index]
+    onChange(reordered)
+  }
+
+  return (
+    <fieldset>
+      <legend className='text-sm font-medium'>{label}</legend>
+      {selected.length === 0 && <p className='text-muted-foreground text-sm'>No selection</p>}
+      <ol className='mt-1 divide-y'>
+        {selected.map((code, index) => {
+          const name = options.find(option => option.code === code)?.name ?? code
+
+          return (
+            <li key={code} className='flex min-h-10 items-center gap-2 text-sm'>
+              <span className='min-w-0 flex-1'>{name}</span>
+              <Button
+                type='button'
+                variant='ghost'
+                size='icon'
+                disabled={index === 0}
+                aria-label={`Move ${name} up`}
+                onClick={() => move(index, -1)}
+              >
+                <ArrowUp aria-hidden='true' />
+              </Button>
+              <Button
+                type='button'
+                variant='ghost'
+                size='icon'
+                disabled={index === selected.length - 1}
+                aria-label={`Move ${name} down`}
+                onClick={() => move(index, 1)}
+              >
+                <ArrowDown aria-hidden='true' />
+              </Button>
+            </li>
+          )
+        })}
+      </ol>
+    </fieldset>
+  )
+}
 
 type DictionarySettingsProps = {
   search: string
@@ -27,12 +112,11 @@ export function DictionarySettings({
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [error, setError] = useState('')
+  const [selectedLanguages, setSelectedLanguages] = useState(languages)
+  const [selectedDictionaries, setSelectedDictionaries] = useState(dictionaryCodes)
 
   function applySettings(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const form = new FormData(event.currentTarget)
-    const selectedLanguages = form.getAll('lang').map(String)
-    const selectedDictionaries = form.getAll('dicts').map(String)
 
     if (!selectedLanguages.length || !selectedDictionaries.length) {
       setError('Select at least one language and one dictionary.')
@@ -48,7 +132,11 @@ export function DictionarySettings({
       lang: selectedLanguages.join('-'),
       dicts: selectedDictionaries.join('-'),
     })
-    if (search) params.set('search', search)
+    const searchForm = document.getElementById(SEARCH_FORM_ID)
+    const currentSearch = searchForm instanceof HTMLFormElement
+      ? String(new FormData(searchForm).get('search') ?? '')
+      : search
+    if (currentSearch) params.set('search', currentSearch)
 
     setOpen(false)
     router.push(`/?${params}`, { scroll: false })
@@ -57,6 +145,11 @@ export function DictionarySettings({
   return (
     <Dialog.Root open={open} onOpenChange={nextOpen => {
       setError('')
+      if (nextOpen) {
+        setSelectedLanguages(languages)
+        setSelectedDictionaries(dictionaryCodes.filter(code =>
+          dictionaries.some(dictionary => dictionary.code === code)))
+      }
       setOpen(nextOpen)
     }}>
       <Dialog.Trigger asChild>
@@ -75,30 +168,34 @@ export function DictionarySettings({
           </Dialog.Description>
 
           <form onSubmit={applySettings} className='mt-4 space-y-4'>
-            <fieldset>
-              <legend className='font-medium'>Languages</legend>
-              <div className='mt-1 grid grid-cols-2'>
-                {languageOptions.map(({ code, name }) => (
-                  <label key={code} className='flex min-h-10 items-center gap-2 text-sm'>
-                    <input type='checkbox' name='lang' value={code} defaultChecked={languages.includes(code)} />
-                    {name}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+            <MultipleChoice
+              label='Languages'
+              options={languageOptions}
+              selected={selectedLanguages}
+              onChange={setSelectedLanguages}
+            />
+            <MultipleChoice
+              label='Dictionaries'
+              options={dictionaries}
+              selected={selectedDictionaries}
+              onChange={setSelectedDictionaries}
+            />
 
-            <fieldset>
-              <legend className='font-medium'>Dictionaries</legend>
-              <div className='mt-1'>
-                {dictionaries.map(({ code, name }) => (
-                  <label key={code} className='flex min-h-10 items-center gap-2 text-sm'>
-                    <input type='checkbox' name='dicts' value={code} defaultChecked={dictionaryCodes.includes(code)} />
-                    {name}
-                    {code === 'mw' && <span className='text-muted-foreground'>(English)</span>}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+            <section aria-labelledby='settings-order' className='space-y-3 border-t pt-3'>
+              <h3 id='settings-order' className='font-semibold'>Display order</h3>
+              <SelectionOrder
+                label='Languages'
+                options={languageOptions}
+                selected={selectedLanguages}
+                onChange={setSelectedLanguages}
+              />
+              <SelectionOrder
+                label='Dictionaries'
+                options={dictionaries}
+                selected={selectedDictionaries}
+                onChange={setSelectedDictionaries}
+              />
+            </section>
 
             {error && <p role='alert' className='text-destructive text-sm'>{error}</p>}
 

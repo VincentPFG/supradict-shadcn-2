@@ -2,9 +2,9 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import { Info } from 'lucide-react'
 
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { DictionaryPicker } from '@/components/dicts/dictionary-picker'
+import { DictionarySearch } from '@/components/dicts/dictionary-search'
 import { DictionarySettings } from '@/components/dicts/dictionary-settings'
 import {
   Popover,
@@ -113,7 +113,10 @@ export default async function Home({
     ...DICTIONARIES.map(dictionary => dictionary.code),
   ])].flatMap(code => {
     const dictionary = getDictionary(code)
-    return dictionary ? [{ code, name: dictionary.name }] : []
+    return dictionary ? [{
+      code,
+      name: code === 'mw' ? `${dictionary.name} (English)` : dictionary.name,
+    }] : []
   })
 
   const defaultDictionary =
@@ -170,28 +173,7 @@ export default async function Home({
         </Link>
       </h1>
 
-      <form className='w-full max-w-md'>
-        <input
-          type='hidden'
-          name='lang'
-          value={lang}
-        />
-
-        <input
-          type='hidden'
-          name='dicts'
-          value={dicts}
-        />
-
-        <Input
-          id='search'
-          type='text'
-          name='search'
-          placeholder='Type here then press Enter'
-          autoFocus
-          autoCapitalize='off'
-        />
-      </form>
+      <DictionarySearch search={search} />
 
       <div className='w-full max-w-md flex items-center space-x-1'>
         <ScrollArea className='h-[50px] w-full max-w-md rounded-md border px-1'>
@@ -212,6 +194,7 @@ export default async function Home({
       </div>
 
       <DictionaryPicker
+        key={`${lang}:${dicts}`}
         defaultDictionary={defaultDictionary?.code ?? ''}
         options={selectedDictionaries.map(dictionary => ({
           code: dictionary.code,

@@ -68,7 +68,12 @@ function GoogleTranslateContent({
                     key={targetLanguage}
                   >
                     <Link
-                      href={`https://translate.google.com/?op=translate&sl=${sourceLanguage}&tl=${targetLanguage}&text=${search}`}
+                      href={`https://translate.google.com/?${new URLSearchParams({
+                        op: 'translate',
+                        sl: sourceLanguage,
+                        tl: targetLanguage,
+                        text: search,
+                      })}`}
                     >
                       {targetLanguage.toUpperCase()}
                     </Link>
