@@ -5,6 +5,7 @@ import { Info } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { DictionaryPicker } from '@/components/dicts/dictionary-picker'
+import { DictionarySettings } from '@/components/dicts/dictionary-settings'
 import {
   Popover,
   PopoverContent,
@@ -19,6 +20,8 @@ import {
 } from '@/components/dicts/dictionary-registry'
 
 const DEFAULT_DICTIONARIES = 'wr-mw-g-w'
+const DEFAULT_LANGUAGES = 'en-fr-es'
+const languageNames = new Intl.DisplayNames(['en'], { type: 'language' })
 
 export async function generateMetadata({
   searchParams,
@@ -51,13 +54,16 @@ export default async function Home({
 }) {
   const {
     search = '',
-    lang = '',
+    lang = DEFAULT_LANGUAGES,
     dicts = DEFAULT_DICTIONARIES,
   } = await searchParams
 
-  const languages = lang
-    .split('-')
-    .filter(Boolean)
+  const languages = [...new Set(lang.split('-').filter(Boolean))]
+  const languageOptions = [...new Set([...languages, ...DEFAULT_LANGUAGES.split('-')])]
+    .map(code => ({
+      code,
+      name: /^[a-z]{2,3}$/.test(code) ? languageNames.of(code) ?? code : code,
+    }))
 
   const dictionaryProps = {
     search,
@@ -101,6 +107,14 @@ export default async function Home({
         secondDictionary.name,
       ),
   )
+
+  const dictionaryOptions = [...new Set([
+    ...dictionaryCodes,
+    ...DICTIONARIES.map(dictionary => dictionary.code),
+  ])].flatMap(code => {
+    const dictionary = getDictionary(code)
+    return dictionary ? [{ code, name: dictionary.name }] : []
+  })
 
   const defaultDictionary =
     selectedDictionaries.find(
@@ -185,6 +199,16 @@ export default async function Home({
         </ScrollArea>
 
         <Help />
+      </div>
+
+      <div className='flex w-full max-w-md justify-end'>
+        <DictionarySettings
+          search={search}
+          languages={languages}
+          dictionaryCodes={dictionaryCodes}
+          languageOptions={languageOptions}
+          dictionaries={dictionaryOptions}
+        />
       </div>
 
       <DictionaryPicker
