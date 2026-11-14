@@ -7,13 +7,15 @@ import type {
   DictionaryProps,
 } from '@/components/dicts/dictionary-types'
 
-function MerriamWebsterTab({
-  search,
-}: DictionaryProps) {
+function getHref({ search }: DictionaryProps) {
+  return `https://www.merriam-webster.com/dictionary/${encodeURIComponent(search)}`
+}
+
+function MerriamWebsterTab(props: DictionaryProps) {
   return (
     <TabsTrigger value='mw' asChild>
       <Link
-        href={`https://www.merriam-webster.com/dictionary/${search}`}
+        href={getHref(props)}
       >
         MW
       </Link>
@@ -25,6 +27,7 @@ export const merriamWebsterDictionary = {
   code: 'mw',
   name: 'Merriam-Webster',
   Tab: MerriamWebsterTab,
+  getHref,
 
   isAvailable: ({ languages }: DictionaryProps) =>
     languages.includes('en'),

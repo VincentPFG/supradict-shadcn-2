@@ -4,10 +4,7 @@ import { Info } from 'lucide-react'
 
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import {
-  Tabs,
-  TabsList,
-} from '@/components/ui/tabs'
+import { DictionaryPicker } from '@/components/dicts/dictionary-picker'
 import {
   Popover,
   PopoverContent,
@@ -190,26 +187,25 @@ export default async function Home({
         <Help />
       </div>
 
-      <Tabs
-        defaultValue={defaultDictionary?.code}
-        className='w-full items-center'
+      <DictionaryPicker
+        defaultDictionary={defaultDictionary?.code ?? ''}
+        options={selectedDictionaries.map(dictionary => ({
+          code: dictionary.code,
+          name: dictionary.name,
+          href: dictionary.getHref?.(dictionaryProps),
+        }))}
+        triggers={selectedDictionaries.map(dictionary => {
+          const DictionaryTab = dictionary.Tab
+
+          return (
+            <DictionaryTab
+              key={dictionary.code}
+              search={search}
+              languages={languages}
+            />
+          )
+        })}
       >
-        <TabsList className='w-full max-w-md'>
-          {selectedDictionaries.map(
-            dictionary => {
-              const DictionaryTab = dictionary.Tab
-
-              return (
-                <DictionaryTab
-                  key={dictionary.code}
-                  search={search}
-                  languages={languages}
-                />
-              )
-            },
-          )}
-        </TabsList>
-
         {selectedDictionaries.map(dictionary => {
           const DictionaryContent =
             dictionary.Content
@@ -226,7 +222,7 @@ export default async function Home({
             />
           )
         })}
-      </Tabs>
+      </DictionaryPicker>
     </div>
   )
 }

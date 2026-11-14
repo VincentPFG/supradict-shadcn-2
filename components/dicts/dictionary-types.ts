@@ -12,6 +12,7 @@ export type DictionaryDefinition = {
   Tab: ComponentType<DictionaryProps>
 
   Content?: ComponentType<DictionaryProps>
+  getHref?: (props: DictionaryProps) => string
 
   isAvailable?: (
     props: DictionaryProps,
