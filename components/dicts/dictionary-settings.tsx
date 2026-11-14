@@ -53,41 +53,40 @@ function MultipleChoice({ label, options, selected, onChange }: SelectionProps) 
           <ChevronDown className='size-4' aria-hidden='true' />
         </Button>
       </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content
-          aria-label={label}
-          sideOffset={5}
-          collisionPadding={16}
-          className={`z-[60] flex max-h-[min(40dvh,18rem,var(--radix-popover-content-available-height))] w-(--radix-popover-trigger-width) flex-col gap-2 rounded-md border p-2 ${styles.panel}`}
-        >
-          {options.length > 12 && (
-            <Input
-              aria-label={`Search ${label.toLowerCase()}`}
-              placeholder={`Search ${label.toLowerCase()}`}
-              value={query}
-              onChange={event => setQuery(event.target.value)}
-            />
-          )}
-          <div role='group' aria-label={label} className={`min-h-0 overflow-y-auto overscroll-contain rounded px-2 ${styles.choices}`}>
-            {matches.map(({ code, name }) => (
-              <label key={code} className='flex min-h-10 items-center gap-2 text-sm'>
-                <input
-                  type='checkbox'
-                  checked={selected.includes(code)}
-                  onChange={event => onChange(event.target.checked
-                    ? [...selected, code]
-                    : selected.filter(item => item !== code))}
-                />
-                {name}
-              </label>
-            ))}
-            {!matches.length && <p className='py-2 text-sm'>No matches</p>}
-          </div>
-          <Popover.Close asChild>
-            <Button type='button' variant='outline' size='sm'>Done</Button>
-          </Popover.Close>
-        </Popover.Content>
-      </Popover.Portal>
+      {/* Keep the scrollable list inside the modal's scroll lock. */}
+      <Popover.Content
+        aria-label={label}
+        sideOffset={5}
+        collisionPadding={16}
+        className={`z-[60] flex max-h-[min(40dvh,18rem,var(--radix-popover-content-available-height))] w-(--radix-popover-trigger-width) flex-col gap-2 rounded-md border p-2 ${styles.panel}`}
+      >
+        {options.length > 12 && (
+          <Input
+            aria-label={`Search ${label.toLowerCase()}`}
+            placeholder={`Search ${label.toLowerCase()}`}
+            value={query}
+            onChange={event => setQuery(event.target.value)}
+          />
+        )}
+        <div role='group' aria-label={label} className={`min-h-0 overflow-y-auto overscroll-contain rounded px-2 ${styles.choices}`}>
+          {matches.map(({ code, name }) => (
+            <label key={code} className='flex min-h-10 items-center gap-2 text-sm'>
+              <input
+                type='checkbox'
+                checked={selected.includes(code)}
+                onChange={event => onChange(event.target.checked
+                  ? [...selected, code]
+                  : selected.filter(item => item !== code))}
+              />
+              {name}
+            </label>
+          ))}
+          {!matches.length && <p className='py-2 text-sm'>No matches</p>}
+        </div>
+        <Popover.Close asChild>
+          <Button type='button' variant='outline' size='sm'>Done</Button>
+        </Popover.Close>
+      </Popover.Content>
     </Popover.Root>
   )
 }
@@ -237,7 +236,7 @@ export function DictionarySettings({
 
       <Dialog.Portal>
         <Dialog.Overlay className='fixed inset-0 z-50 bg-black/55 backdrop-blur-[2px]' />
-        <Dialog.Content className={`fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg border p-5 ${styles.panel}`}>
+        <Dialog.Content className={`fixed inset-0 z-50 m-auto h-fit max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md overflow-y-auto rounded-lg border p-5 ${styles.panel}`}>
           <Dialog.Title className='text-lg font-semibold'>Settings</Dialog.Title>
           <Dialog.Description className='text-muted-foreground mt-1 text-sm'>
             Choose the languages and dictionaries to show.
