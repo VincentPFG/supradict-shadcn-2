@@ -1,18 +1,9 @@
-import { Fragment } from 'react'
 import Link from 'next/link'
-import { Info } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
 import { DictionaryPicker } from '@/components/dicts/dictionary-picker'
 import { DictionarySearch } from '@/components/dicts/dictionary-search'
 import { DictionarySettings } from '@/components/dicts/dictionary-settings'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Separator } from '@/components/ui/separator'
+import { googleLanguageCodes, languageName, readLanguageOrder } from '@/components/dicts/google-languages'
 
 import {
   DICTIONARIES,
@@ -21,7 +12,6 @@ import {
 
 const DEFAULT_DICTIONARIES = 'wr-mw-g-w'
 const DEFAULT_LANGUAGES = 'en-fr-es'
-const languageNames = new Intl.DisplayNames(['en'], { type: 'language' })
 
 export async function generateMetadata({
   searchParams,
@@ -58,12 +48,10 @@ export default async function Home({
     dicts = DEFAULT_DICTIONARIES,
   } = await searchParams
 
-  const languages = [...new Set(lang.split('-').filter(Boolean))]
-  const languageOptions = [...new Set([...languages, ...DEFAULT_LANGUAGES.split('-')])]
-    .map(code => ({
-      code,
-      name: /^[a-z]{2,3}$/.test(code) ? languageNames.of(code) ?? code : code,
-    }))
+  const languages = readLanguageOrder(lang)
+  const languageOptions = [...new Set([...googleLanguageCodes, ...languages])]
+    .map(code => ({ code, name: languageName(code) }))
+    .sort((a, b) => a.name.localeCompare(b.name, 'en'))
 
   const dictionaryProps = {
     search,
@@ -101,13 +89,6 @@ export default async function Home({
       return [dictionary]
     })
 
-  const helpDictionaries = [...DICTIONARIES].sort(
-    (firstDictionary, secondDictionary) =>
-      firstDictionary.name.localeCompare(
-        secondDictionary.name,
-      ),
-  )
-
   const dictionaryOptions = [...new Set([
     ...dictionaryCodes,
     ...DICTIONARIES.map(dictionary => dictionary.code),
@@ -125,48 +106,11 @@ export default async function Home({
         dictionary.Content !== undefined,
     )
 
-  const Help = () => (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant='ghost'
-          size='icon'
-          aria-label='Show help information'
-        >
-          <Info className='!h-5 !w-5' />
-        </Button>
-      </PopoverTrigger>
-
-      <PopoverContent className='space-y-2 grid grid-cols-[1fr_2fr]'>
-        {helpDictionaries.map(dictionary => (
-          <Fragment key={dictionary.code}>
-            <span>
-              {dictionary.code.toUpperCase()}
-            </span>
-
-            <span>{dictionary.name}</span>
-          </Fragment>
-        ))}
-
-        <Separator className='col-span-2' />
-
-        <span>Row 1</span>
-        <span>Dictionary</span>
-
-        <span>Row 2</span>
-        <span>Source Language</span>
-
-        <span>Row 3</span>
-        <span>Target Language</span>
-      </PopoverContent>
-    </Popover>
-  )
-
   return (
     <div className='grid w-full place-items-center gap-5 p-5'>
       <h1 className='text-4xl sm:text-5xl font-semibold'>
         <Link
-          href={`?lang=${lang}&dicts=${dicts}`}
+          href={`?${new URLSearchParams({ lang, dicts })}`}
           className='text-inherit no-underline hover:underline'
         >
           SupraDictionary
@@ -174,14 +118,6 @@ export default async function Home({
       </h1>
 
       <DictionarySearch search={search} />
-
-      <div className='w-full max-w-md flex items-center space-x-1'>
-        <ScrollArea className='h-[50px] w-full max-w-md rounded-md border px-1'>
-          {search}
-        </ScrollArea>
-
-        <Help />
-      </div>
 
       <div className='flex w-full max-w-md justify-end'>
         <DictionarySettings
@@ -192,6 +128,12 @@ export default async function Home({
           dictionaries={dictionaryOptions}
         />
       </div>
+
+      {selectedDictionaries.length === 0 && (
+        <p className='text-muted-foreground text-center text-sm'>
+          Choose supported languages or another dictionary in Settings.
+        </p>
+      )}
 
       <DictionaryPicker
         key={`${lang}:${dicts}`}

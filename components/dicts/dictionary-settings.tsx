@@ -3,7 +3,7 @@
 import { useId, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { ChevronDown, GripVertical, Settings } from 'lucide-react'
-import { Dialog } from 'radix-ui'
+import { Dialog, Popover } from 'radix-ui'
 import {
   closestCenter,
   DndContext,
@@ -22,6 +22,7 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import { SEARCH_FORM_ID } from '@/components/dicts/dictionary-search'
 import styles from './dictionary-settings.module.css'
 
@@ -35,31 +36,60 @@ type SelectionProps = {
 }
 
 function MultipleChoice({ label, options, selected, onChange }: SelectionProps) {
+  const [query, setQuery] = useState('')
+  const filter = query.trim().toLowerCase()
+  const matches = options.filter(({ code, name }) =>
+    name.toLowerCase().includes(filter) || code.toLowerCase().includes(filter),
+  )
+
   return (
-    <details className={`rounded-md border ${styles.surface}`}>
-      <summary className='flex min-h-11 cursor-pointer list-none items-center gap-2 px-3 text-sm font-medium [&::-webkit-details-marker]:hidden'>
-        {label}
-        <span className='text-muted-foreground ml-auto font-normal'>
-          {selected.length} selected
-        </span>
-        <ChevronDown className='size-4' aria-hidden='true' />
-      </summary>
-      <fieldset className={`rounded-b-md border-t px-3 py-1 ${styles.choices}`}>
-        <legend className='sr-only'>{label}</legend>
-        {options.map(({ code, name }) => (
-          <label key={code} className='flex min-h-10 items-center gap-2 text-sm'>
-            <input
-              type='checkbox'
-              checked={selected.includes(code)}
-              onChange={event => onChange(event.target.checked
-                ? [...selected, code]
-                : selected.filter(item => item !== code))}
+    <Popover.Root onOpenChange={open => { if (!open) setQuery('') }}>
+      <Popover.Trigger asChild>
+        <Button type='button' variant='outline' className={`min-h-11 w-full justify-start ${styles.surface}`}>
+          {label}
+          <span className='text-muted-foreground ml-auto font-normal'>
+            {selected.length} selected
+          </span>
+          <ChevronDown className='size-4' aria-hidden='true' />
+        </Button>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Content
+          aria-label={label}
+          sideOffset={5}
+          collisionPadding={16}
+          className={`z-[60] flex max-h-[min(40dvh,18rem,var(--radix-popover-content-available-height))] w-(--radix-popover-trigger-width) flex-col gap-2 rounded-md border p-2 ${styles.panel}`}
+        >
+          {options.length > 12 && (
+            <Input
+              aria-label={`Search ${label.toLowerCase()}`}
+              placeholder={`Search ${label.toLowerCase()}`}
+              value={query}
+              onChange={event => setQuery(event.target.value)}
             />
-            {name}
-          </label>
-        ))}
-      </fieldset>
-    </details>
+          )}
+          <fieldset className={`min-h-0 overflow-y-auto overscroll-contain rounded px-2 ${styles.choices}`}>
+            <legend className='sr-only'>{label}</legend>
+            {matches.map(({ code, name }) => (
+              <label key={code} className='flex min-h-10 items-center gap-2 text-sm'>
+                <input
+                  type='checkbox'
+                  checked={selected.includes(code)}
+                  onChange={event => onChange(event.target.checked
+                    ? [...selected, code]
+                    : selected.filter(item => item !== code))}
+                />
+                {name}
+              </label>
+            ))}
+            {!matches.length && <p className='py-2 text-sm'>No matches</p>}
+          </fieldset>
+          <Popover.Close asChild>
+            <Button type='button' variant='outline' size='sm'>Done</Button>
+          </Popover.Close>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   )
 }
 
@@ -177,7 +207,7 @@ export function DictionarySettings({
     }
 
     const params = new URLSearchParams({
-      lang: selectedLanguages.join('-'),
+      lang: selectedLanguages.join(selectedLanguages.some(code => code.includes('-')) ? ',' : '-'),
       dicts: selectedDictionaries.join('-'),
     })
     const searchForm = document.getElementById(SEARCH_FORM_ID)

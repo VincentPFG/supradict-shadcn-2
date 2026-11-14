@@ -14,6 +14,19 @@ import type {
   DictionaryProps,
 } from '@/components/dicts/dictionary-types'
 
+const wordReferenceCodes = new Set('en ar zh cs nl fr de el it ja ko pl pt ro es sv tr ru is'.split(' '))
+const pathCodes: Record<string, string> = { cs: 'cz', el: 'gr' }
+
+function supportedLanguages(languages: string[]) {
+  return languages.map(language => language.startsWith('zh-') ? 'zh' : language.split('-')[0])
+    .filter((code, index, codes) => wordReferenceCodes.has(code) && codes.indexOf(code) === index)
+}
+
+function supportsPair(source: string, target: string) {
+  return source !== target && (source === 'en' || target === 'en' ||
+    !['ru', 'is'].some(code => code === source || code === target))
+}
+
 function WordReferenceTab({
   search: _search,
   languages: _languages,
@@ -23,15 +36,17 @@ function WordReferenceTab({
 
 function WordReferenceContent({
   search,
-  languages,
+  languages: configuredLanguages,
 }: DictionaryProps) {
+  const supported = supportedLanguages(configuredLanguages)
+  const languages = supported.filter(source => supported.some(target => supportsPair(source, target)))
   return (
     <TabsContent
       value='wr'
       className='w-full flex justify-center'
     >
       <Tabs className='w-full items-center'>
-        <TabsList className='w-full max-w-md'>
+        <TabsList className='w-full max-w-md justify-start overflow-x-auto'>
           {languages.map(sourceLanguage => (
             <TabsTrigger
               value={sourceLanguage}
@@ -49,18 +64,11 @@ function WordReferenceContent({
             key={sourceLanguage}
           >
             <ButtonGroup
-              className='grid w-full'
-              style={{
-                gridTemplateColumns: `repeat(${
-                  languages.length - 1
-                }, minmax(0, 1fr))`,
-              }}
+              className='grid w-full grid-cols-[repeat(auto-fit,minmax(4rem,1fr))]'
             >
               {languages
                 .filter(
-                  targetLanguage =>
-                    targetLanguage !==
-                    sourceLanguage,
+                  targetLanguage => supportsPair(sourceLanguage, targetLanguage),
                 )
                 .map(targetLanguage => (
                   <Button
@@ -69,7 +77,7 @@ function WordReferenceContent({
                     key={targetLanguage}
                   >
                     <Link
-                      href={`https://www.wordreference.com/${sourceLanguage}${targetLanguage}/${search}`}
+                      href={`https://www.wordreference.com/${pathCodes[sourceLanguage] ?? sourceLanguage}${pathCodes[targetLanguage] ?? targetLanguage}/${encodeURIComponent(search)}`}
                     >
                       {targetLanguage.toUpperCase()}
                     </Link>
@@ -88,4 +96,8 @@ export const wordReferenceDictionary = {
   name: 'WordReference',
   Tab: WordReferenceTab,
   Content: WordReferenceContent,
+  isAvailable: ({ languages }: DictionaryProps) => {
+    const supported = supportedLanguages(languages)
+    return supported.some(source => supported.some(target => supportsPair(source, target)))
+  },
 } satisfies DictionaryDefinition

@@ -18,8 +18,9 @@ function YouGlishTab(_props: DictionaryProps) {
 
 function YouGlishContent({
   search,
-  languages,
+  languages: configuredLanguages,
 }: DictionaryProps) {
+  const languages = configuredLanguages.filter(language => ['en', 'fr', 'es'].includes(language))
   return (
     <TabsContent value='yg' className='w-full'>
       <Tabs className='w-full items-center'>
@@ -56,4 +57,5 @@ export const youGlishDictionary = {
   name: 'YouGlish',
   Tab: YouGlishTab,
   Content: YouGlishContent,
+  isAvailable: ({ languages }: DictionaryProps) => languages.some(language => ['en', 'fr', 'es'].includes(language)),
 } satisfies DictionaryDefinition

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { googleLanguageCodes } from '@/components/dicts/google-languages'
 
 import { Button } from '@/components/ui/button'
 import { ButtonGroup } from '@/components/ui/button-group'
@@ -22,15 +23,16 @@ function GoogleTranslateTab(
 
 function GoogleTranslateContent({
   search,
-  languages,
+  languages: configuredLanguages,
 }: DictionaryProps) {
+  const languages = configuredLanguages.filter(code => googleLanguageCodes.has(code))
   return (
     <TabsContent
       value='g'
       className='w-full flex justify-center'
     >
       <Tabs className='w-full items-center'>
-        <TabsList className='w-full max-w-md'>
+        <TabsList className='w-full max-w-md justify-start overflow-x-auto'>
           {languages.map(sourceLanguage => (
             <TabsTrigger
               value={sourceLanguage}
@@ -48,12 +50,7 @@ function GoogleTranslateContent({
             key={sourceLanguage}
           >
             <ButtonGroup
-              className='grid w-full'
-              style={{
-                gridTemplateColumns: `repeat(${
-                  languages.length - 1
-                }, minmax(0, 1fr))`,
-              }}
+              className='grid w-full grid-cols-[repeat(auto-fit,minmax(4rem,1fr))]'
             >
               {languages
                 .filter(
@@ -92,4 +89,5 @@ export const googleTranslateDictionary = {
   name: 'Google Translate',
   Tab: GoogleTranslateTab,
   Content: GoogleTranslateContent,
+  isAvailable: ({ languages }: DictionaryProps) => languages.filter(code => googleLanguageCodes.has(code)).length >= 2,
 } satisfies DictionaryDefinition
